@@ -3,6 +3,9 @@
 *_cache/
 *_files/
 
+# IPA documents (do not track)
+*.pdf
+
 # OS files
 .DS_Store
 Thumbs.db
