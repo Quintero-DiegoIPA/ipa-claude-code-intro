@@ -2,7 +2,7 @@
 title: "Getting Started with Claude Code"
 subtitle: "A practical guide for IPA Colombia Research Analysts"
 author:
-  - name: "Diego Quintero"
+  - name: "Diego Quintero Mogollon"
     email: "dquintero@poverty-action.org"
     affiliation: "IPA Colombia"
 date: today
@@ -26,8 +26,7 @@ execute:
 ```{=html}
 <div class="hero-banner">
   <div class="hero-content">
-    <span class="beta-badge">BETA</span>
-    <p class="hero-eyebrow">IPA Colombia &middot; 50–75 min</p>
+    <span class="beta-badge">BETA v0.1</span>
     <h1 class="hero-title">Learn Claude Code<br>for Stata Research</h1>
     <p class="hero-subtitle">
       Go from zero to productive with an AI coding assistant.<br>
@@ -35,53 +34,70 @@ execute:
     </p>
     <div class="hero-badges">
       <span class="badge-item">📖 5 Modules</span>
-      <span class="badge-item">🔒 PII Safety</span>
+      <span class="badge-item">🔒 Data Safety</span>
       <span class="badge-item">🎯 2 Exercises</span>
+      <span class="badge-item">⏱️ 50–75 min</span>
     </div>
-    <p class="hero-disclaimer">
-      This guide complements the <a href="https://ipastorage.box.com/s/mvr67ygvz1y3v8qmgjey67lk7msmyeks" style="color: #8bb8d0;">IPA AI Usage Guidelines</a>.
-      Read those first for the full data classification and approval framework.
-    </p>
   </div>
+</div>
+
+<div class="feedback-banner">
+  <p>
+    <strong>This guide is in beta.</strong>
+    It is a first attempt at introducing Claude Code to IPA research analysts.
+    Feedback, corrections, and suggestions are very welcome — they will directly shape the next version.
+    Please reach out to <a href="mailto:dquintero@poverty-action.org">Diego Quintero Mogoll&oacute;n</a> (dquintero@poverty-action.org)
+    or open an issue on <a href="https://github.com/Quintero-DiegoIPA/ipa-claude-code-intro/issues">GitHub</a>.
+  </p>
 </div>
 ```
 
+::: {.callout-important appearance="simple"}
+This guide complements the [IPA AI Usage Guidelines](https://ipastorage.box.com/s/mvr67ygvz1y3v8qmgjey67lk7msmyeks). Read those first for the full data classification and approval framework.
+:::
+
+::: {.callout-note appearance="simple"}
+**This is the tip of the iceberg.** This guide is a very initial introduction to Claude Code, focused on getting IPA research analysts up and running. For a much deeper dive into AI-assisted workflows, prompting strategies, and advanced use cases, the [Chris Blattman AI guide](https://claudeblattman.com/) has been an invaluable resource.
+:::
+
 ::: {.module-nav}
-This guide has five modules. Work through them in order, or jump to what you need. Each module is self-contained.
+Five modules. Work through them in order, or jump to what you need.
 :::
 
 ::: {.panel-tabset .module-tabs}
 
-## 1. Setup
+## 1. Setup (~15 min)
 
-### What You Need Before Starting
+::::: {.two-col}
+:::: {.col-left}
 
-::::: {.grid}
-:::: {.g-col-6}
+### What You Need
+
 :::{.card}
-### Must Have
+#### Must Have
 - Stata 17 or later, installed and licensed
 - Node.js 18 or later ([download](https://nodejs.org/))
 - An Anthropic API key **or** a Claude Max/Pro account
 :::
-::::
-:::: {.g-col-6}
+
 :::{.card}
-### Good to Have
+#### Good to Have
 - A GitHub account ([sign up](https://github.com/))
 - A project repository cloned to your machine
 - Familiarity with IPA/DIME Stata coding standards
 :::
-::::
-:::::
 
----
+::::
+:::: {.col-right}
 
 ### What Is GitHub?
 
 GitHub is a platform where teams store and collaborate on code. Think of it as a shared folder with superpowers: it keeps a complete history of every change, lets multiple people work on the same files without overwriting each other, and provides a backup of all project code outside your local machine.
 
 At IPA, each project has a **repository** (repo) on GitHub. A repository is a folder that contains all the do-files, documentation, and configuration for one project. The code lives on GitHub, and each analyst **clones** (downloads) a copy to their own computer to work on.
+
+::::
+:::::
 
 ::::: {.grid}
 :::: {.g-col-4}
@@ -105,53 +121,54 @@ Save a snapshot of your changes (commit) and upload them to GitHub (push) so the
 :::::
 
 ::: {.callout-note appearance="simple"}
-You do not need to be a Git expert. The three concepts above (repo, clone, commit/push) are enough to get started. Claude Code can help with Git commands when you need them.
+You do not need to be a Git expert. The three concepts above are enough to get started. Claude Code can help with Git commands when you need them.
 :::
 
 ---
 
 ### Project Folder Structure
 
-IPA projects should follow a standardized folder structure. The official template is available at [PovertyAction/ipa-stata-template](https://github.com/PovertyAction/ipa-stata-template) on GitHub.
+IPA projects should follow a standardized folder structure. The official template is available at [PovertyAction/ipa-stata-template](https://github.com/PovertyAction/ipa-stata-template) on GitHub. To start a new project, go to that repository and click **"Use this template"** to create your own copy.
 
-To start a new project, go to that repository and click **"Use this template"** to create your own copy. This gives you:
+::::: {.two-col}
+:::: {.col-left}
 
 ```
 my-project/
 ├── do_files/           # Stata scripts
-│   └── 00_run.do       # Master do-file (runs everything)
-├── data/               # Raw, cleaned, and final datasets
-├── outputs/            # Generated tables and figures
+│   └── 00_run.do       # Master do-file
+├── data/               # Raw, cleaned, final
+├── outputs/            # Tables and figures
 │   ├── tables/
 │   └── figures/
 ├── logs/               # Stata execution logs
 ├── ado/                # Local Stata packages
-├── documentation/      # Project guides and references
+├── documentation/      # Project guides
 ├── .config/            # Configuration files
-├── .env                # Local Stata path (not committed to Git)
-└── .here               # Root marker for automatic path detection
+├── .env                # Local Stata path
+└── .here               # Root marker
 ```
 
-The template supports three tiers of complexity:
-
-::::: {.grid}
-:::: {.g-col-4}
-:::{.card}
-### Tier 1: Minimal
-Git + Stata only. Clone the template, configure `.env` with your Stata path, and start writing do-files.
-:::
 ::::
-:::: {.g-col-4}
+:::: {.col-right}
+
+The template supports three tiers:
+
 :::{.card}
-### Tier 2: Task Runner
+#### Tier 1: Minimal
+Git + Stata only. Clone the template, configure `.env`, start writing do-files.
+:::
+
+:::{.card}
+#### Tier 2: Task Runner
 Add `just` for automation. Run scripts with `just stata-run` instead of opening Stata manually.
 :::
-::::
-:::: {.g-col-4}
+
 :::{.card}
-### Tier 3: Full
+#### Tier 3: Full
 Python tools, pre-commit hooks, and Claude Code integration with `CLAUDE.md` and skills.
 :::
+
 ::::
 :::::
 
@@ -164,10 +181,6 @@ If you already have a project repo, you do not need to start over. The folder st
 ### VS Code: Your New Workspace
 
 Visual Studio Code (VS Code) is a free code editor where Claude Code runs. Download it from [code.visualstudio.com](https://code.visualstudio.com/).
-
-Most research analysts switch between the Stata graphical user interface (GUI), a file browser, and a terminal window. VS Code puts all three into one screen.
-
-**The four panels you need:**
 
 ::::: {.grid}
 :::: {.g-col-6}
@@ -196,10 +209,8 @@ A marketplace for add-ons. Open with `Ctrl+Shift+X`.
 ::::
 :::::
 
-**Three essential shortcuts:**
-
 ::: {.panel-tabset}
-#### Windows
+#### Windows Shortcuts
 
 | Action | Shortcut |
 |--------|----------|
@@ -207,7 +218,7 @@ A marketplace for add-ons. Open with `Ctrl+Shift+X`.
 | Open the terminal | `` Ctrl+` `` |
 | Search across all files | `Ctrl+Shift+F` |
 
-#### macOS
+#### macOS Shortcuts
 
 | Action | Shortcut |
 |--------|----------|
@@ -226,41 +237,54 @@ code --install-extension eamodio.gitlens
 
 ---
 
-### Install Claude Code
+### Install and Authenticate Claude Code
 
-Open the VS Code terminal (`` Ctrl+` ``) and run:
+::::: {.two-col}
+:::: {.col-left}
+
+**Step 1: Install.** Open the VS Code terminal (`` Ctrl+` ``):
 
 ```bash
 npm install -g @anthropic-ai/claude-code
 ```
 
 ::: {.callout-note appearance="simple"}
-Permissions error on Windows? Close VS Code and reopen as Administrator. On macOS, prefix with `sudo`.
+Permissions error on Windows? Reopen VS Code as Administrator. On macOS, prefix with `sudo`.
 :::
 
-### Authenticate
+**Step 2: Launch and verify.**
 
-There are two ways to use Claude Code. Choose the one that applies to you.
-
-::: {.panel-tabset}
-#### API Key (Pay Per Use)
-
-An API key charges per use. This is the standard setup for IPA projects where the team shares a billing account. Ask your project lead for the key.
-
-Set it as an environment variable:
-
-::: {.panel-tabset}
-##### Windows (PowerShell)
-
-```powershell
-[System.Environment]::SetEnvironmentVariable("ANTHROPIC_API_KEY", "sk-ant-your-key-here", "User")
+```bash
+cd /path/to/your/project
+claude
 ```
 
-Restart VS Code after running this command.
+Type `What project is this?` — Claude Code reads `CLAUDE.md` on startup and should describe your project.
 
-##### macOS / Linux
+::::
+:::: {.col-right}
 
-Add to your `~/.zshrc` or `~/.bashrc`:
+**Step 2: Authenticate.** Two options:
+
+::: {.panel-tabset}
+##### API Key (Pay Per Use)
+
+Standard for IPA projects with shared billing. Ask your project lead for the key.
+
+::: {.panel-tabset}
+###### Windows (PowerShell)
+
+```powershell
+[System.Environment]::SetEnvironmentVariable(
+  "ANTHROPIC_API_KEY",
+  "sk-ant-your-key-here", "User")
+```
+
+Restart VS Code after running this.
+
+###### macOS / Linux
+
+Add to `~/.zshrc` or `~/.bashrc`:
 
 ```bash
 export ANTHROPIC_API_KEY="sk-ant-your-key-here"
@@ -269,36 +293,20 @@ export ANTHROPIC_API_KEY="sk-ant-your-key-here"
 Then restart your terminal.
 :::
 
-#### Claude Account (Max / Pro)
+##### Claude Account (Max / Pro)
 
-If you have a Claude Max or Pro subscription, you can use Claude Code without a separate API key.
-
-Launch Claude Code (see below) and follow the browser login prompt. It opens a window where you sign in with your Claude credentials. No environment variable needed. The session token is stored locally after the first login.
+Launch Claude Code and follow the browser login prompt. No environment variable needed. Session token stored locally after first login.
 :::
 
 ::: {.callout-warning appearance="simple"}
-**Keep credentials private.** Never paste your API key into a shared document, Slack message, or Git commit. If using a Claude account, do not share your login session. The [IPA AI Usage Guidelines](https://ipastorage.box.com/s/mvr67ygvz1y3v8qmgjey67lk7msmyeks) list API keys, passwords, and authentication tokens as **prohibited** from sharing with AI tools.
+**Keep credentials private.** Never paste your API key into a shared document, Slack message, or Git commit. The [IPA AI Usage Guidelines](https://ipastorage.box.com/s/mvr67ygvz1y3v8qmgjey67lk7msmyeks) list API keys and authentication tokens as **prohibited** from sharing with AI tools.
 :::
 
-### Launch and Verify
-
-Navigate to your project folder and start Claude Code:
-
-```bash
-cd /path/to/your/project
-claude
-```
-
-To verify it works, type:
-
-```
-What project is this?
-```
-
-Claude Code reads the `CLAUDE.md` file on startup and should describe your project. If it does, you are ready.
+::::
+:::::
 
 
-## 2. Concepts
+## 2. Concepts (~10 min)
 
 ### What Is Claude Code?
 
@@ -360,69 +368,78 @@ Follows rules in a `CLAUDE.md` file at your project root. Coding standards, conv
 
 Claude Code does not start from zero each time. Three mechanisms give it persistent knowledge.
 
-**CLAUDE.md: The project briefing.** Think of it as the document you would write for a new research analyst on their first day. It tells Claude Code what the project is, what rules to follow, and where to find things.
+::::: {.two-col}
+:::: {.col-left}
+
+**CLAUDE.md: The project briefing.** Think of it as the document you would write for a new research analyst on their first day.
 
 ```yaml
 # CLAUDE.md — SpC Project
 
 ## What This Project Is
 SpC 3.0 = Sanar para Crecer 3.0 (HtG)
-A large-scale caregiver education program implemented by ICBF
-in Colombia. The program includes an embedded RCT.
+A large-scale caregiver education program
+implemented by ICBF in Colombia.
 
 ## Project-Specific Rules
-- PII: Raw data contains PII — never read or display raw data files.
+- PII: never read or display raw data files.
 - Do not use cap / capture except for cap mkdir.
-- Path globals are defined in 0_paths.do. Never redefine them.
+- Path globals defined in 0_paths.do.
 ```
 
 This file is checked into Git. Every team member shares the same instructions.
 
-**Skills: The reference manuals.** The `.claude/skills/` directory contains specialized instruction sets with rules, examples, and conventions.
+::::
+:::: {.col-right}
+
+**Skills: The reference manuals.** The `.claude/skills/` directory contains specialized instruction sets.
 
 ::::: {.grid}
 :::: {.g-col-6}
 :::{.card}
 ### Stata Skill
-IPA/DIME coding standards, do-file headers, path conventions, missing value handling, four-stage data flow.
+IPA/DIME coding standards, do-file headers, path conventions, missing value handling.
 :::
 ::::
 :::: {.g-col-6}
 :::{.card}
 ### IPA Writing Skill
-Style rules for IPA content: paragraph structure, active voice, acronym conventions, citation format.
+Style rules for IPA content: active voice, acronym conventions, citation format.
 :::
 ::::
 :::::
 
-Claude Code loads the relevant skill automatically. Ask it to write a do-file and it applies the Stata skill. Ask it to draft report text and it applies the writing guidelines.
+Claude Code loads the relevant skill automatically. Ask it to write a do-file and it applies the Stata skill.
 
 > **Mental model:** `CLAUDE.md` is the briefing for a new RA. Skills are the reference manuals on their desk.
 
-**Settings and permissions.** The `.claude/settings.json` file controls which commands Claude Code can run without asking. You do not need to modify these files. They are maintained by the project lead.
+**Settings and permissions.** `.claude/settings.json` controls which commands Claude Code can run without asking. Maintained by the project lead.
+
+::::
+:::::
 
 
-## 3. Data Safety
+## 3. Data Safety (~10 min)
 
 :::{.callout-danger appearance="simple"}
-**This is the most important module in the guide.** Read the full [IPA AI Usage Guidelines](https://ipastorage.box.com/s/mvr67ygvz1y3v8qmgjey67lk7msmyeks) before using Claude Code on any project with human subjects data. What follows is a summary tailored to Claude Code.
+**This is the most important module.** Read the full [IPA AI Usage Guidelines](https://ipastorage.box.com/s/mvr67ygvz1y3v8qmgjey67lk7msmyeks) before using Claude Code on any project with human subjects data. What follows is a summary tailored to Claude Code.
 :::
 
 ### IPA Data Classification
 
-IPA uses a four-tier data classification system. **Before using any AI tool, classify the data you plan to work with.** The classification determines which tools are allowed.
+IPA uses a four-tier data classification system. **Before using any AI tool, classify the data you plan to work with.**
 
 | Classification | Examples | Claude Code? |
 |---|---|---|
 | **PUBLIC** | Published papers, public blog posts, anonymized published datasets | ✅ Yes |
-| **INTERNAL** | Project documentation, non-public training materials, do-files, draft documents without sensitive content | ✅ Yes (IPA-approved tools) |
-| **CONFIDENTIAL** | Datasets with PII (names, emails, cedula), unpublished research data, embargoed findings, grant proposals | ⚠️ Not with Claude Code. Use Azure OpenAI or local LLMs |
-| **HIGHLY CONFIDENTIAL** | Health data, biometric data, children's sensitive data, data that could endanger participants | 🛑 Contact MIST first |
+| **INTERNAL** | Project documentation, do-files, draft documents without sensitive content | ✅ Yes (IPA-approved tools) |
+| **CONFIDENTIAL** | Datasets with PII (names, cedula), unpublished research data, embargoed findings | ⚠️ Not with Claude Code. Use Azure OpenAI or local LLMs |
+| **HIGHLY CONFIDENTIAL** | Health data, biometric data, children's sensitive data | 🛑 Contact MIST first |
 
 Claude Code sends your messages and file contents to Anthropic's servers. This makes it appropriate for PUBLIC and INTERNAL data. For CONFIDENTIAL data containing PII, IPA's approved pathways are Azure OpenAI (via API) and local/offline LLMs.
 
 ::: {.callout-note appearance="simple"}
-**Where does Claude Code fit?** Claude Code uses either an Anthropic API key or a Claude Max/Pro account. Both send data to Anthropic's cloud. Under IPA guidelines, this means Claude Code follows the same rules as the Claude institutional license: approved for PUBLIC and INTERNAL data, not approved for PII or data restricted by contracts or legal obligations. When in doubt, check the [full guidelines](https://ipastorage.box.com/s/mvr67ygvz1y3v8qmgjey67lk7msmyeks) or contact MIST.
+**Where does Claude Code fit?** It uses either an Anthropic API key or a Claude Max/Pro account. Both send data to Anthropic's cloud. Under IPA guidelines, Claude Code follows the same rules as the Claude institutional license: approved for PUBLIC and INTERNAL data, not approved for PII or data restricted by contracts. When in doubt, check the [full guidelines](https://ipastorage.box.com/s/mvr67ygvz1y3v8qmgjey67lk7msmyeks) or contact MIST.
 :::
 
 ---
@@ -433,25 +450,25 @@ Claude Code sends your messages and file contents to Anthropic's servers. This m
 :::: {.g-col-6}
 :::{.card .card-danger}
 ### Rule 1: No PII in Prompts
-Do not type or paste names, cedula numbers, addresses, phone numbers, or participant IDs into Claude Code. Messages are sent to Anthropic's servers.
+Do not type or paste names, cedula numbers, addresses, phone numbers, or participant IDs. Messages are sent to Anthropic's servers.
 :::
 ::::
 :::: {.g-col-6}
 :::{.card .card-danger}
 ### Rule 2: No Raw Data Files
-Never ask Claude Code to open files in `data/raw/` or the encrypted vault (D: drive). Work only with do-files, logs, and de-identified outputs.
+Never ask Claude Code to open files in `data/raw/` or encrypted vaults. Work only with do-files, logs, and de-identified outputs.
 :::
 ::::
 :::: {.g-col-6}
 :::{.card .card-danger}
 ### Rule 3: No Individual-Level Output
-Do not ask for rows of data. Even de-identified data can become re-identifiable in small samples. Ask it to write code that produces summaries instead.
+Do not ask for rows of data. Even de-identified data can become re-identifiable in small samples. Ask it to write code that produces summaries.
 :::
 ::::
 :::: {.g-col-6}
 :::{.card .card-danger}
 ### Rule 4: Review Before Committing
-Check every file Claude Code creates or modifies. Confirm no PII leaked into comments, labels, or hard-coded values. Also check that no API keys or credentials appear.
+Check every file Claude Code creates or modifies. Confirm no PII leaked into comments, labels, or hard-coded values. Check that no API keys appear.
 :::
 ::::
 :::::
@@ -465,7 +482,7 @@ Regardless of the tool, IPA prohibits sharing these without specific use-case ap
 - **PII from research participants**: names, addresses, phone numbers, ID numbers, identifiable photos or audio
 - **Sensitive Personal Information (SPI)**: health data, biometric data, sexual orientation, political opinions, criminal history, data about children under 13
 - **IPA credentials**: passwords, API keys, authentication tokens, encryption keys
-- **Contractually restricted data**: information under NDAs, donor restrictions, embargoed findings, or legal agreements
+- **Contractually restricted data**: information under NDAs, donor restrictions, embargoed findings
 
 ::: {.callout-warning appearance="simple"}
 **If your dataset contains ANY SPI, the entire dataset is classified as HIGHLY CONFIDENTIAL**, even if most fields are regular PII. Contact MIST before using any AI tool.
@@ -475,7 +492,7 @@ Regardless of the tool, IPA prohibits sharing these without specific use-case ap
 
 ### Safe vs. Unsafe
 
-> Before sending a prompt, ask yourself: "Does this require Claude Code to see individual-level data or personal details?" If yes, rephrase to focus on the **code**, not the **data**.
+> Before sending a prompt, ask: "Does this require Claude Code to see individual-level data or personal details?" If yes, rephrase to focus on the **code**, not the **data**.
 
 | Scenario | Verdict |
 |----------|---------|
@@ -491,13 +508,56 @@ Regardless of the tool, IPA prohibits sharing these without specific use-case ap
 :::
 
 
-## 4. Prompting
+## 4. Prompting (~10 min)
 
-### Five Patterns for Effective Prompts
+### The Single Most Important Idea
 
-These patterns, each with a weak and strong version, will help you get useful results on the first try.
+:::{.callout-important appearance="simple"}
+**Great plans produce great outputs. Poor prompts produce poor, uncontrolled, random outputs.** The quality of what Claude Code delivers is directly proportional to the clarity and specificity of what you ask for. This is the one thing to internalize before anything else.
+:::
+
+### Use Plan Mode for Anything Non-Trivial
+
+For any task that involves more than a quick question or a one-line edit, start by asking Claude Code to **plan before it acts**. Type `/plan` or ask it to "plan this first" before making changes.
+
+Plan mode forces Claude Code to outline its approach and get your approval before writing code. This matters because:
+
+- You catch misunderstandings **before** Claude Code edits 10 files in the wrong direction
+- You stay in control of the analytical approach
+- The plan itself becomes a record of what was done and why
+
+::::: {.two-col}
+:::: {.col-left}
+
+:::{.card .card-danger}
+#### Without Planning
+```
+Write me an attrition analysis do-file
+```
+Claude Code guesses the specification, variable names, and output format. You spend more time fixing than you saved.
+:::
+
+::::
+:::: {.col-right}
+
+:::{.card .card-safe}
+#### With Planning
+```
+I need an attrition analysis. Use plan mode.
+The outcome is a binary attrition indicator.
+Regress on treatment with strata FE and
+clustered SEs at the UDS level. Export with
+esttab to LaTeX.
+```
+Claude Code outlines its plan. You approve, adjust, or redirect before any code is written.
+:::
+
+::::
+:::::
 
 ---
+
+### Five Patterns for Effective Prompts
 
 **Pattern 1: Describe the output, not the steps**
 
@@ -512,12 +572,9 @@ Use regress, then outreg2, then add a title, then save as .tex
 
 ```
 Run an ITT regression of FFMQ on treatment with strata fixed effects
-and SEs clustered at the UDS level. Export to LaTeX using the outreg2
-conventions in CLAUDE_DELIVERABLES_GUIDE.md.
+and SEs clustered at the UDS level. Export to LaTeX using esttab.
 ```
 :::
-
----
 
 **Pattern 2: Reference project conventions**
 
@@ -536,8 +593,6 @@ Match the column structure of the attrition tables in outputs/tables/.
 ```
 :::
 
----
-
 **Pattern 3: Provide context about errors**
 
 ::: {.panel-tabset}
@@ -550,17 +605,11 @@ I got r(111), please fix
 #### ✅ Strong
 
 ```
-I ran `just stata-script mel/2_AttritionAnalysis` and got r(111).
-Here are the last 30 lines of the log:
-
-[paste log excerpt]
-
+I ran my attrition analysis and got r(111). Here are the
+last 30 lines of the log: [paste log excerpt].
 The error is on the line referencing `treatment_status`.
-I think the variable was renamed upstream.
 ```
 :::
-
----
 
 **Pattern 4: Ask for explanations alongside code**
 
@@ -579,8 +628,6 @@ Also explain what the assert results mean.
 ```
 :::
 
----
-
 **Pattern 5: Iterate, do not start over**
 
 ::: {.panel-tabset}
@@ -598,26 +645,32 @@ and include the F-test for joint significance at the bottom.
 ```
 :::
 
-Claude Code remembers the conversation. Build on its output rather than starting over each time.
+Claude Code remembers the conversation. Build on its output rather than starting over.
+
+::: {.callout-tip appearance="simple"}
+**Go deeper on prompting.** The [Blattman guide on prompting](https://claudeblattman.com/essentials/prompting) covers this topic in much more depth: how to structure complex requests, the Prompt-Plan-Review loop, and strategies for getting consistent results. It is highly recommended reading after completing this guide.
+:::
 
 
-## 5. Exercises
+## 5. Practice (~25 min)
 
 ### Exercise 1: Debug a Stata Error
 
 :::{.exercise-banner}
-**Hands-on** · 10–15 minutes
+**Hands-on** · 10–15 minutes · Uses Stata's built-in `auto` dataset
 :::
 
-**Scenario:** You ran an attrition analysis script and the log shows this error:
+**Scenario:** You wrote a do-file that uses Stata's built-in `auto` dataset, but it has an error. The log shows:
 
 ```stata
-. use "$data/clean/masterMUESTRA_final_RCT.dta", clear
+. sysuse auto, clear
+(1978 automobile data)
 
-. gen attrited = (endline_survey == 0)
+. * Summary stats by car origin
+. gen high_mileage = (mpg > 25)
 
-. regress attrited treatment_status i.strata, vce(cluster cod_uds)
-variable treatment_status not found
+. regress high_mileage fuel_economy weight foreign, robust
+variable fuel_economy not found
 r(111);
 
 end of do-file
@@ -626,22 +679,22 @@ r(111);
 
 **Your task:**
 
-1. Open Claude Code in your project folder (`claude` in the terminal)
-2. Paste the log and ask: *"I got this r(111) error running my attrition analysis. What is wrong and how do I fix it?"*
-3. Read the diagnosis. Does it identify `r(111)` as "variable not found"?
-4. Follow up: *"Check what treatment-related variables exist in the do-files."*
+1. Open Claude Code in any project folder (`claude` in the terminal)
+2. Paste the log and ask: *"I got this r(111) error. What is wrong and how do I fix it?"*
+3. Read the diagnosis. Does Claude Code identify that `fuel_economy` does not exist in the `auto` dataset and that `mpg` is the correct variable?
+4. Follow up: *"What other fuel-related variables exist in sysuse auto?"*
 5. Evaluate the proposed fix
 
 **What to look for:**
 
-- Does it identify the correct error type?
-- Does it suggest checking existing do-files for the real variable name?
-- Does the fix follow conventions (no `capture`, proper path globals)?
+- Does it correctly identify `r(111)` as "variable not found"?
+- Does it suggest the right replacement variable (`mpg`)?
+- Does it explain why (the `auto` dataset uses `mpg`, not `fuel_economy`)?
 
 ::: {.callout-tip collapse="true" appearance="simple"}
 ## Reveal Answer
 
-The variable is named `treatment` (or `treat`), not `treatment_status`. This happens when variable names change during cleaning but downstream scripts are not updated. The fix is a single-line change, not a workaround with `capture` or `rename`.
+The variable `fuel_economy` does not exist in the `auto` dataset. The correct variable is `mpg` (miles per gallon). Claude Code should suggest replacing `fuel_economy` with `mpg` in the regression command. This is a common error pattern: using a variable name that seems logical but does not match the actual dataset. The fix is `regress high_mileage mpg weight foreign, robust`.
 :::
 
 ---
@@ -649,103 +702,114 @@ The variable is named `treatment` (or `treat`), not `treatment_status`. This hap
 ### Exercise 2: Write a Summary Statistics Do-File
 
 :::{.exercise-banner}
-**Hands-on** · 15–20 minutes
+**Hands-on** · 15–20 minutes · Uses Stata's built-in `auto` dataset
 :::
 
-**Scenario:** Your project lead asks for a summary statistics table of early childhood development (ECD) worker outcomes at endline, by treatment group.
+**Scenario:** You need a summary statistics table comparing domestic and foreign cars using Stata's built-in `auto` dataset.
 
-**Step 1: Write the prompt.** Use this specification (remember Pattern 1):
+**Step 1: Write the prompt.** Use this specification (remember Pattern 1 and plan mode):
 
-::::: {.grid}
-:::: {.g-col-6}
+::::: {.two-col}
+:::: {.col-left}
+
 **Variables:**
 
-- `ffmq_total` (mindfulness)
-- `dass_stress` (stress)
-- `dass_anxiety` (anxiety)
-- `dass_depression` (depression)
-- `psi_total` (parenting stress)
+- `price` (car price in USD)
+- `mpg` (miles per gallon)
+- `weight` (car weight in lbs)
+- `length` (car length in inches)
+- `headroom` (headroom in inches)
+
 ::::
-:::: {.g-col-6}
+:::: {.col-right}
+
 **Requirements:**
 
-- Breakdown by treatment arm (0/1)
-- Mean, SD, N, and t-test p-value
-- LaTeX output via `esttab`
-- Follow `CLAUDE_DELIVERABLES_GUIDE.md`
+- Breakdown by origin (`foreign`: 0 = Domestic, 1 = Foreign)
+- Mean, SD, N, and t-test p-value for difference
+- Use `sysuse auto` as the dataset
+- Save the do-file as `exercise_sumstats.do`
+- Ask Claude Code to use plan mode first
+
 ::::
 :::::
 
+::: {.callout-note appearance="simple"}
+**Hint:** Try prompting like this: *"Use plan mode. I need a do-file that produces a summary statistics table from sysuse auto, comparing domestic vs foreign cars. Variables: price, mpg, weight, length, headroom. Show mean, SD, N, and a t-test p-value for each. Save as exercise_sumstats.do."*
+:::
+
 **Step 2: Review the output** against this checklist:
 
-- [ ] Proper header (project, purpose, author, date)
-- [ ] Path globals (`$data`, `$tables`) instead of hard-coded paths
-- [ ] No `capture` (except `cap mkdir`)
-- [ ] Extended missing values handled (`.d`, `.n`, `.r`, `.s`)
-- [ ] Clean `esttab` producing LaTeX output
-- [ ] Saved to `$tables` directory
+- [ ] Does it load `sysuse auto, clear`?
+- [ ] Does it produce stats by `foreign` (0/1)?
+- [ ] Does it include a t-test of difference?
+- [ ] Is the code readable with comments?
+- [ ] Could you run it in Stata right now?
 
-**Step 3: Iterate.** Ask Claude Code for two changes:
+**Step 3: Iterate.** Ask Claude Code for two modifications:
 
-1. *"Add a column with the treatment-control difference and the t-test p-value."*
-2. *"Exclude `.d` (do not know) and `.r` (refused) from calculations but keep `.n` (not applicable) observations."*
+1. *"Add a row for `rep78` (repair record). Handle the missing values in that variable."*
+2. *"Add variable labels to the table so it shows 'Price (USD)' instead of 'price'."*
 
-**Step 4: Evaluate.** Did it modify the do-file without breaking the existing structure?
+**Step 4: Evaluate.** Did Claude Code modify the do-file without breaking the existing structure? Did it handle the missing values in `rep78` correctly?
 
 ::: {.callout-tip collapse="true" appearance="simple"}
-## Reveal: Strong Output
+## Reveal: Strong Output Characteristics
 
-- Clean header with project metadata
-- Path globals instead of hard-coded paths
-- A loop over outcome variables (avoids repetition)
-- `eststo` and `esttab` used together
-- Missing values handled with `if !inlist(var, .d, .r)`
-- Output saved as `.tex` and `.csv`
-- No `capture` commands
-- Comments explain *why*, not just *what*
+- Loads `sysuse auto, clear`
+- Loops over outcome variables to avoid repetitive code
+- Uses `eststo` and `esttab`, or `tabstat`, or `estpost` with `ttest`
+- Handles missing values in `rep78` explicitly
+- Variable labels applied for display
+- Code is well-commented and runnable
+- No hard-coded paths (uses `auto` which needs no path)
 :::
 
 ---
 
 ### Quick Reference
 
+::::: {.two-col}
+:::: {.col-left}
+
 **Common interactions:**
 
 | What You Want | What to Type |
 |---------------|-------------|
 | Start Claude Code | `claude` in the terminal |
+| Plan before acting | `/plan` or *"use plan mode"* |
 | Edit a file | *"Edit [path] to [change]"* |
 | Create a file | *"Create a do-file that [spec]"* |
-| Run Stata | *"Run `just stata-script mel/2_AttritionAnalysis`"* |
 | Debug an error | Paste the log and ask *"What is wrong?"* |
 | Exit | `/exit` or `Ctrl+C` |
 
+::::
+:::: {.col-right}
+
 **Safe vs. unsafe at a glance:**
 
-::::: {.grid}
-:::: {.g-col-6}
 :::{.card .card-safe}
-### ✅ Safe
+#### ✅ Safe
 - "Write a do-file that..."
 - "Debug this log output..."
 - "Explain this Stata command..."
 - "Generate a LaTeX table for..."
-- "Review this do-file for errors..."
 :::
-::::
-:::: {.g-col-6}
+
 :::{.card .card-danger}
-### ❌ Never
+#### ❌ Never
 - "Read the raw survey data..."
 - "Show me observations where name =..."
-- "Summarize the PII variables..."
 - "List all respondent names..."
 - "Open the file on D: drive..."
 :::
+
 ::::
 :::::
 
-**Next steps after this guide:**
+---
+
+### Next Steps
 
 ::::: {.grid}
 :::: {.g-col-6}
@@ -768,8 +832,8 @@ Ask Claude Code to **review** a do-file for coding standard violations.
 ::::
 :::: {.g-col-6}
 :::{.card}
-### 🟠 Go Further
-Generate a **summary statistics table** for a presentation.
+### 🟠 Go Deeper
+Work through the [Blattman AI guide](https://claudeblattman.com/) for advanced workflows, custom skills, and MCP integrations.
 :::
 ::::
 :::::
@@ -777,9 +841,9 @@ Generate a **summary statistics table** for a presentation.
 **Resources:**
 
 - [IPA AI Usage Guidelines](https://ipastorage.box.com/s/mvr67ygvz1y3v8qmgjey67lk7msmyeks) (required reading for all IPA AI tool use)
+- [Blattman AI Guide](https://claudeblattman.com/) (recommended for going deeper)
 - [Claude Code documentation](https://docs.anthropic.com/en/docs/claude-code/overview)
 - [IPA Stata template](https://github.com/PovertyAction/ipa-stata-template)
-- Your project's `CLAUDE.md` and `.claude/skills/` directory
 - MIST helpdesk for AI use case approvals or questions
 
 ::: {.callout-note appearance="simple"}
