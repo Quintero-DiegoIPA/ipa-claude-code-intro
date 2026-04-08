@@ -1,61 +1,100 @@
 ---
 title: "Getting Started with Claude Code"
-subtitle: "A Practical Guide for IPA Colombia Research Analysts"
+subtitle: "A practical guide for IPA Colombia Research Analysts"
 author: "IPA Colombia MEL Team"
 date: today
 format:
   html:
     toc: true
-    toc-depth: 3
+    toc-depth: 2
     toc-location: left
-    number-sections: true
+    number-sections: false
     embed-resources: true
-    theme: cosmo
+    theme:
+      light: cosmo
+      dark: darkly
     smooth-scroll: true
     code-copy: true
     link-external-newwindow: true
+    css: styles.css
 execute:
   echo: false
   eval: false
 ---
 
+```{=html}
+<div class="hero-banner">
+  <div class="hero-content">
+    <p class="hero-eyebrow">IPA Colombia &middot; 50–75 min</p>
+    <h1 class="hero-title">Learn Claude Code<br>for Stata Research</h1>
+    <p class="hero-subtitle">
+      Go from zero to productive with an AI coding assistant.<br>
+      No prior experience with VS Code or Claude Code required.
+    </p>
+    <div class="hero-badges">
+      <span class="badge-item">📖 Reading + 2 Exercises</span>
+      <span class="badge-item">🔒 PII Safety Rules</span>
+      <span class="badge-item">🎯 Stata-Focused</span>
+    </div>
+  </div>
+</div>
+```
+
 # Before You Start {#sec-prereqs}
 
-This guide introduces Claude Code, an artificial intelligence (AI) coding assistant that runs inside the terminal. It is designed for Innovations for Poverty Action (IPA) Colombia research analysts who are proficient in Stata but have not used Visual Studio Code (VS Code) or Claude Code before. The guide takes 50 to 75 minutes to complete, including two hands-on exercises.
+This guide is designed for research analysts who are proficient in Stata but have not used Visual Studio Code (VS Code) or Claude Code before. It progresses from reading to doing: Sections 1 through 5 build understanding, Section 6 teaches prompting, and Sections 7 and 8 are hands-on exercises.
 
-::: {.callout-note}
+:::: {.callout-note appearance="simple"}
 ## Prerequisites
 
-Before starting, confirm the following are in place:
-
-- Stata 17 or later is installed and licensed on your machine
-- Your project repository is cloned from GitHub (e.g., the SpC repo)
-- Node.js 18 or later is installed ([download here](https://nodejs.org/))
-- You have an Anthropic API key (ask your project lead if you do not have one)
-:::
-
-The guide progresses from orientation to practice. Sections 1 through 5 are reading. Section 6 bridges reading and doing. Sections 7 and 8 are hands-on exercises where you will use Claude Code on realistic Stata tasks.
+::::: {.grid}
+:::: {.g-col-6}
+- Stata 17 or later installed and licensed
+- A project repository cloned from GitHub
+::::
+:::: {.g-col-6}
+- Node.js 18+ installed ([download](https://nodejs.org/))
+- An Anthropic API key **or** a Claude Max/Pro account
+::::
+:::::
+::::
 
 ---
 
 # VS Code in Five Minutes {#sec-vscode}
 
-## Why VS Code?
-
-Most research analysts switch between the Stata graphical user interface (GUI), a file browser, and a terminal window throughout the day. VS Code puts all three into one screen. It is a free, open-source code editor maintained by Microsoft, and it is the environment where Claude Code runs.
+Most research analysts switch between the Stata graphical user interface (GUI), a file browser, and a terminal window throughout the day. VS Code puts all three into one screen. It is a free, open-source code editor maintained by Microsoft and the environment where Claude Code runs.
 
 ## The Four Panels
 
-VS Code organizes the workspace into four areas that research analysts use daily.
-
-1. **Sidebar (file explorer)**: Shows the folder structure of your project. Click any file to open it in the editor. Toggle it with `Ctrl+B`.
-2. **Editor**: The main area where files open as tabs. You can split the editor to view two files side by side.
-3. **Integrated terminal**: A command-line interface built into VS Code. This is where Claude Code runs. Toggle it with `` Ctrl+` `` (the backtick key, above Tab).
-4. **Extensions panel**: A marketplace for add-ons that enhance VS Code. Open it with `Ctrl+Shift+X`.
+::::: {.grid}
+:::: {.g-col-6}
+:::{.card}
+### Sidebar
+Shows your project folder structure. Toggle it with `Ctrl+B`. Click any file to open it in the editor.
+:::
+::::
+:::: {.g-col-6}
+:::{.card}
+### Editor
+The main area where files open as tabs. Split the view to compare two files side by side.
+:::
+::::
+:::: {.g-col-6}
+:::{.card}
+### Terminal
+A command line built into VS Code. This is where Claude Code runs. Toggle it with `` Ctrl+` ``.
+:::
+::::
+:::: {.g-col-6}
+:::{.card}
+### Extensions
+A marketplace for add-ons. Open with `Ctrl+Shift+X`. You will install three extensions below.
+:::
+::::
+:::::
 
 ## Three Essential Actions
-
-These three actions cover 90 percent of what a new user needs.
 
 ::: {.panel-tabset}
 ### Windows
@@ -77,7 +116,7 @@ These three actions cover 90 percent of what a new user needs.
 
 ## Extensions to Install
 
-Open the terminal in VS Code and run the following commands one at a time. These extensions add Stata syntax highlighting, Claude Code integration, and basic Git support.
+Open the VS Code terminal and run these one at a time:
 
 ```bash
 code --install-extension kylebarron.stata-enhanced
@@ -85,52 +124,56 @@ code --install-extension anthropic.claude-code
 code --install-extension eamodio.gitlens
 ```
 
-::: {.callout-tip}
-## Getting comfortable
-
-Do not worry about mastering VS Code before moving on. You will learn it by using it during the exercises. The three actions above are enough to get started.
+::: {.callout-tip appearance="simple"}
+Do not worry about mastering VS Code now. You will learn it by using it during the exercises. The three actions above are enough.
 :::
 
 ---
 
 # What Is Claude Code? {#sec-what-is-cc}
 
-Claude Code is an AI coding assistant built by Anthropic. It runs inside the VS Code terminal as a command-line tool. Unlike browser-based chatbots such as ChatGPT, Claude Code reads the files in your project folder, understands the project structure, and can write or edit code directly on your machine.
+Claude Code is an AI coding assistant built by Anthropic. It runs inside the VS Code terminal as a command-line tool. Unlike browser-based chatbots, Claude Code reads the files in your project folder, understands the structure, and can write or edit code directly on your machine.
 
-## How It Differs from Other AI Tools
+::::: {.grid}
+:::: {.g-col-4}
+:::{.card}
+### 🗂️ Project Context
+Reads your files automatically. It sees do-files, configs, and docs. No copy-pasting into a chat window.
+:::
+::::
+:::: {.g-col-4}
+:::{.card}
+### ✏️ Direct Editing
+Creates, modifies, and deletes files in your project. It asks for approval before making changes.
+:::
+::::
+:::: {.g-col-4}
+:::{.card}
+### 📋 Instructions
+Follows rules in a `CLAUDE.md` file at your project root. Coding standards, conventions, and guardrails.
+:::
+::::
+:::::
 
-Three features distinguish Claude Code from general-purpose AI chatbots.
+### What It Can Do for Stata Work
 
-1. **Project context**: Claude Code reads your project files automatically. It sees the folder structure, existing do-files, configuration files, and documentation. There is no need to copy-paste code into a chat window.
-2. **Direct editing**: Claude Code can create, modify, and delete files in your project. It suggests changes and asks for your approval before making them.
-3. **Project instructions**: Claude Code follows written instructions stored in a file called `CLAUDE.md` at the root of your project. These instructions tell it the project conventions, coding standards, and rules specific to your work.
-
-## What Claude Code Can Do for Stata Work
-
-- Write new do-files following IPA and DIME Analytics coding standards
+- Write new do-files following Innovations for Poverty Action (IPA) and DIME Analytics standards
 - Debug errors by reading Stata log files
-- Generate LaTeX tables using `esttab` or `outreg2` patterns
+- Generate LaTeX tables using `esttab` or `outreg2`
 - Explain existing code in plain language
-- Refactor do-files to improve readability or performance
 
-## What Claude Code Cannot Do
+### What It Cannot Do
 
 - Access or read data that contains personally identifiable information (PII)
-- Replace your judgment on research design or statistical methodology
-- Run Stata by itself (it uses project commands such as `just stata-run` that launch Stata)
-- Access Box, email, or other systems outside your local machine
-
-::: {.callout-important}
-## Data safety
-
-Claude Code can read any file on your computer that you open in VS Code. Raw survey data often contains PII. Section 5 of this guide covers security rules in detail. Read it carefully before using Claude Code on any project with human subjects data.
-:::
+- Replace your judgment on research design or methodology
+- Run Stata by itself (it uses project commands like `just stata-run`)
+- Access Box, email, or systems outside your machine
 
 ---
 
 # Installation and First Run {#sec-install}
 
-Follow these steps to install Claude Code and verify it works. The process takes about five minutes.
+The setup takes about five minutes. There are two ways to authenticate Claude Code: with an API key (pay per use) or with a Claude Max/Pro account (monthly subscription). Choose the one that applies to you.
 
 ## Step 1: Install Claude Code
 
@@ -140,16 +183,22 @@ Open the VS Code terminal (`` Ctrl+` ``) and run:
 npm install -g @anthropic-ai/claude-code
 ```
 
-::: {.callout-note}
-If you see a permissions error on Windows, close VS Code and reopen it as Administrator. On macOS, prefix the command with `sudo`.
+::: {.callout-note appearance="simple"}
+If you see a permissions error on Windows, close VS Code and reopen it as Administrator. On macOS, prefix with `sudo`.
 :::
 
-## Step 2: Set Up Your API Key
-
-Claude Code needs an Anthropic API key to function. Set it as an environment variable so it persists across sessions.
+## Step 2: Authenticate
 
 ::: {.panel-tabset}
-### Windows (PowerShell)
+
+### Option A: API Key
+
+An API key charges per use. This is the standard setup for IPA projects where the team shares a billing account.
+
+Set the key as an environment variable:
+
+::: {.panel-tabset}
+#### Windows (PowerShell)
 
 ```powershell
 [System.Environment]::SetEnvironmentVariable("ANTHROPIC_API_KEY", "sk-ant-your-key-here", "User")
@@ -157,9 +206,9 @@ Claude Code needs an Anthropic API key to function. Set it as an environment var
 
 Restart VS Code after running this command.
 
-### macOS / Linux
+#### macOS / Linux
 
-Add the following line to your `~/.zshrc` or `~/.bashrc` file:
+Add to `~/.zshrc` or `~/.bashrc`:
 
 ```bash
 export ANTHROPIC_API_KEY="sk-ant-your-key-here"
@@ -168,425 +217,452 @@ export ANTHROPIC_API_KEY="sk-ant-your-key-here"
 Then restart your terminal.
 :::
 
-::: {.callout-warning}
-## Keep your API key private
+### Option B: Claude Account (Max/Pro)
 
-Never paste your API key into a shared document, Slack message, or Git commit. The key is linked to your personal account and incurs usage charges. If you suspect it has been exposed, rotate it immediately on the [Anthropic Console](https://console.anthropic.com/).
+If you have a Claude Max or Pro subscription, you can use Claude Code without a separate API key. This authenticates through your personal Claude account.
+
+Launch Claude Code (Step 3 below) and follow the browser login prompt. Claude Code will open a browser window where you sign in with your Claude account credentials.
+
+No environment variable is needed. Claude Code stores the session token locally after the first login.
 :::
 
-## Step 3: Launch Claude Code
+::: {.callout-warning appearance="simple"}
+**Keep credentials private.** Never paste your API key into a shared document, Slack message, or Git commit. If using a Claude account, do not share your login session.
+:::
 
-Navigate to your project folder in the terminal and start Claude Code:
+## Step 3: Launch and Verify
+
+Navigate to your project folder and start Claude Code:
 
 ```bash
 cd /path/to/your/project
 claude
 ```
 
-Claude Code reads the `CLAUDE.md` file in the project root on startup. You should see a greeting message and a prompt where you can type.
-
-## Step 4: Verify It Works
-
-Type the following question at the Claude Code prompt:
+Claude Code reads the `CLAUDE.md` file on startup. To verify it works, type:
 
 ```
 What project is this?
 ```
 
-If Claude Code is working correctly, it will describe the project based on the `CLAUDE.md` file. For the SpC project, it should mention Sanar para Crecer 3.0, ICBF, and the Monitoring, Evaluation, and Learning (MEL) pipeline.
+It should describe your project based on the `CLAUDE.md` contents. For the SpC project, it mentions Sanar para Crecer 3.0 (SPC), ICBF, and the Monitoring, Evaluation, and Learning (MEL) pipeline.
 
 ---
 
 # How Claude Code Knows Your Project {#sec-project-context}
 
-Claude Code does not start from zero each time. Three mechanisms give it persistent knowledge of your project: the `CLAUDE.md` file, the skills system, and project settings.
+Claude Code does not start from zero each time. Three mechanisms give it persistent knowledge of your project.
 
 ## CLAUDE.md: The Project Briefing
 
-Every project that uses Claude Code has a `CLAUDE.md` file at its root. Think of it as the briefing document you would write for a new research analyst on their first day. It tells Claude Code what the project is, what rules to follow, and where to find things.
-
-Here is a shortened excerpt from the SpC project's `CLAUDE.md`:
+Think of `CLAUDE.md` as the briefing you would write for a new research analyst on their first day. It tells Claude Code what the project is, what rules to follow, and where to find things.
 
 ```yaml
 # CLAUDE.md — SpC Project
 
 ## What This Project Is
-SpC 3.0 = Sanar para Crecer 3.0 (HtG — "How to Grow")
+SpC 3.0 = Sanar para Crecer 3.0 (HtG)
 A large-scale caregiver education program implemented by ICBF
 in Colombia. The program includes an embedded RCT.
 
 ## Project-Specific Rules
-- PII: Raw data contains PII — never read, process, or display raw data files.
+- PII: Raw data contains PII — never read or display raw data files.
 - Do not use cap / capture except for cap mkdir.
-- Global macros: Path globals are defined in 0_paths.do.
-  Never redefine them in individual scripts.
+- Path globals are defined in 0_paths.do. Never redefine them.
 ```
 
-This file is checked into the Git repository, so every team member shares the same project instructions. You do not need to edit it unless the project lead asks you to.
+This file is checked into Git, so every team member shares the same instructions.
 
 ## Skills: The Reference Manuals
 
-The `.claude/skills/` directory contains specialized instruction sets that give Claude Code domain expertise. Each skill is a markdown file with rules, examples, and conventions. The SpC project includes two main skills:
+The `.claude/skills/` directory contains specialized instruction sets. Each skill is a markdown file with rules, examples, and conventions. Two key skills:
 
-1. **Stata skill** (`.claude/skills/stata/SKILL.md`): Contains IPA and DIME Analytics coding standards, do-file header templates, path setup conventions, missing value handling, and the four-stage data flow (import, de-identify, clean, construct).
-2. **IPA writing guidelines** (`.claude/skills/ipa-writing-guidelines/SKILL.md`): Contains style rules for all IPA written content, including paragraph structure, active voice requirements, acronym conventions, and citation format.
+::::: {.grid}
+:::: {.g-col-6}
+:::{.card}
+### Stata Skill
+IPA/DIME coding standards, do-file headers, path conventions, missing value handling, the four-stage data flow.
+:::
+::::
+:::: {.g-col-6}
+:::{.card}
+### IPA Writing Skill
+Style rules for all IPA content: paragraph structure, active voice, acronym conventions, citation format.
+:::
+::::
+:::::
 
-Claude Code loads the relevant skill automatically when the task matches. If you ask it to write a do-file, it applies the Stata skill. If you ask it to draft report text, it applies the writing guidelines.
+Claude Code loads the relevant skill automatically. Ask it to write a do-file and it applies the Stata skill. Ask it to draft text and it applies writing guidelines.
 
-**Mental model**: `CLAUDE.md` is the briefing for a new research analyst. Skills are the reference manuals on their desk.
+**Mental model:** `CLAUDE.md` is the briefing for a new research analyst. Skills are the reference manuals on their desk.
 
 ## Settings and Permissions
 
-The `.claude/settings.json` file controls which commands Claude Code can run without asking for your approval. In the SpC project, Stata commands through the `just` runner are pre-approved, so Claude Code can run scripts and read logs without prompting you each time.
+The `.claude/settings.json` file controls which commands Claude Code can run without asking. In the SpC project, Stata commands through the `just` runner are pre-approved.
 
-::: {.callout-note}
-You do not need to modify these files to use Claude Code. They are maintained by the project lead. Understanding that they exist helps explain why Claude Code "already knows" project conventions when you start a conversation.
+::: {.callout-note appearance="simple"}
+You do not need to modify any of these files. They are maintained by the project lead. Understanding that they exist explains why Claude Code "already knows" your conventions.
 :::
 
 ---
 
 # Security and PII Rules {#sec-security}
 
-This is the most important section in the guide. IPA projects routinely handle data that contains personally identifiable information, including names, national identification numbers (cedula), addresses, and phone numbers. Claude Code can read any file you open in VS Code. Careless use could expose PII to an external AI service.
+:::{.callout-danger appearance="simple"}
+**This is the most important section in the guide.** Read it carefully before using Claude Code on any project with human subjects data.
+:::
+
+IPA projects handle data with personally identifiable information: names, national identification numbers (cedula), addresses, and phone numbers. Claude Code can read any file in your VS Code workspace and sends your messages to external servers for processing.
 
 ## The Four Rules
 
-::: {.callout-danger}
-## Rule 1: Never paste PII into the Claude Code prompt
-
-Do not type or paste names, cedula numbers, addresses, phone numbers, or any other identifying information directly into the Claude Code conversation. Claude Code sends your messages to Anthropic's servers for processing.
+::::: {.grid}
+:::: {.g-col-6}
+:::{.card .card-danger}
+### Rule 1: No PII in Prompts
+Do not type or paste names, cedula numbers, addresses, or phone numbers into Claude Code.
 :::
-
-::: {.callout-danger}
-## Rule 2: Never ask Claude Code to read raw data files
-
-Raw data files on the encrypted vault (D: drive) or in `data/raw/` directories contain PII. Do not ask Claude Code to open, read, summarize, or process these files. Claude Code should only work with do-files, logs, documentation, and cleaned output files that have been de-identified.
+::::
+:::: {.g-col-6}
+:::{.card .card-danger}
+### Rule 2: No Raw Data Files
+Never ask Claude Code to open files in `data/raw/` or the encrypted vault (D: drive). Work only with do-files, logs, and de-identified outputs.
 :::
-
-::: {.callout-danger}
-## Rule 3: Never ask Claude Code to display individual-level data
-
-Even de-identified data can become re-identifiable when combined with enough detail. Do not ask Claude Code to show you "the first 10 observations" or "list all values of variable X." Ask it to write code that produces summary statistics instead.
+::::
+:::: {.g-col-6}
+:::{.card .card-danger}
+### Rule 3: No Individual-Level Output
+Do not ask Claude Code to display rows of data. Even de-identified data can become re-identifiable. Ask it to write code that produces summaries instead.
 :::
-
-::: {.callout-danger}
-## Rule 4: Review every file before committing
-
-Before committing any file that Claude Code created or modified, review it to confirm that no PII leaked into code comments, variable labels, log output, or hard-coded values.
+::::
+:::: {.g-col-6}
+:::{.card .card-danger}
+### Rule 4: Review Before Committing
+Check every file Claude Code creates or modifies. Confirm no PII leaked into comments, labels, or hard-coded values.
 :::
+::::
+:::::
 
-## Safe versus Unsafe Scenarios
+## Safe vs. Unsafe: Quick Test
 
-The following table illustrates the boundary between safe and unsafe requests.
+> Before sending a prompt, ask: "Does this require Claude Code to see individual-level data or personal details?" If yes, rephrase to focus on the **code**, not the **data**.
 
-| Scenario | Safe? | Why |
-|----------|-------|-----|
-| "Write a do-file that cleans survey data following this structure" | Safe | Claude Code writes code, does not see data |
-| "Clean this survey data" | **Not safe** | Claude Code would need to read data that may contain PII |
-| "Why is my merge failing? Here is the log" | Safe | Logs contain aggregates and error messages, not PII |
-| "Show me the first 20 rows of the baseline dataset" | **Not safe** | Individual-level data may contain identifying information |
-| "Debug this r(111) error in my do-file" | Safe | Claude Code reads the do-file code, not the data |
-| "Summarize the attendance data for Maria Garcia in Centro Zonal Norte" | **Not safe** | Contains a name and location that identify an individual |
-
-::: {.callout-tip}
-## A simple test
-
-Before sending a prompt, ask yourself: "Does this require Claude Code to see individual-level data or personal details?" If the answer is yes, rephrase your request to focus on the code rather than the data.
-:::
+| Scenario | Verdict |
+|----------|---------|
+| "Write a do-file that cleans survey data following this structure" | ✅ Safe |
+| "Clean this survey data" | ❌ Unsafe — Claude Code would read PII |
+| "Why is my merge failing? Here is the log" | ✅ Safe — logs have aggregates |
+| "Show me the first 20 rows of the baseline dataset" | ❌ Unsafe — individual-level data |
+| "Debug this r(111) error in my do-file" | ✅ Safe — reads code, not data |
 
 ---
 
-# Prompt Engineering for Stata Tasks {#sec-prompts}
+# Prompt Engineering for Stata {#sec-prompts}
 
-Claude Code responds better to some prompting styles than others. The five patterns below, each illustrated with a weak and a strong version, will help you get useful results on the first try.
+Five patterns for writing effective prompts. Each shows a weak and a strong version.
 
-## Pattern 1: Describe the Output, Not the Steps
-
-Tell Claude Code what you need to produce, not how to build it step by step. It already knows Stata syntax.
+## 1. Describe the Output, Not the Steps
 
 ::: {.panel-tabset}
-### Weak Prompt
+### ❌ Weak
 
 ```
 Use regress, then outreg2, then add a title, then save as .tex
 ```
 
-### Strong Prompt
+### ✅ Strong
 
 ```
-Run an intent-to-treat regression of FFMQ on treatment with strata fixed effects
-and standard errors clustered at the UDS level. Export the table to LaTeX using
-the outreg2 conventions documented in CLAUDE_DELIVERABLES_GUIDE.md.
+Run an ITT regression of FFMQ on treatment with strata fixed effects
+and SEs clustered at the UDS level. Export to LaTeX using the outreg2
+conventions in CLAUDE_DELIVERABLES_GUIDE.md.
 ```
 :::
 
-The strong prompt describes the analytical goal and references project conventions. Claude Code determines the Stata commands itself.
-
-## Pattern 2: Reference Project Conventions
-
-When a project has established patterns for tables, graphs, or file structure, point Claude Code to the relevant documentation.
+## 2. Reference Project Conventions
 
 ::: {.panel-tabset}
-### Weak Prompt
+### ❌ Weak
 
 ```
 Make a nice table with the results
 ```
 
-### Strong Prompt
+### ✅ Strong
 
 ```
-Export the results using the esttab pattern in CLAUDE_DELIVERABLES_GUIDE.md.
-Use the same column structure as the attrition tables in outputs/tables/.
+Export using the esttab pattern in CLAUDE_DELIVERABLES_GUIDE.md.
+Match the column structure of the attrition tables in outputs/tables/.
 ```
 :::
 
-The strong prompt grounds Claude Code in existing project files rather than asking it to invent a format.
-
-## Pattern 3: Provide Context About Errors
-
-When debugging, give Claude Code the error message and surrounding context from the log file. Stata error codes alone are ambiguous.
+## 3. Provide Context About Errors
 
 ::: {.panel-tabset}
-### Weak Prompt
+### ❌ Weak
 
 ```
 I got r(111), please fix
 ```
 
-### Strong Prompt
+### ✅ Strong
 
 ```
-I ran `just stata-script mel/2_AttritionAnalysis` and got r(111). Here are the
-last 30 lines of the log:
+I ran `just stata-script mel/2_AttritionAnalysis` and got r(111).
+Here are the last 30 lines of the log:
 
-[paste the relevant log excerpt here]
+[paste log excerpt]
 
-The error appears on the line that references `treatment_status`. I think the
-variable may have been renamed upstream.
+The error is on the line referencing `treatment_status`.
+I think the variable was renamed upstream.
 ```
 :::
 
-The strong prompt gives Claude Code the log context, identifies the suspect line, and offers a hypothesis. Claude Code can investigate from there rather than guessing.
-
-## Pattern 4: Ask for Explanations Alongside Code
-
-When you want to learn from the code Claude Code produces, ask it to explain its choices.
+## 4. Ask for Explanations
 
 ::: {.panel-tabset}
-### Weak Prompt
+### ❌ Weak
 
 ```
 Write the merge command
 ```
 
-### Strong Prompt
+### ✅ Strong
 
 ```
-Write the merge command and explain why you chose 1:1 versus m:1 for this case.
+Write the merge command and explain why you chose 1:1 vs m:1.
 Also explain what the assert results mean.
 ```
 :::
 
-This pattern is especially useful for analysts learning new Stata commands or statistical techniques.
-
-## Pattern 5: Iterate, Do Not Start Over
-
-After Claude Code produces an initial result, refine it with follow-up requests rather than rewriting the entire prompt.
+## 5. Iterate, Do Not Start Over
 
 ::: {.panel-tabset}
-### Weak Prompt
+### ❌ Weak
 
 ```
-[rewrites the entire prompt from scratch with one small change]
+[rewrites the entire prompt from scratch]
 ```
 
-### Strong Prompt
+### ✅ Strong
 
 ```
-The table looks right. Add baseline controls as a second column and include
-the F-test for joint significance at the bottom.
+The table looks right. Add baseline controls as a second column
+and include the F-test for joint significance at the bottom.
 ```
 :::
 
-Claude Code remembers the conversation context. Building on its previous output is faster and produces more consistent results than starting over.
+Claude Code remembers the conversation. Build on its output rather than starting over.
 
 ---
 
-# Exercise 1: Debug a Stata Error from a Log {#sec-exercise1}
+# Exercise 1: Debug a Stata Error {#sec-exercise1}
 
-**Estimated time: 10 to 15 minutes**
+:::{.exercise-banner}
+**Hands-on Exercise** · 10–15 minutes
+:::
 
-This exercise practices the most common task research analysts will use Claude Code for: diagnosing a Stata error from a log file.
+### The Scenario
 
-## The Scenario
-
-You ran an attrition analysis script and the log file shows an error. The relevant portion of the log is below.
+You ran an attrition analysis script and the log shows an error:
 
 ```stata
-. * ============================================================
-. * Attrition Analysis — Treatment vs. Control
-. * ============================================================
-
 . use "$data/clean/masterMUESTRA_final_RCT.dta", clear
 
-. * Define attrition variable
 . gen attrited = (endline_survey == 0)
 
-. * Run attrition regression
 . regress attrited treatment_status i.strata, vce(cluster cod_uds)
 variable treatment_status not found
 r(111);
 
 end of do-file
-
 r(111);
 ```
 
-## Your Task
+### Your Task
 
-1. **Open Claude Code** in your project folder (run `claude` in the VS Code terminal).
-2. **Paste the log excerpt** into the Claude Code prompt and ask: "I got this r(111) error when running my attrition analysis. What is wrong and how do I fix it?"
-3. **Read Claude Code's diagnosis.** It should identify that the variable `treatment_status` does not exist in the dataset and suggest checking the actual variable name.
-4. **Follow up** by asking: "Can you check what treatment-related variables exist in the do-files in this project?"
-5. **Evaluate the fix** that Claude Code proposes.
+1. Open Claude Code in your project folder (run `claude` in the terminal).
+2. Paste the log and ask: *"I got this r(111) error running my attrition analysis. What is wrong and how do I fix it?"*
+3. Read the diagnosis. Does it identify `r(111)` as "variable not found"?
+4. Follow up: *"Check what treatment-related variables exist in the do-files."*
+5. Evaluate the proposed fix.
 
-## What to Look For
+### What to Look For
 
-- Does Claude Code correctly identify `r(111)` as a "variable not found" error?
-- Does it suggest looking at the data dictionary or existing do-files to find the correct variable name?
-- Does the proposed fix use the project's coding conventions (no `capture`, proper path globals)?
+- Does Claude Code identify the correct error type?
+- Does it suggest checking existing do-files for the real variable name?
+- Does the fix follow conventions (no `capture`, proper path globals)?
 
-::: {.callout-tip collapse="true"}
-## Reveal: Expected Diagnosis
+::: {.callout-tip collapse="true" appearance="simple"}
+## Reveal Answer
 
-The error occurs because the variable is named `treatment` (or `treat`), not `treatment_status`. This is a common pattern in research projects where variable names change during the cleaning stage but downstream scripts are not updated. Claude Code should suggest replacing `treatment_status` with the correct variable name found in the project's do-files or variable documentation. The fix should be a single line change in the do-file, not a workaround using `capture` or `rename`.
+The variable is named `treatment` (or `treat`), not `treatment_status`. This happens when variable names change during cleaning but downstream scripts are not updated. The fix is a single-line change, not a workaround with `capture` or `rename`.
 :::
 
 ---
 
-# Exercise 2: Write a Descriptive Statistics Do-File {#sec-exercise2}
+# Exercise 2: Write a Summary Statistics Do-File {#sec-exercise2}
 
-**Estimated time: 15 to 20 minutes**
-
-This exercise practices the second most common task: asking Claude Code to generate a new analysis do-file from a specification.
-
-## The Scenario
-
-Your project lead asks you to produce a summary statistics table for early childhood development (ECD) worker outcome variables at endline, broken down by treatment and control groups. The table should follow the project's existing conventions.
-
-## Your Task
-
-### Step 1: Write the Initial Prompt
-
-Open Claude Code and write a prompt based on this specification:
-
-- **Dataset**: A clean, de-identified dataset of ECD worker outcomes
-- **Variables**: `ffmq_total` (mindfulness score), `dass_stress` (stress score), `dass_anxiety` (anxiety score), `dass_depression` (depression score), `psi_total` (parenting stress index)
-- **Breakdown**: Summary statistics by treatment arm (`treatment == 0` for control, `treatment == 1` for treatment)
-- **Statistics**: Mean, standard deviation, number of observations, and a p-value from a t-test of difference
-- **Output format**: LaTeX table using `esttab`, following the conventions in `CLAUDE_DELIVERABLES_GUIDE.md`
-- **File location**: Save the do-file in the project's do-files directory
-
-::: {.callout-note}
-## Prompt hint
-
-Remember Pattern 1: describe the output, not the steps. Tell Claude Code what table you need, what variables to include, and what format to use. Reference the project's deliverables guide for formatting conventions. You do not need to specify each Stata command.
+:::{.exercise-banner}
+**Hands-on Exercise** · 15–20 minutes
 :::
 
-### Step 2: Review the Generated Do-File
+### The Scenario
 
-After Claude Code produces the do-file, check it against this list:
+Your project lead asks for a summary statistics table of early childhood development (ECD) worker outcomes at endline, by treatment group.
 
-- [ ] Does it include a proper header (project name, purpose, author, date)?
-- [ ] Does it use `$data` or another path global instead of a hard-coded file path?
-- [ ] Does it avoid using `capture` (except `cap mkdir`)?
-- [ ] Does it handle extended missing values (`.d`, `.n`, `.r`, `.s`) correctly?
-- [ ] Does the `esttab` call produce a clean LaTeX table?
-- [ ] Does it save output to the `$tables` directory?
+### Step 1: Write the Prompt
 
-### Step 3: Iterate with Two Modifications
+Use this specification to write your prompt (remember Pattern 1: describe the output):
 
-Ask Claude Code to make two changes to the do-file:
+::::: {.grid}
+:::: {.g-col-6}
+**Variables:**
 
-1. "Add a column showing the difference between treatment and control means, with the p-value from the t-test."
-2. "Use the project's extended missing value conventions. Exclude `.d` (do not know) and `.r` (refused) from calculations but keep `.n` (not applicable) observations."
+- `ffmq_total` (mindfulness)
+- `dass_stress` (stress)
+- `dass_anxiety` (anxiety)
+- `dass_depression` (depression)
+- `psi_total` (parenting stress)
+::::
+:::: {.g-col-6}
+**Requirements:**
 
-### Step 4: Evaluate the Iteration
+- Breakdown by treatment arm (0 = control, 1 = treatment)
+- Mean, SD, N, and t-test p-value
+- LaTeX output via `esttab`
+- Follow `CLAUDE_DELIVERABLES_GUIDE.md`
+::::
+:::::
 
-Check whether Claude Code correctly modified the do-file without breaking the existing structure. A good result preserves the original table format while adding the requested columns and missing value handling.
+::: {.callout-note appearance="simple"}
+**Hint:** Tell Claude Code what table you need and reference the deliverables guide. You do not need to specify each Stata command.
+:::
 
-::: {.callout-tip collapse="true"}
-## Reveal: What a Strong Output Looks Like
+### Step 2: Review the Output
 
-A strong do-file from this exercise has these characteristics:
+Check the generated do-file against this list:
+
+- [ ] Proper header (project, purpose, author, date)
+- [ ] Path globals (`$data`, `$tables`) instead of hard-coded paths
+- [ ] No `capture` (except `cap mkdir`)
+- [ ] Extended missing values handled (`.d`, `.n`, `.r`, `.s`)
+- [ ] Clean `esttab` call producing LaTeX output
+- [ ] Output saved to the `$tables` directory
+
+### Step 3: Iterate
+
+Ask Claude Code for two modifications:
+
+1. *"Add a column with the treatment-control difference and the t-test p-value."*
+2. *"Exclude `.d` (do not know) and `.r` (refused) from calculations but keep `.n` (not applicable) observations."*
+
+### Step 4: Evaluate
+
+Did Claude Code modify the do-file without breaking the existing structure? A good result preserves the original format while adding the new columns and missing value logic.
+
+::: {.callout-tip collapse="true" appearance="simple"}
+## Reveal: Strong Output Characteristics
 
 - Clean header with project metadata
-- Path globals (`$data`, `$tables`) instead of hard-coded paths
-- A loop over the outcome variables to avoid repetitive code
-- `eststo` and `esttab` used together for the summary statistics table
-- Extended missing values handled with explicit `if` conditions (e.g., `if !inlist(ffmq_total, .d, .r)`)
-- Output saved as both `.tex` and `.csv` for flexibility
+- Path globals instead of hard-coded paths
+- A loop over outcome variables (avoids repetitive code)
+- `eststo` and `esttab` used together
+- Missing values handled with `if !inlist(var, .d, .r)`
+- Output saved as `.tex` and `.csv`
 - No `capture` commands
-- Comments that explain analytical decisions, not just what the code does
+- Comments explain *why*, not just *what*
 :::
 
 ---
 
-# Quick Reference Card {#sec-reference}
+# Quick Reference {#sec-reference}
 
-## Common Claude Code Interactions
+## Common Interactions
 
 | What You Want | What to Type |
 |---------------|-------------|
-| Start Claude Code | `claude` (in the VS Code terminal, inside your project folder) |
-| Ask a question | Type your question at the `>` prompt |
-| Ask Claude Code to edit a file | "Edit the file at [path] to [change]" |
-| Ask Claude Code to create a file | "Create a do-file that [specification]" |
-| Run a Stata script | "Run `just stata-script mel/2_AttritionAnalysis` and tell me if it passes" |
-| Debug an error | Paste the log excerpt and ask "What is wrong and how do I fix it?" |
-| Exit Claude Code | Type `/exit` or press `Ctrl+C` |
+| Start Claude Code | `claude` in the terminal, inside your project folder |
+| Ask a question | Type at the `>` prompt |
+| Edit a file | *"Edit [path] to [change]"* |
+| Create a file | *"Create a do-file that [spec]"* |
+| Run Stata | *"Run `just stata-script mel/2_AttritionAnalysis`"* |
+| Debug an error | Paste the log and ask *"What is wrong?"* |
+| Exit | `/exit` or `Ctrl+C` |
 
-## Safe versus Unsafe Patterns
+## Safe vs. Unsafe
 
-| Safe to Ask | Never Ask |
-|------------|-----------|
-| "Write a do-file that..." | "Read the raw survey data and..." |
-| "Debug this log output..." | "Show me observations where name = ..." |
-| "Explain this Stata command..." | "Summarize the PII variables in..." |
-| "Generate a LaTeX table for..." | "List all respondent names from..." |
-| "Review this do-file for errors..." | "Open the file on the D: drive..." |
+::::: {.grid}
+:::: {.g-col-6}
+:::{.card .card-safe}
+### ✅ Safe to Ask
+- "Write a do-file that..."
+- "Debug this log output..."
+- "Explain this Stata command..."
+- "Generate a LaTeX table for..."
+- "Review this do-file for errors..."
+:::
+::::
+:::: {.g-col-6}
+:::{.card .card-danger}
+### ❌ Never Ask
+- "Read the raw survey data..."
+- "Show me observations where name =..."
+- "Summarize the PII variables..."
+- "List all respondent names..."
+- "Open the file on D: drive..."
+:::
+::::
+:::::
 
-## Key Documentation Files
+## Key Files in Your Project
 
-| File | What It Contains |
-|------|-----------------|
-| `CLAUDE.md` | Project overview, rules, and pipeline map |
-| `documentation/CLAUDE_STATA_GUIDE.md` | How Claude Code runs Stata scripts |
-| `documentation/CLAUDE_DELIVERABLES_GUIDE.md` | Table formatting, LaTeX pipeline, IPA brand identity |
+| File | Contents |
+|------|---------|
+| `CLAUDE.md` | Project overview, rules, pipeline map |
+| `documentation/CLAUDE_STATA_GUIDE.md` | How Claude Code runs Stata |
+| `documentation/CLAUDE_DELIVERABLES_GUIDE.md` | Table formatting, LaTeX pipeline |
 | `.claude/skills/stata/SKILL.md` | IPA/DIME Stata coding standards |
 
 ---
 
 # Next Steps {#sec-next}
 
-Claude Code becomes more useful as you become more specific in your requests. Start with small, low-risk tasks and build up from there.
+Start small and build up. Good first tasks after completing this guide:
 
-**Good first tasks after this guide:**
+::::: {.grid}
+:::: {.g-col-6}
+:::{.card}
+### 🟢 Start Here
+Ask Claude Code to **explain** an unfamiliar section of an existing do-file.
+:::
+::::
+:::: {.g-col-6}
+:::{.card}
+### 🔵 Then Try
+Paste a **Stata error** from a log and ask for a diagnosis.
+:::
+::::
+:::: {.g-col-6}
+:::{.card}
+### 🟣 Build Up
+Ask Claude Code to **review** a do-file you wrote for coding standard violations.
+:::
+::::
+:::: {.g-col-6}
+:::{.card}
+### 🟠 Go Further
+Generate a **summary statistics table** for a presentation or report.
+:::
+::::
+:::::
 
-1. Ask Claude Code to explain an unfamiliar section of an existing do-file
-2. Paste a Stata error from a log and ask for a diagnosis
-3. Ask Claude Code to review a do-file you wrote for coding standard violations
-4. Generate a simple summary statistics table for a presentation
+**Resources:**
 
-**Resources for continued learning:**
+- [Claude Code documentation](https://docs.anthropic.com/en/docs/claude-code/overview) for the full feature set
+- Your project's `CLAUDE.md` for project-specific conventions
+- The `.claude/skills/` directory for domain knowledge available to Claude Code
 
-- [Claude Code official documentation](https://docs.anthropic.com/en/docs/claude-code/overview) for the full feature set
-- The project's `CLAUDE.md` file for project-specific conventions
-- The `.claude/skills/` directory to understand what domain knowledge Claude Code has access to
-
-::: {.callout-note}
-## One final reminder
-
-Claude Code is a tool, not a replacement for analytical judgment. Always review the code it generates, verify the statistical choices it makes, and confirm that outputs match your expectations before sharing results with your project lead or including them in deliverables.
+::: {.callout-note appearance="simple"}
+Claude Code is a tool, not a replacement for analytical judgment. Always review the code it generates, verify statistical choices, and confirm outputs before sharing results.
 :::
