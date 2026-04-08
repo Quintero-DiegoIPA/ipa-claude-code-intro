@@ -1,7 +1,10 @@
 ---
 title: "Getting Started with Claude Code"
 subtitle: "A practical guide for IPA Colombia Research Analysts"
-author: "IPA Colombia MEL Team"
+author:
+  - name: "Diego Quintero"
+    email: "dquintero@poverty-action.org"
+    affiliation: "IPA Colombia"
 date: today
 format:
   html:
@@ -23,6 +26,7 @@ execute:
 ```{=html}
 <div class="hero-banner">
   <div class="hero-content">
+    <span class="beta-badge">BETA</span>
     <p class="hero-eyebrow">IPA Colombia &middot; 50–75 min</p>
     <h1 class="hero-title">Learn Claude Code<br>for Stata Research</h1>
     <p class="hero-subtitle">
@@ -34,6 +38,10 @@ execute:
       <span class="badge-item">🔒 PII Safety</span>
       <span class="badge-item">🎯 2 Exercises</span>
     </div>
+    <p class="hero-disclaimer">
+      This guide complements the <a href="https://ipastorage.box.com/s/mvr67ygvz1y3v8qmgjey67lk7msmyeks" style="color: #8bb8d0;">IPA AI Usage Guidelines</a>.
+      Read those first for the full data classification and approval framework.
+    </p>
   </div>
 </div>
 ```
@@ -269,7 +277,7 @@ Launch Claude Code (see below) and follow the browser login prompt. It opens a w
 :::
 
 ::: {.callout-warning appearance="simple"}
-**Keep credentials private.** Never paste your API key into a shared document, Slack message, or Git commit. If using a Claude account, do not share your login session.
+**Keep credentials private.** Never paste your API key into a shared document, Slack message, or Git commit. If using a Claude account, do not share your login session. The [IPA AI Usage Guidelines](https://ipastorage.box.com/s/mvr67ygvz1y3v8qmgjey67lk7msmyeks) list API keys, passwords, and authentication tokens as **prohibited** from sharing with AI tools.
 :::
 
 ### Launch and Verify
@@ -394,21 +402,38 @@ Claude Code loads the relevant skill automatically. Ask it to write a do-file an
 **Settings and permissions.** The `.claude/settings.json` file controls which commands Claude Code can run without asking. You do not need to modify these files. They are maintained by the project lead.
 
 
-## 3. PII Safety
+## 3. Data Safety
 
 :::{.callout-danger appearance="simple"}
-**This is the most important module in the guide.** Read it before using Claude Code on any project with human subjects data.
+**This is the most important module in the guide.** Read the full [IPA AI Usage Guidelines](https://ipastorage.box.com/s/mvr67ygvz1y3v8qmgjey67lk7msmyeks) before using Claude Code on any project with human subjects data. What follows is a summary tailored to Claude Code.
 :::
 
-Innovations for Poverty Action (IPA) projects handle data with personally identifiable information (PII): names, national identification numbers (cedula), addresses, and phone numbers. Claude Code can read any file in your VS Code workspace and sends your messages to external servers for processing.
+### IPA Data Classification
 
-### The Four Rules
+IPA uses a four-tier data classification system. **Before using any AI tool, classify the data you plan to work with.** The classification determines which tools are allowed.
+
+| Classification | Examples | Claude Code? |
+|---|---|---|
+| **PUBLIC** | Published papers, public blog posts, anonymized published datasets | ✅ Yes |
+| **INTERNAL** | Project documentation, non-public training materials, do-files, draft documents without sensitive content | ✅ Yes (IPA-approved tools) |
+| **CONFIDENTIAL** | Datasets with PII (names, emails, cedula), unpublished research data, embargoed findings, grant proposals | ⚠️ Not with Claude Code. Use Azure OpenAI or local LLMs |
+| **HIGHLY CONFIDENTIAL** | Health data, biometric data, children's sensitive data, data that could endanger participants | 🛑 Contact MIST first |
+
+Claude Code sends your messages and file contents to Anthropic's servers. This makes it appropriate for PUBLIC and INTERNAL data. For CONFIDENTIAL data containing PII, IPA's approved pathways are Azure OpenAI (via API) and local/offline LLMs.
+
+::: {.callout-note appearance="simple"}
+**Where does Claude Code fit?** Claude Code uses either an Anthropic API key or a Claude Max/Pro account. Both send data to Anthropic's cloud. Under IPA guidelines, this means Claude Code follows the same rules as the Claude institutional license: approved for PUBLIC and INTERNAL data, not approved for PII or data restricted by contracts or legal obligations. When in doubt, check the [full guidelines](https://ipastorage.box.com/s/mvr67ygvz1y3v8qmgjey67lk7msmyeks) or contact MIST.
+:::
+
+---
+
+### The Four Rules for Claude Code
 
 ::::: {.grid}
 :::: {.g-col-6}
 :::{.card .card-danger}
 ### Rule 1: No PII in Prompts
-Do not type or paste names, cedula numbers, addresses, or phone numbers into Claude Code. Messages are sent to Anthropic's servers.
+Do not type or paste names, cedula numbers, addresses, phone numbers, or participant IDs into Claude Code. Messages are sent to Anthropic's servers.
 :::
 ::::
 :::: {.g-col-6}
@@ -420,16 +445,33 @@ Never ask Claude Code to open files in `data/raw/` or the encrypted vault (D: dr
 :::: {.g-col-6}
 :::{.card .card-danger}
 ### Rule 3: No Individual-Level Output
-Do not ask for rows of data. Even de-identified data can become re-identifiable. Ask it to write code that produces summaries instead.
+Do not ask for rows of data. Even de-identified data can become re-identifiable in small samples. Ask it to write code that produces summaries instead.
 :::
 ::::
 :::: {.g-col-6}
 :::{.card .card-danger}
 ### Rule 4: Review Before Committing
-Check every file Claude Code creates or modifies. Confirm no PII leaked into comments, labels, or hard-coded values.
+Check every file Claude Code creates or modifies. Confirm no PII leaked into comments, labels, or hard-coded values. Also check that no API keys or credentials appear.
 :::
 ::::
 :::::
+
+---
+
+### What You Can Never Share with AI Tools
+
+Regardless of the tool, IPA prohibits sharing these without specific use-case approval:
+
+- **PII from research participants**: names, addresses, phone numbers, ID numbers, identifiable photos or audio
+- **Sensitive Personal Information (SPI)**: health data, biometric data, sexual orientation, political opinions, criminal history, data about children under 13
+- **IPA credentials**: passwords, API keys, authentication tokens, encryption keys
+- **Contractually restricted data**: information under NDAs, donor restrictions, embargoed findings, or legal agreements
+
+::: {.callout-warning appearance="simple"}
+**If your dataset contains ANY SPI, the entire dataset is classified as HIGHLY CONFIDENTIAL**, even if most fields are regular PII. Contact MIST before using any AI tool.
+:::
+
+---
 
 ### Safe vs. Unsafe
 
@@ -437,12 +479,16 @@ Check every file Claude Code creates or modifies. Confirm no PII leaked into com
 
 | Scenario | Verdict |
 |----------|---------|
-| "Write a do-file that cleans survey data following this structure" | ✅ Safe |
-| "Clean this survey data" | ❌ Unsafe |
-| "Why is my merge failing? Here is the log" | ✅ Safe |
-| "Show me the first 20 rows of the baseline dataset" | ❌ Unsafe |
-| "Debug this r(111) error in my do-file" | ✅ Safe |
-| "Summarize attendance for Maria Garcia in Centro Zonal Norte" | ❌ Unsafe |
+| "Write a do-file that cleans survey data following this structure" | ✅ Safe (code, no data) |
+| "Clean this survey data" | ❌ Unsafe (requires reading data) |
+| "Why is my merge failing? Here is the log" | ✅ Safe (logs have aggregates) |
+| "Show me the first 20 rows of the baseline dataset" | ❌ Unsafe (individual-level data) |
+| "Debug this r(111) error in my do-file" | ✅ Safe (reads code, not data) |
+| "Summarize attendance for Maria Garcia in Centro Zonal Norte" | ❌ Unsafe (names + location = PII) |
+
+::: {.callout-tip appearance="simple"}
+**Using AI for code generation with non-sensitive data is pre-approved** under IPA guidelines. Writing do-files, debugging Stata errors, and generating LaTeX tables are all standard, approved uses of Claude Code.
+:::
 
 
 ## 4. Prompting
@@ -730,12 +776,14 @@ Generate a **summary statistics table** for a presentation.
 
 **Resources:**
 
+- [IPA AI Usage Guidelines](https://ipastorage.box.com/s/mvr67ygvz1y3v8qmgjey67lk7msmyeks) (required reading for all IPA AI tool use)
 - [Claude Code documentation](https://docs.anthropic.com/en/docs/claude-code/overview)
 - [IPA Stata template](https://github.com/PovertyAction/ipa-stata-template)
 - Your project's `CLAUDE.md` and `.claude/skills/` directory
+- MIST helpdesk for AI use case approvals or questions
 
 ::: {.callout-note appearance="simple"}
-Claude Code is a tool, not a replacement for analytical judgment. Always review code it generates, verify statistical choices, and confirm outputs before sharing.
+Claude Code is a tool, not a replacement for analytical judgment. Always review code it generates, verify statistical choices, and confirm outputs before sharing. You remain responsible for the accuracy and quality of your work, even when AI helped create it.
 :::
 
 :::

@@ -1,3 +1,29 @@
+/* ===== Beta Badge ===== */
+.beta-badge {
+  display: inline-block;
+  background: #f0ad4e;
+  color: #1a1a2e;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.8rem;
+  border-radius: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+/* ===== Hero Disclaimer ===== */
+.hero-disclaimer {
+  font-size: 0.82rem;
+  color: #8b9ab8;
+  margin-top: 1.2rem;
+  line-height: 1.5;
+}
+
+.hero-disclaimer a {
+  text-decoration: underline;
+}
+
 /* ===== Hero Banner ===== */
 .hero-banner {
   background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
