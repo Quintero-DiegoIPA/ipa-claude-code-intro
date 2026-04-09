@@ -1,0 +1,120 @@
+---
+title: "5. Ejercicios practicos"
+subtitle: "~25 minutos · Usan el dataset integrado auto de Stata"
+---
+
+## Ejercicio 1: Diagnosticar un error de Stata
+
+*10–15 minutos*
+
+Escribiste un do-file que usa el dataset integrado `auto` de Stata, pero tiene un error. El log muestra:
+
+```stata
+. sysuse auto, clear
+(1978 automobile data)
+
+. gen high_mileage = (mpg > 25)
+
+. regress high_mileage fuel_economy weight foreign, robust
+variable fuel_economy not found
+r(111);
+
+end of do-file
+r(111);
+```
+
+### Tu tarea
+
+1. Abre Claude Code en cualquier carpeta de proyecto (`claude` en la terminal)
+2. Pega el log y pregunta: *"Me salio este error r(111). Que esta mal y como lo arreglo?"*
+3. Lee el diagnostico. Identifica que `fuel_economy` no existe en `auto` y que `mpg` es la correcta?
+4. Haz seguimiento: *"Que otras variables relacionadas con combustible existen en sysuse auto?"*
+5. Evalua la correccion propuesta
+
+### Que buscar
+
+- Identifica correctamente `r(111)` como "variable not found"?
+- Sugiere `mpg` como reemplazo?
+- Explica por que?
+
+::: {.callout-tip collapse="true"}
+## Revelar respuesta
+La variable `fuel_economy` no existe en el dataset `auto`. La correcta es `mpg` (millas por galon). La correccion es `regress high_mileage mpg weight foreign, robust`. Este es un patron comun: usar un nombre que parece logico pero no coincide con el dataset real.
+:::
+
+---
+
+## Ejercicio 2: Escribir un do-file de estadisticas descriptivas
+
+*15–20 minutos*
+
+Necesitas una tabla de estadisticas descriptivas comparando autos domesticos y extranjeros.
+
+### Paso 1: Escribe el prompt
+
+Usa esta especificacion con plan mode:
+
+> *"Usa plan mode. Necesito un do-file que produzca una tabla de estadisticas descriptivas de sysuse auto, comparando autos domesticos vs extranjeros. Variables: price, mpg, weight, length, headroom. Muestra media, DE, N, y un p-valor de t-test para cada una. Guarda como exercise_sumstats.do."*
+
+### Paso 2: Revisa el output
+
+- [ ] Carga `sysuse auto, clear`?
+- [ ] Produce estadisticas por `foreign` (0/1)?
+- [ ] Incluye un t-test de diferencia?
+- [ ] El codigo es legible con comentarios?
+- [ ] Lo podrias ejecutar en Stata ahora mismo?
+
+### Paso 3: Itera
+
+Pide dos modificaciones:
+
+1. *"Agrega una fila para `rep78` (registro de reparaciones). Maneja los valores faltantes."*
+2. *"Agrega etiquetas de variable a la tabla para que muestre 'Precio (USD)' en vez de 'price'."*
+
+### Paso 4: Evalua
+
+Modifico el do-file sin romper la estructura existente? Manejo correctamente los valores faltantes en `rep78`?
+
+::: {.callout-tip collapse="true"}
+## Revelar: buen output
+Un buen do-file carga `sysuse auto, clear`, usa un loop sobre las variables, maneja valores faltantes en `rep78` explicitamente, aplica etiquetas de variable, esta bien comentado, y es ejecutable sin modificaciones.
+:::
+
+---
+
+## Referencia rapida
+
+### Comandos comunes
+
+| Que quieres | Que escribir |
+|-------------|-------------|
+| Iniciar Claude Code | `claude` en la terminal |
+| Planificar antes de actuar | `/plan` o *"usa plan mode"* |
+| Editar un archivo | *"Edita [ruta] para [cambio]"* |
+| Crear un archivo | *"Crea un do-file que [especificacion]"* |
+| Diagnosticar un error | Pega el log y pregunta *"Que esta mal?"* |
+| Salir | `/exit` o `Ctrl+C` |
+
+### Seguro vs. no seguro
+
+| ✅ Seguro | ❌ Nunca |
+|-----------|---------|
+| "Escribe un do-file que..." | "Lee los datos crudos de la encuesta..." |
+| "Diagnostica este log..." | "Muestrame observaciones donde nombre =..." |
+| "Explica este comando de Stata..." | "Lista todos los nombres de encuestados..." |
+| "Genera una tabla en LaTeX para..." | "Abre el archivo en la unidad D:..." |
+
+### Siguientes pasos
+
+1. **Empieza aqui.** Pide a Claude Code que explique una seccion de un do-file existente.
+2. **Luego intenta.** Pega un error de Stata de un log y pide un diagnostico.
+3. **Avanza.** Pide que revise un do-file contra estandares de codigo.
+4. **Profundiza.** Trabaja con la [guia de Blattman](https://claudeblattman.com/) para flujos avanzados.
+
+### Recursos
+
+- [IPA AI Usage Guidelines](https://ipastorage.box.com/s/mvr67ygvz1y3v8qmgjey67lk7msmyeks)
+- [Guia de Blattman sobre IA](https://claudeblattman.com/)
+- [Documentacion de Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview)
+- [Plantilla Stata de IPA](https://github.com/PovertyAction/ipa-stata-template)
+- Mesa de ayuda MIST para aprobaciones

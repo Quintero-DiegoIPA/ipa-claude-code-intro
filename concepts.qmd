@@ -1,0 +1,60 @@
+---
+title: "2. Conceptos clave"
+subtitle: "~10 minutos"
+---
+
+## Que es Claude Code?
+
+Claude Code es un asistente de codigo con IA construido por Anthropic. Se ejecuta dentro de la terminal de VS Code. A diferencia de chatbots en el navegador, lee los archivos de tu proyecto, entiende la estructura, y puede escribir o editar codigo directamente en tu maquina.
+
+Tres capacidades lo distinguen:
+
+1. **Contexto del proyecto.** Lee tus archivos automaticamente — do-files, configs, documentacion. No necesitas copiar y pegar en una ventana de chat.
+2. **Edicion directa.** Crea, modifica y elimina archivos en tu proyecto. Pide tu aprobacion antes de hacer cambios.
+3. **Instrucciones persistentes.** Sigue reglas escritas en un archivo `CLAUDE.md` en la raiz de tu proyecto — estandares de codigo, convenciones y reglas de seguridad.
+
+## Que puede y que no puede hacer
+
+| ✅ Puede hacer | ❌ No puede hacer |
+|---|---|
+| Escribir do-files siguiendo estandares IPA/DIME | Acceder o leer datos que contengan PII |
+| Diagnosticar errores leyendo logs de Stata | Reemplazar tu juicio sobre diseno de investigacion |
+| Generar tablas en LaTeX con `esttab` o `outreg2` | Ejecutar Stata por si solo (usa comandos `just`) |
+| Explicar codigo existente en lenguaje sencillo | Acceder a Box, email u otros sistemas externos |
+| Revisar do-files contra estandares de codigo | Garantizar metodologia estadistica correcta |
+| Ayudar con comandos de Git | Recordar entre sesiones separadas |
+
+## Como Claude Code conoce tu proyecto
+
+Claude Code no empieza de cero cada vez. Tres mecanismos le dan conocimiento persistente:
+
+### CLAUDE.md: el briefing del proyecto
+
+Es como el documento que escribirias para un nuevo miembro del equipo en su primer dia. Le dice a Claude Code que es el proyecto, que reglas seguir, y donde encontrar las cosas.
+
+```yaml
+# CLAUDE.md — Proyecto SpC
+
+## Que es este proyecto
+SpC 3.0 = Sanar para Crecer 3.0 (HtG)
+Programa de educacion a cuidadores implementado por ICBF en Colombia.
+
+## Reglas del proyecto
+- PII: nunca leer o mostrar archivos de datos crudos.
+- No usar cap / capture excepto para cap mkdir.
+- Globals de rutas definidos en 0_paths.do.
+```
+
+Este archivo se sube a Git. Todos los miembros del equipo comparten las mismas instrucciones.
+
+### Skills: los manuales de referencia
+
+El directorio `.claude/skills/` contiene instrucciones especializadas. Por ejemplo, el skill de Stata contiene estandares IPA/DIME, headers de do-files, convenciones de rutas y manejo de valores faltantes. El skill de escritura IPA contiene reglas de estilo, voz activa, acronimos y formato de citas.
+
+Claude Code carga el skill relevante automaticamente segun lo que le pidas.
+
+> **Modelo mental:** `CLAUDE.md` es el briefing para un nuevo miembro del equipo. Los skills son los manuales de referencia en su escritorio.
+
+### Configuracion y permisos
+
+El archivo `.claude/settings.json` controla que comandos puede ejecutar Claude Code sin pedir permiso. Lo mantiene el lider del proyecto — no necesitas modificar estos archivos.

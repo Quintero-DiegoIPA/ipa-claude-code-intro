@@ -1,0 +1,61 @@
+---
+title: "3. Seguridad de datos"
+subtitle: "~10 minutos"
+---
+
+::: {.callout-caution}
+## Este es el modulo mas importante
+Lee las [IPA AI Usage Guidelines](https://ipastorage.box.com/s/mvr67ygvz1y3v8qmgjey67lk7msmyeks) completas antes de usar Claude Code en cualquier proyecto con datos de sujetos humanos. Lo que sigue es un resumen adaptado a Claude Code.
+:::
+
+## Clasificacion de datos de IPA
+
+IPA usa un sistema de cuatro niveles. **Antes de usar cualquier herramienta de IA, clasifica los datos con los que vas a trabajar.**
+
+| Clasificacion | Ejemplos | Claude Code? |
+|---|---|---|
+| **Publico** | Articulos publicados, blogs publicos, datasets anonimizados publicados | ✅ Si |
+| **Interno** | Documentacion de proyecto, do-files, borradores sin contenido sensible | ✅ Si |
+| **Confidencial** | Datasets con PII (nombres, cedula), datos no publicados, hallazgos embargados | ⚠️ No. Usar Azure OpenAI o LLMs locales |
+| **Altamente confidencial** | Datos de salud, biometricos, datos sensibles de menores | 🛑 Contactar a MIST primero |
+
+Claude Code envia tus mensajes y contenido de archivos a los servidores de Anthropic. Esto lo hace apropiado para datos **publicos** e **internos**. Para datos **confidenciales** con PII, las vias aprobadas por IPA son Azure OpenAI (via API) y LLMs locales/offline.
+
+::: {.callout-note}
+**Donde encaja Claude Code?** Usa una API key de Anthropic o una cuenta Claude Max/Pro. Ambas envian datos a la nube de Anthropic. Bajo las guias de IPA, Claude Code sigue las mismas reglas que la licencia institucional de Claude: aprobado para datos publicos e internos, no aprobado para PII ni datos restringidos por contratos.
+:::
+
+## Las cuatro reglas
+
+1. **No PII en los prompts.** No escribas ni pegues nombres, numeros de cedula, direcciones, telefonos, ni IDs de participantes.
+2. **No archivos de datos crudos.** Nunca pidas a Claude Code abrir archivos en `data/raw/` ni en bovedas encriptadas.
+3. **No datos a nivel individual.** No pidas filas de datos. Incluso datos desidentificados pueden reidentificarse en muestras pequenas.
+4. **Revisar antes de hacer commit.** Revisa cada archivo que Claude Code cree o modifique. Confirma que no se filtro PII.
+
+## Lo que nunca puedes compartir
+
+Independientemente de la herramienta, IPA prohibe compartir lo siguiente sin aprobacion especifica:
+
+- **PII de participantes**: nombres, direcciones, telefonos, numeros de identificacion
+- **Informacion Personal Sensible (SPI)**: datos de salud, biometricos, orientacion sexual, opiniones politicas, datos de menores de 13 anos
+- **Credenciales de IPA**: contrasenas, API keys, tokens de autenticacion
+- **Datos restringidos por contrato**: informacion bajo NDAs, restricciones de donantes, hallazgos embargados
+
+::: {.callout-warning}
+Si tu dataset contiene **cualquier SPI**, todo el dataset se clasifica como **altamente confidencial**. Contacta a MIST antes de usar cualquier herramienta de IA.
+:::
+
+## Seguro vs. no seguro
+
+Antes de enviar un prompt, preguntate: *"Esto requiere que Claude Code vea datos individuales o detalles personales?"* Si si, reformula para enfocarte en el **codigo**, no en los **datos**.
+
+| Escenario | Veredicto |
+|-----------|-----------|
+| "Escribe un do-file que limpie datos de encuesta siguiendo esta estructura" | ✅ Seguro |
+| "Limpia estos datos de encuesta" | ❌ No seguro |
+| "Por que falla mi merge? Aqui esta el log" | ✅ Seguro |
+| "Muestrame las primeras 20 filas del dataset de linea base" | ❌ No seguro |
+| "Diagnostica este error r(111) en mi do-file" | ✅ Seguro |
+| "Resume la asistencia de Maria Garcia en Centro Zonal Norte" | ❌ No seguro |
+
+Usar IA para **generacion de codigo con datos no sensibles esta pre-aprobado** bajo las guias de IPA.

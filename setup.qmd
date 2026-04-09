@@ -1,0 +1,110 @@
+---
+title: "1. Instalacion y configuracion"
+subtitle: "~15 minutos"
+---
+
+## Que necesitas
+
+Antes de empezar, confirma que tienes lo siguiente:
+
+- **Stata 17** o posterior, instalado y con licencia
+- **Node.js 18** o posterior ([descargar](https://nodejs.org/))
+- Una **API key de Anthropic** o una **cuenta Claude Max/Pro** (pregunta a tu lider de proyecto)
+- Recomendado: una cuenta de [GitHub](https://github.com/) y un repositorio de proyecto clonado
+
+## Que es GitHub?
+
+GitHub es una plataforma donde los equipos almacenan y colaboran en codigo. Es como una carpeta compartida con superpoderes: guarda un historial completo de cada cambio, permite que varias personas trabajen en los mismos archivos sin sobreescribirse, y proporciona un respaldo fuera de tu computador.
+
+En IPA, cada proyecto tiene un **repositorio** (repo) en GitHub. Un repositorio es una carpeta que contiene todos los do-files, documentacion y configuracion de un proyecto. Cada analista **clona** (descarga) una copia a su propio computador para trabajar.
+
+| Concepto | Que es |
+|----------|--------|
+| **Repositorio** | Carpeta de proyecto en GitHub. Contiene do-files, documentacion y configs. |
+| **Clonar** | Descargar una copia del repo a tu computador. |
+| **Commit & Push** | Guardar un snapshot de tus cambios (commit) y subirlos a GitHub (push). |
+
+No necesitas ser experto en Git. Estos tres conceptos son suficientes para empezar, y Claude Code puede ayudarte con los comandos.
+
+## Estructura de carpetas del proyecto
+
+Los proyectos de IPA deben seguir una estructura estandarizada. La plantilla oficial esta en [PovertyAction/ipa-stata-template](https://github.com/PovertyAction/ipa-stata-template). Para iniciar un proyecto nuevo, haz clic en **"Use this template"**.
+
+```
+mi-proyecto/
+├── do_files/           # Scripts de Stata
+│   └── 00_run.do       # Do-file maestro
+├── data/               # Datos crudos, limpios, finales
+├── outputs/            # Tablas y graficos
+│   ├── tables/
+│   └── figures/
+├── logs/               # Logs de ejecucion
+├── ado/                # Paquetes locales de Stata
+├── documentation/      # Guias del proyecto
+├── .env                # Ruta local de Stata (no se sube a Git)
+└── .here               # Marcador de raiz del proyecto
+```
+
+La plantilla soporta tres niveles: **Minimo** (solo Git + Stata), **Task Runner** (agrega `just` para automatizacion), y **Completo** (herramientas de Python, pre-commit hooks e integracion con Claude Code).
+
+::: {.callout-tip}
+Si ya tienes un repositorio de proyecto, no necesitas empezar de cero. La estructura anterior es una referencia.
+:::
+
+## VS Code: tu espacio de trabajo
+
+Visual Studio Code (VS Code) es un editor de codigo gratuito donde se ejecuta Claude Code. Descargalo en [code.visualstudio.com](https://code.visualstudio.com/).
+
+| Panel | Funcion | Atajo |
+|-------|---------|-------|
+| **Barra lateral** | Estructura de carpetas del proyecto | `Ctrl+B` |
+| **Editor** | Area principal donde se abren archivos como pestanas | — |
+| **Terminal** | Linea de comandos integrada. Aqui corre Claude Code | `` Ctrl+` `` |
+| **Extensiones** | Marketplace de complementos | `Ctrl+Shift+X` |
+
+Instala estas extensiones en la terminal de VS Code:
+
+```bash
+code --install-extension kylebarron.stata-enhanced
+code --install-extension anthropic.claude-code
+code --install-extension eamodio.gitlens
+```
+
+## Instalar Claude Code
+
+```bash
+npm install -g @anthropic-ai/claude-code
+```
+
+::: {.callout-note}
+Error de permisos en Windows? Reabre VS Code como Administrador. En macOS, usa `sudo`.
+:::
+
+## Autenticacion
+
+**Opcion A: API Key (pago por uso).** Estandar para proyectos IPA con facturacion compartida.
+
+```powershell
+# Windows (PowerShell)
+[System.Environment]::SetEnvironmentVariable("ANTHROPIC_API_KEY", "sk-ant-tu-clave-aqui", "User")
+```
+
+```bash
+# macOS / Linux (agregar a ~/.zshrc o ~/.bashrc)
+export ANTHROPIC_API_KEY="sk-ant-tu-clave-aqui"
+```
+
+**Opcion B: Cuenta Claude (Max / Pro).** Lanza Claude Code y sigue el prompt de login en el navegador. No se necesita variable de entorno.
+
+::: {.callout-warning}
+**Manten tus credenciales privadas.** Nunca pegues tu API key en documentos compartidos, Slack, o Git. Las [IPA AI Usage Guidelines](https://ipastorage.box.com/s/mvr67ygvz1y3v8qmgjey67lk7msmyeks) lo prohiben explicitamente.
+:::
+
+## Lanzar y verificar
+
+```bash
+cd /ruta/a/tu/proyecto
+claude
+```
+
+Escribe `What project is this?` para verificar que Claude Code lee tu `CLAUDE.md` correctamente.

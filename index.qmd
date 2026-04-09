@@ -1,0 +1,40 @@
+---
+title: "Primeros Pasos con Claude Code"
+subtitle: "Guia practica para IPA Colombia"
+---
+
+```{=html}
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<div class="site-banner">
+  <span class="banner-badge">BETA v0.1</span>
+  Esta guia esta en beta. La construi con Claude Code y puede contener errores.
+  Comentarios bienvenidos: <a href="mailto:dquintero@poverty-action.org">dquintero@poverty-action.org</a> · <a href="https://github.com/Quintero-DiegoIPA/ipa-claude-code-intro/issues">GitHub Issues</a>
+</div>
+```
+
+## De que se trata esta guia
+
+Claude Code es un asistente de codigo con inteligencia artificial que se ejecuta en la terminal. Lee los archivos de tu proyecto, entiende la estructura, y puede escribir o editar codigo directamente en tu maquina. Esta guia es una introduccion practica para cualquier persona en IPA Colombia que quiera empezar a usarlo.
+
+No se requiere experiencia previa con VS Code ni con Claude Code. La guia toma entre **50 y 75 minutos**, incluyendo dos ejercicios practicos.
+
+::: {.callout-important}
+## Lectura obligatoria previa
+Esta guia complementa las [IPA AI Usage Guidelines](https://ipastorage.box.com/s/mvr67ygvz1y3v8qmgjey67lk7msmyeks). Revisalas primero para conocer el marco completo de clasificacion de datos y aprobaciones.
+:::
+
+## Modulos
+
+| | Modulo | Tiempo | Que cubre |
+|---|---|---|---|
+| 1 | [Instalacion](setup.qmd) | ~15 min | GitHub, estructura de proyecto, VS Code, instalar Claude Code |
+| 2 | [Conceptos](concepts.qmd) | ~10 min | Que es Claude Code, que puede hacer, CLAUDE.md y skills |
+| 3 | [Seguridad](safety.qmd) | ~10 min | Clasificacion de datos, reglas de PII, escenarios seguros/no seguros |
+| 4 | [Prompting](prompting.qmd) | ~10 min | Modo plan, cinco patrones para prompts efectivos |
+| 5 | [Practica](exercises.qmd) | ~25 min | Dos ejercicios con el dataset `auto` de Stata |
+| | [Ejemplos](examples.qmd) | — | Productos reales construidos con Claude Code |
+
+## Esto es solo la punta del iceberg
+
+Esta guia es una introduccion muy inicial. Para profundizar mucho mas en flujos de trabajo asistidos por IA, estrategias de prompting y casos de uso avanzados, he encontrado la [guia de Chris Blattman sobre IA](https://claudeblattman.com/) increiblemente valiosa. La recomiendo como siguiente paso despues de completar esta guia.
