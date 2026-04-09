@@ -44,10 +44,12 @@ execute:
 <div class="feedback-banner">
   <p>
     <strong>This guide is in beta.</strong>
-    It is a first attempt at introducing Claude Code to IPA research analysts.
+    This is my first attempt at introducing Claude Code to IPA research analysts.
+    I built it entirely with Claude Code itself, so it may contain errors or rough edges.
     Feedback, corrections, and suggestions are very welcome — they will directly shape the next version.
-    Please reach out to <a href="mailto:dquintero@poverty-action.org">Diego Quintero Mogoll&oacute;n</a> (dquintero@poverty-action.org)
+    Please reach out to me at <a href="mailto:dquintero@poverty-action.org">dquintero@poverty-action.org</a>
     or open an issue on <a href="https://github.com/Quintero-DiegoIPA/ipa-claude-code-intro/issues">GitHub</a>.
+    <br><em>— Diego Quintero Mogoll&oacute;n, IPA Colombia</em>
   </p>
 </div>
 ```
@@ -57,7 +59,7 @@ This guide complements the [IPA AI Usage Guidelines](https://ipastorage.box.com/
 :::
 
 ::: {.callout-note appearance="simple"}
-**This is the tip of the iceberg.** This guide is a very initial introduction to Claude Code, focused on getting IPA research analysts up and running. For a much deeper dive into AI-assisted workflows, prompting strategies, and advanced use cases, the [Chris Blattman AI guide](https://claudeblattman.com/) has been an invaluable resource.
+**This is the tip of the iceberg.** This guide is a very initial introduction to Claude Code, focused on getting IPA research analysts up and running. For a much deeper dive into AI-assisted workflows, prompting strategies, and advanced use cases, I have found the [Chris Blattman AI guide](https://claudeblattman.com/) incredibly valuable — it covers everything from basic setup to building custom skills and automating entire workflows. I highly recommend it as a next step after this guide.
 :::
 
 ::: {.module-nav}
@@ -648,7 +650,7 @@ and include the F-test for joint significance at the bottom.
 Claude Code remembers the conversation. Build on its output rather than starting over.
 
 ::: {.callout-tip appearance="simple"}
-**Go deeper on prompting.** The [Blattman guide on prompting](https://claudeblattman.com/essentials/prompting) covers this topic in much more depth: how to structure complex requests, the Prompt-Plan-Review loop, and strategies for getting consistent results. It is highly recommended reading after completing this guide.
+**Go deeper on prompting.** The [Blattman guide on prompting](https://claudeblattman.com/essentials/prompting) covers this topic in much more depth: how to structure complex requests, the Prompt-Plan-Review loop, and strategies for getting consistent results. I found it extremely helpful for improving my own prompts — I recommend reading it after completing this guide.
 :::
 
 
