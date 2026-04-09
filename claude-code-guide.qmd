@@ -1,19 +1,20 @@
 ---
-title: "Getting Started with Claude Code"
-subtitle: "A practical guide for IPA Colombia Research Analysts"
+title: "Primeros Pasos con Claude Code"
+subtitle: "Guia practica para analistas de investigacion de IPA Colombia"
 author:
   - name: "Diego Quintero Mogollon"
     email: "dquintero@poverty-action.org"
     affiliation: "IPA Colombia"
 date: today
+lang: es
 format:
   html:
     toc: false
     number-sections: false
     embed-resources: true
     theme:
-      light: cosmo
       dark: darkly
+      light: cosmo
     smooth-scroll: true
     code-copy: true
     link-external-newwindow: true
@@ -27,15 +28,15 @@ execute:
 <div class="hero-banner">
   <div class="hero-content">
     <span class="beta-badge">BETA v0.1</span>
-    <h1 class="hero-title">Learn Claude Code<br>for Stata Research</h1>
+    <h1 class="hero-title">Aprende Claude Code<br>para investigacion en Stata</h1>
     <p class="hero-subtitle">
-      Go from zero to productive with an AI coding assistant.<br>
-      No prior experience with VS Code or Claude Code required.
+      De cero a productivo con un asistente de codigo con inteligencia artificial.<br>
+      No se requiere experiencia previa con VS Code ni con Claude Code.
     </p>
     <div class="hero-badges">
-      <span class="badge-item">📖 5 Modules</span>
-      <span class="badge-item">🔒 Data Safety</span>
-      <span class="badge-item">🎯 2 Exercises</span>
+      <span class="badge-item">📖 5 Modulos</span>
+      <span class="badge-item">🔒 Seguridad de Datos</span>
+      <span class="badge-item">🎯 2 Ejercicios</span>
       <span class="badge-item">⏱️ 50–75 min</span>
     </div>
   </div>
@@ -43,60 +44,60 @@ execute:
 
 <div class="feedback-banner">
   <p>
-    <strong>This guide is in beta.</strong>
-    This is my first attempt at introducing Claude Code to IPA research analysts.
-    I built it entirely with Claude Code itself, so it may contain errors or rough edges.
-    Feedback, corrections, and suggestions are very welcome — they will directly shape the next version.
-    Please reach out to me at <a href="mailto:dquintero@poverty-action.org">dquintero@poverty-action.org</a>
-    or open an issue on <a href="https://github.com/Quintero-DiegoIPA/ipa-claude-code-intro/issues">GitHub</a>.
+    <strong>Esta guia esta en beta.</strong>
+    Este es mi primer intento de introducir Claude Code a analistas de investigacion de IPA.
+    La construi completamente con Claude Code, asi que puede contener errores o cosas por pulir.
+    Los comentarios, correcciones y sugerencias son muy bienvenidos — van a dar forma directamente a la siguiente version.
+    Escribeme a <a href="mailto:dquintero@poverty-action.org">dquintero@poverty-action.org</a>
+    o abre un issue en <a href="https://github.com/Quintero-DiegoIPA/ipa-claude-code-intro/issues">GitHub</a>.
     <br><em>— Diego Quintero Mogoll&oacute;n, IPA Colombia</em>
   </p>
 </div>
 ```
 
 ::: {.callout-important appearance="simple"}
-This guide complements the [IPA AI Usage Guidelines](https://ipastorage.box.com/s/mvr67ygvz1y3v8qmgjey67lk7msmyeks). Read those first for the full data classification and approval framework.
+Esta guia complementa las [IPA AI Usage Guidelines](https://ipastorage.box.com/s/mvr67ygvz1y3v8qmgjey67lk7msmyeks) (en ingles). Revisalas primero para conocer el marco completo de clasificacion de datos y aprobaciones.
 :::
 
 ::: {.callout-note appearance="simple"}
-**This is the tip of the iceberg.** This guide is a very initial introduction to Claude Code, focused on getting IPA research analysts up and running. For a much deeper dive into AI-assisted workflows, prompting strategies, and advanced use cases, I have found the [Chris Blattman AI guide](https://claudeblattman.com/) incredibly valuable — it covers everything from basic setup to building custom skills and automating entire workflows. I highly recommend it as a next step after this guide.
+**Esto es solo la punta del iceberg.** Esta guia es una introduccion muy inicial a Claude Code, enfocada en que los analistas de IPA puedan empezar a usarlo. Para profundizar mucho mas en flujos de trabajo asistidos por IA, estrategias de prompting y casos de uso avanzados, he encontrado la [guia de Chris Blattman sobre IA](https://claudeblattman.com/) increiblemente valiosa — cubre desde la configuracion basica hasta la creacion de skills personalizados y la automatizacion de flujos completos. La recomiendo mucho como siguiente paso despues de esta guia.
 :::
 
 ::: {.module-nav}
-Five modules. Work through them in order, or jump to what you need.
+Cinco modulos. Recorrelos en orden o salta al que necesites.
 :::
 
 ::: {.panel-tabset .module-tabs}
 
-## 1. Setup (~15 min)
+## 1. Instalacion (~15 min)
 
 ::::: {.two-col}
 :::: {.col-left}
 
-### What You Need
+### Que necesitas
 
 :::{.card}
-#### Must Have
-- Stata 17 or later, installed and licensed
-- Node.js 18 or later ([download](https://nodejs.org/))
-- An Anthropic API key **or** a Claude Max/Pro account
+#### Obligatorio
+- Stata 17 o posterior, instalado y con licencia
+- Node.js 18 o posterior ([descargar](https://nodejs.org/))
+- Una API key de Anthropic **o** una cuenta Claude Max/Pro
 :::
 
 :::{.card}
-#### Good to Have
-- A GitHub account ([sign up](https://github.com/))
-- A project repository cloned to your machine
-- Familiarity with IPA/DIME Stata coding standards
+#### Recomendado
+- Una cuenta de GitHub ([registrarse](https://github.com/))
+- Un repositorio de proyecto clonado en tu maquina
+- Familiaridad con los estandares de codigo IPA/DIME para Stata
 :::
 
 ::::
 :::: {.col-right}
 
-### What Is GitHub?
+### Que es GitHub?
 
-GitHub is a platform where teams store and collaborate on code. Think of it as a shared folder with superpowers: it keeps a complete history of every change, lets multiple people work on the same files without overwriting each other, and provides a backup of all project code outside your local machine.
+GitHub es una plataforma donde los equipos almacenan y colaboran en codigo. Es como una carpeta compartida con superpoderes: guarda un historial completo de cada cambio, permite que varias personas trabajen en los mismos archivos sin sobreescribirse, y proporciona un respaldo de todo el codigo del proyecto fuera de tu computador.
 
-At IPA, each project has a **repository** (repo) on GitHub. A repository is a folder that contains all the do-files, documentation, and configuration for one project. The code lives on GitHub, and each analyst **clones** (downloads) a copy to their own computer to work on.
+En IPA, cada proyecto tiene un **repositorio** (repo) en GitHub. Un repositorio es una carpeta que contiene todos los do-files, documentacion y configuracion de un proyecto. El codigo vive en GitHub, y cada analista **clona** (descarga) una copia a su propio computador para trabajar.
 
 ::::
 :::::
@@ -104,132 +105,132 @@ At IPA, each project has a **repository** (repo) on GitHub. A repository is a fo
 ::::: {.grid}
 :::: {.g-col-4}
 :::{.card}
-### Repository
-A project folder on GitHub. Contains do-files, documentation, and configs. Each project gets one repo.
+### Repositorio
+Una carpeta de proyecto en GitHub. Contiene do-files, documentacion y configuraciones. Cada proyecto tiene un repo.
 :::
 ::::
 :::: {.g-col-4}
 :::{.card}
-### Clone
-Download a copy of the repo to your computer. You edit your local copy, then push changes back.
+### Clonar
+Descargar una copia del repo a tu computador. Editas tu copia local y luego subes (push) los cambios.
 :::
 ::::
 :::: {.g-col-4}
 :::{.card}
 ### Commit & Push
-Save a snapshot of your changes (commit) and upload them to GitHub (push) so the team can see them.
+Guardar una instantanea de tus cambios (commit) y subirlos a GitHub (push) para que el equipo los vea.
 :::
 ::::
 :::::
 
 ::: {.callout-note appearance="simple"}
-You do not need to be a Git expert. The three concepts above are enough to get started. Claude Code can help with Git commands when you need them.
+No necesitas ser un experto en Git. Los tres conceptos anteriores son suficientes para empezar. Claude Code puede ayudarte con comandos de Git cuando los necesites.
 :::
 
 ---
 
-### Project Folder Structure
+### Estructura de carpetas del proyecto
 
-IPA projects should follow a standardized folder structure. The official template is available at [PovertyAction/ipa-stata-template](https://github.com/PovertyAction/ipa-stata-template) on GitHub. To start a new project, go to that repository and click **"Use this template"** to create your own copy.
+Los proyectos de IPA deben seguir una estructura de carpetas estandarizada. La plantilla oficial esta disponible en [PovertyAction/ipa-stata-template](https://github.com/PovertyAction/ipa-stata-template) en GitHub. Para iniciar un proyecto nuevo, ve a ese repositorio y haz clic en **"Use this template"** para crear tu propia copia.
 
 ::::: {.two-col}
 :::: {.col-left}
 
 ```
-my-project/
-├── do_files/           # Stata scripts
-│   └── 00_run.do       # Master do-file
-├── data/               # Raw, cleaned, final
-├── outputs/            # Tables and figures
+mi-proyecto/
+├── do_files/           # Scripts de Stata
+│   └── 00_run.do       # Do-file maestro
+├── data/               # Datos crudos, limpios, finales
+├── outputs/            # Tablas y graficos
 │   ├── tables/
 │   └── figures/
-├── logs/               # Stata execution logs
-├── ado/                # Local Stata packages
-├── documentation/      # Project guides
-├── .config/            # Configuration files
-├── .env                # Local Stata path
-└── .here               # Root marker
+├── logs/               # Logs de ejecucion de Stata
+├── ado/                # Paquetes locales de Stata
+├── documentation/      # Guias del proyecto
+├── .config/            # Archivos de configuracion
+├── .env                # Ruta local de Stata
+└── .here               # Marcador de raiz
 ```
 
 ::::
 :::: {.col-right}
 
-The template supports three tiers:
+La plantilla soporta tres niveles:
 
 :::{.card}
-#### Tier 1: Minimal
-Git + Stata only. Clone the template, configure `.env`, start writing do-files.
+#### Nivel 1: Minimo
+Solo Git + Stata. Clona la plantilla, configura `.env`, y empieza a escribir do-files.
 :::
 
 :::{.card}
-#### Tier 2: Task Runner
-Add `just` for automation. Run scripts with `just stata-run` instead of opening Stata manually.
+#### Nivel 2: Task Runner
+Agrega `just` para automatizacion. Ejecuta scripts con `just stata-run` en vez de abrir Stata manualmente.
 :::
 
 :::{.card}
-#### Tier 3: Full
-Python tools, pre-commit hooks, and Claude Code integration with `CLAUDE.md` and skills.
+#### Nivel 3: Completo
+Herramientas de Python, pre-commit hooks, e integracion con Claude Code mediante `CLAUDE.md` y skills.
 :::
 
 ::::
 :::::
 
 ::: {.callout-tip appearance="simple"}
-If you already have a project repo, you do not need to start over. The folder structure above is a reference. Ask your project lead how your repo is organized.
+Si ya tienes un repositorio de proyecto, no necesitas empezar de cero. La estructura anterior es una referencia. Pregunta a tu lider de proyecto como esta organizado tu repo.
 :::
 
 ---
 
-### VS Code: Your New Workspace
+### VS Code: Tu nuevo espacio de trabajo
 
-Visual Studio Code (VS Code) is a free code editor where Claude Code runs. Download it from [code.visualstudio.com](https://code.visualstudio.com/).
+Visual Studio Code (VS Code) es un editor de codigo gratuito donde se ejecuta Claude Code. Descargalo en [code.visualstudio.com](https://code.visualstudio.com/).
 
 ::::: {.grid}
 :::: {.g-col-6}
 :::{.card}
-### Sidebar
-Shows your project folder structure. Toggle with `Ctrl+B`. Click any file to open it.
+### Barra lateral
+Muestra la estructura de carpetas de tu proyecto. Activa/desactiva con `Ctrl+B`. Haz clic en cualquier archivo para abrirlo.
 :::
 ::::
 :::: {.g-col-6}
 :::{.card}
 ### Editor
-The main area where files open as tabs. Split the view to compare two files side by side.
+El area principal donde los archivos se abren como pestanas. Divide la vista para comparar dos archivos lado a lado.
 :::
 ::::
 :::: {.g-col-6}
 :::{.card}
 ### Terminal
-A command line built into VS Code. This is where Claude Code runs. Toggle with `` Ctrl+` ``.
+Una linea de comandos integrada en VS Code. Aqui es donde se ejecuta Claude Code. Activa con `` Ctrl+` ``.
 :::
 ::::
 :::: {.g-col-6}
 :::{.card}
-### Extensions
-A marketplace for add-ons. Open with `Ctrl+Shift+X`.
+### Extensiones
+Un marketplace de complementos. Abre con `Ctrl+Shift+X`.
 :::
 ::::
 :::::
 
 ::: {.panel-tabset}
-#### Windows Shortcuts
+#### Windows
 
-| Action | Shortcut |
-|--------|----------|
-| Open a folder | `Ctrl+K`, then `Ctrl+O` |
-| Open the terminal | `` Ctrl+` `` |
-| Search across all files | `Ctrl+Shift+F` |
+| Accion | Atajo |
+|--------|-------|
+| Abrir una carpeta | `Ctrl+K`, luego `Ctrl+O` |
+| Abrir la terminal | `` Ctrl+` `` |
+| Buscar en todos los archivos | `Ctrl+Shift+F` |
 
-#### macOS Shortcuts
+#### macOS
 
-| Action | Shortcut |
-|--------|----------|
-| Open a folder | `Cmd+O` |
-| Open the terminal | `` Ctrl+` `` |
-| Search across all files | `Cmd+Shift+F` |
+| Accion | Atajo |
+|--------|-------|
+| Abrir una carpeta | `Cmd+O` |
+| Abrir la terminal | `` Ctrl+` `` |
+| Buscar en todos los archivos | `Cmd+Shift+F` |
 :::
 
-**Extensions to install** (run in the VS Code terminal):
+**Extensiones a instalar** (ejecuta en la terminal de VS Code):
 
 ```bash
 code --install-extension kylebarron.stata-enhanced
@@ -239,39 +240,39 @@ code --install-extension eamodio.gitlens
 
 ---
 
-### Install and Authenticate Claude Code
+### Instalar y autenticar Claude Code
 
 ::::: {.two-col}
 :::: {.col-left}
 
-**Step 1: Install.** Open the VS Code terminal (`` Ctrl+` ``):
+**Paso 1: Instalar.** Abre la terminal de VS Code (`` Ctrl+` ``):
 
 ```bash
 npm install -g @anthropic-ai/claude-code
 ```
 
 ::: {.callout-note appearance="simple"}
-Permissions error on Windows? Reopen VS Code as Administrator. On macOS, prefix with `sudo`.
+Error de permisos en Windows? Reabre VS Code como Administrador. En macOS, usa `sudo` antes del comando.
 :::
 
-**Step 2: Launch and verify.**
+**Paso 3: Lanzar y verificar.**
 
 ```bash
-cd /path/to/your/project
+cd /ruta/a/tu/proyecto
 claude
 ```
 
-Type `What project is this?` — Claude Code reads `CLAUDE.md` on startup and should describe your project.
+Escribe `What project is this?` — Claude Code lee el archivo `CLAUDE.md` al iniciar y deberia describir tu proyecto.
 
 ::::
 :::: {.col-right}
 
-**Step 2: Authenticate.** Two options:
+**Paso 2: Autenticar.** Dos opciones:
 
 ::: {.panel-tabset}
-##### API Key (Pay Per Use)
+##### API Key (pago por uso)
 
-Standard for IPA projects with shared billing. Ask your project lead for the key.
+Estandar para proyectos IPA con facturacion compartida. Pide la clave a tu lider de proyecto.
 
 ::: {.panel-tabset}
 ###### Windows (PowerShell)
@@ -279,279 +280,279 @@ Standard for IPA projects with shared billing. Ask your project lead for the key
 ```powershell
 [System.Environment]::SetEnvironmentVariable(
   "ANTHROPIC_API_KEY",
-  "sk-ant-your-key-here", "User")
+  "sk-ant-tu-clave-aqui", "User")
 ```
 
-Restart VS Code after running this.
+Reinicia VS Code despues de ejecutar esto.
 
 ###### macOS / Linux
 
-Add to `~/.zshrc` or `~/.bashrc`:
+Agrega a `~/.zshrc` o `~/.bashrc`:
 
 ```bash
-export ANTHROPIC_API_KEY="sk-ant-your-key-here"
+export ANTHROPIC_API_KEY="sk-ant-tu-clave-aqui"
 ```
 
-Then restart your terminal.
+Luego reinicia tu terminal.
 :::
 
-##### Claude Account (Max / Pro)
+##### Cuenta Claude (Max / Pro)
 
-Launch Claude Code and follow the browser login prompt. No environment variable needed. Session token stored locally after first login.
+Lanza Claude Code y sigue el prompt de inicio de sesion en el navegador. No se necesita variable de entorno. El token de sesion se guarda localmente despues del primer login.
 :::
 
 ::: {.callout-warning appearance="simple"}
-**Keep credentials private.** Never paste your API key into a shared document, Slack message, or Git commit. The [IPA AI Usage Guidelines](https://ipastorage.box.com/s/mvr67ygvz1y3v8qmgjey67lk7msmyeks) list API keys and authentication tokens as **prohibited** from sharing with AI tools.
+**Manten tus credenciales privadas.** Nunca pegues tu API key en un documento compartido, mensaje de Slack, o commit de Git. Las [IPA AI Usage Guidelines](https://ipastorage.box.com/s/mvr67ygvz1y3v8qmgjey67lk7msmyeks) listan las API keys y tokens de autenticacion como **prohibidos** para compartir con herramientas de IA.
 :::
 
 ::::
 :::::
 
 
-## 2. Concepts (~10 min)
+## 2. Conceptos (~10 min)
 
-### What Is Claude Code?
+### Que es Claude Code?
 
-Claude Code is an AI coding assistant built by Anthropic. It runs inside the VS Code terminal as a command-line tool. Unlike browser-based chatbots, it reads the files in your project folder, understands the structure, and can write or edit code directly on your machine.
+Claude Code es un asistente de codigo con IA construido por Anthropic. Se ejecuta dentro de la terminal de VS Code como herramienta de linea de comandos. A diferencia de chatbots en el navegador, lee los archivos de tu carpeta de proyecto, entiende la estructura, y puede escribir o editar codigo directamente en tu maquina.
 
 ::::: {.grid}
 :::: {.g-col-4}
 :::{.card}
-### 🗂️ Project Context
-Reads your files automatically. Sees do-files, configs, and docs. No copy-pasting into a chat window.
+### 🗂️ Contexto del proyecto
+Lee tus archivos automaticamente. Ve do-files, configs y documentacion. No necesitas copiar y pegar en una ventana de chat.
 :::
 ::::
 :::: {.g-col-4}
 :::{.card}
-### ✏️ Direct Editing
-Creates, modifies, and deletes files in your project. Asks for your approval before making changes.
+### ✏️ Edicion directa
+Crea, modifica y elimina archivos en tu proyecto. Pide tu aprobacion antes de hacer cambios.
 :::
 ::::
 :::: {.g-col-4}
 :::{.card}
-### 📋 Instructions
-Follows rules in a `CLAUDE.md` file at your project root. Coding standards, conventions, and guardrails.
+### 📋 Instrucciones
+Sigue reglas escritas en un archivo `CLAUDE.md` en la raiz de tu proyecto. Estandares de codigo, convenciones y reglas de seguridad.
 :::
 ::::
 :::::
 
 ---
 
-### What Claude Code Can and Cannot Do
+### Que puede y que no puede hacer Claude Code
 
 ::::: {.grid}
 :::: {.g-col-6}
 :::{.card .card-safe}
-### Can Do
-- Write new do-files following IPA/DIME standards
-- Debug errors by reading Stata log files
-- Generate LaTeX tables with `esttab` or `outreg2`
-- Explain existing code in plain language
-- Review do-files for coding standard violations
-- Help with Git commands
+### Puede hacer
+- Escribir do-files nuevos siguiendo estandares IPA/DIME
+- Diagnosticar errores leyendo logs de Stata
+- Generar tablas en LaTeX con `esttab` o `outreg2`
+- Explicar codigo existente en lenguaje sencillo
+- Revisar do-files contra estandares de codigo
+- Ayudar con comandos de Git
 :::
 ::::
 :::: {.g-col-6}
 :::{.card .card-danger}
-### Cannot Do
-- Access or read data containing PII
-- Replace your judgment on research design
-- Run Stata by itself (uses `just` commands)
-- Access Box, email, or external systems
-- Guarantee correct statistical methodology
-- Remember across separate sessions
+### No puede hacer
+- Acceder o leer datos que contengan PII
+- Reemplazar tu juicio sobre diseno de investigacion
+- Ejecutar Stata por si solo (usa comandos `just`)
+- Acceder a Box, email u otros sistemas externos
+- Garantizar metodologia estadistica correcta
+- Recordar entre sesiones separadas
 :::
 ::::
 :::::
 
 ---
 
-### How Claude Code Knows Your Project
+### Como Claude Code conoce tu proyecto
 
-Claude Code does not start from zero each time. Three mechanisms give it persistent knowledge.
+Claude Code no empieza de cero cada vez. Tres mecanismos le dan conocimiento persistente.
 
 ::::: {.two-col}
 :::: {.col-left}
 
-**CLAUDE.md: The project briefing.** Think of it as the document you would write for a new research analyst on their first day.
+**CLAUDE.md: El briefing del proyecto.** Es como el documento que escribirias para un nuevo analista de investigacion en su primer dia.
 
 ```yaml
-# CLAUDE.md — SpC Project
+# CLAUDE.md — Proyecto SpC
 
-## What This Project Is
+## Que es este proyecto
 SpC 3.0 = Sanar para Crecer 3.0 (HtG)
-A large-scale caregiver education program
-implemented by ICBF in Colombia.
+Programa de educacion a cuidadores a gran
+escala implementado por ICBF en Colombia.
 
-## Project-Specific Rules
-- PII: never read or display raw data files.
-- Do not use cap / capture except for cap mkdir.
-- Path globals defined in 0_paths.do.
+## Reglas del proyecto
+- PII: nunca leer o mostrar archivos de datos crudos.
+- No usar cap / capture excepto para cap mkdir.
+- Globals de rutas definidos en 0_paths.do.
 ```
 
-This file is checked into Git. Every team member shares the same instructions.
+Este archivo se sube a Git. Todos los miembros del equipo comparten las mismas instrucciones.
 
 ::::
 :::: {.col-right}
 
-**Skills: The reference manuals.** The `.claude/skills/` directory contains specialized instruction sets.
+**Skills: Los manuales de referencia.** El directorio `.claude/skills/` contiene conjuntos de instrucciones especializadas.
 
 ::::: {.grid}
 :::: {.g-col-6}
 :::{.card}
-### Stata Skill
-IPA/DIME coding standards, do-file headers, path conventions, missing value handling.
+### Skill de Stata
+Estandares IPA/DIME, headers de do-files, convenciones de rutas, manejo de valores faltantes.
 :::
 ::::
 :::: {.g-col-6}
 :::{.card}
-### IPA Writing Skill
-Style rules for IPA content: active voice, acronym conventions, citation format.
+### Skill de escritura IPA
+Reglas de estilo para contenido IPA: voz activa, convenciones de acronimos, formato de citas.
 :::
 ::::
 :::::
 
-Claude Code loads the relevant skill automatically. Ask it to write a do-file and it applies the Stata skill.
+Claude Code carga el skill relevante automaticamente. Si le pides escribir un do-file, aplica el skill de Stata.
 
-> **Mental model:** `CLAUDE.md` is the briefing for a new RA. Skills are the reference manuals on their desk.
+> **Modelo mental:** `CLAUDE.md` es el briefing para un nuevo RA. Los skills son los manuales de referencia en su escritorio.
 
-**Settings and permissions.** `.claude/settings.json` controls which commands Claude Code can run without asking. Maintained by the project lead.
+**Configuracion y permisos.** `.claude/settings.json` controla que comandos puede ejecutar Claude Code sin pedir permiso. Lo mantiene el lider del proyecto.
 
 ::::
 :::::
 
 
-## 3. Data Safety (~10 min)
+## 3. Seguridad de datos (~10 min)
 
 :::{.callout-danger appearance="simple"}
-**This is the most important module.** Read the full [IPA AI Usage Guidelines](https://ipastorage.box.com/s/mvr67ygvz1y3v8qmgjey67lk7msmyeks) before using Claude Code on any project with human subjects data. What follows is a summary tailored to Claude Code.
+**Este es el modulo mas importante.** Lee las [IPA AI Usage Guidelines](https://ipastorage.box.com/s/mvr67ygvz1y3v8qmgjey67lk7msmyeks) completas antes de usar Claude Code en cualquier proyecto con datos de sujetos humanos. Lo que sigue es un resumen adaptado a Claude Code.
 :::
 
-### IPA Data Classification
+### Clasificacion de datos de IPA
 
-IPA uses a four-tier data classification system. **Before using any AI tool, classify the data you plan to work with.**
+IPA usa un sistema de clasificacion de datos de cuatro niveles. **Antes de usar cualquier herramienta de IA, clasifica los datos con los que vas a trabajar.**
 
-| Classification | Examples | Claude Code? |
+| Clasificacion | Ejemplos | Claude Code? |
 |---|---|---|
-| **PUBLIC** | Published papers, public blog posts, anonymized published datasets | ✅ Yes |
-| **INTERNAL** | Project documentation, do-files, draft documents without sensitive content | ✅ Yes (IPA-approved tools) |
-| **CONFIDENTIAL** | Datasets with PII (names, cedula), unpublished research data, embargoed findings | ⚠️ Not with Claude Code. Use Azure OpenAI or local LLMs |
-| **HIGHLY CONFIDENTIAL** | Health data, biometric data, children's sensitive data | 🛑 Contact MIST first |
+| **PUBLICO** | Articulos publicados, blogs publicos, datasets anonimizados publicados | ✅ Si |
+| **INTERNO** | Documentacion de proyecto, do-files, borradores sin contenido sensible | ✅ Si (herramientas aprobadas por IPA) |
+| **CONFIDENCIAL** | Datasets con PII (nombres, cedula), datos de investigacion no publicados, hallazgos embargados | ⚠️ No con Claude Code. Usar Azure OpenAI o LLMs locales |
+| **ALTAMENTE CONFIDENCIAL** | Datos de salud, datos biometricos, datos sensibles de menores | 🛑 Contactar a MIST primero |
 
-Claude Code sends your messages and file contents to Anthropic's servers. This makes it appropriate for PUBLIC and INTERNAL data. For CONFIDENTIAL data containing PII, IPA's approved pathways are Azure OpenAI (via API) and local/offline LLMs.
+Claude Code envia tus mensajes y contenido de archivos a los servidores de Anthropic. Esto lo hace apropiado para datos PUBLICOS e INTERNOS. Para datos CONFIDENCIALES que contienen PII, las vias aprobadas por IPA son Azure OpenAI (via API) y LLMs locales/offline.
 
 ::: {.callout-note appearance="simple"}
-**Where does Claude Code fit?** It uses either an Anthropic API key or a Claude Max/Pro account. Both send data to Anthropic's cloud. Under IPA guidelines, Claude Code follows the same rules as the Claude institutional license: approved for PUBLIC and INTERNAL data, not approved for PII or data restricted by contracts. When in doubt, check the [full guidelines](https://ipastorage.box.com/s/mvr67ygvz1y3v8qmgjey67lk7msmyeks) or contact MIST.
+**Donde encaja Claude Code?** Usa una API key de Anthropic o una cuenta Claude Max/Pro. Ambas envian datos a la nube de Anthropic. Bajo las guias de IPA, Claude Code sigue las mismas reglas que la licencia institucional de Claude: aprobado para datos PUBLICOS e INTERNOS, no aprobado para PII ni datos restringidos por contratos. En caso de duda, revisa las [guias completas](https://ipastorage.box.com/s/mvr67ygvz1y3v8qmgjey67lk7msmyeks) o contacta a MIST.
 :::
 
 ---
 
-### The Four Rules for Claude Code
+### Las cuatro reglas para Claude Code
 
 ::::: {.grid}
 :::: {.g-col-6}
 :::{.card .card-danger}
-### Rule 1: No PII in Prompts
-Do not type or paste names, cedula numbers, addresses, phone numbers, or participant IDs. Messages are sent to Anthropic's servers.
+### Regla 1: No PII en los prompts
+No escribas ni pegues nombres, numeros de cedula, direcciones, telefonos, ni IDs de participantes. Los mensajes se envian a los servidores de Anthropic.
 :::
 ::::
 :::: {.g-col-6}
 :::{.card .card-danger}
-### Rule 2: No Raw Data Files
-Never ask Claude Code to open files in `data/raw/` or encrypted vaults. Work only with do-files, logs, and de-identified outputs.
+### Regla 2: No archivos de datos crudos
+Nunca pidas a Claude Code abrir archivos en `data/raw/` ni en bovedas encriptadas. Trabaja solo con do-files, logs y outputs desidentificados.
 :::
 ::::
 :::: {.g-col-6}
 :::{.card .card-danger}
-### Rule 3: No Individual-Level Output
-Do not ask for rows of data. Even de-identified data can become re-identifiable in small samples. Ask it to write code that produces summaries.
+### Regla 3: No datos a nivel individual
+No pidas filas de datos. Incluso datos desidentificados pueden reidentificarse en muestras pequenas. Pide que escriba codigo que produzca resumenes.
 :::
 ::::
 :::: {.g-col-6}
 :::{.card .card-danger}
-### Rule 4: Review Before Committing
-Check every file Claude Code creates or modifies. Confirm no PII leaked into comments, labels, or hard-coded values. Check that no API keys appear.
+### Regla 4: Revisar antes de hacer commit
+Revisa cada archivo que Claude Code cree o modifique. Confirma que no se filtro PII en comentarios, etiquetas, o valores escritos directamente. Verifica que no aparezcan API keys.
 :::
 ::::
 :::::
 
 ---
 
-### What You Can Never Share with AI Tools
+### Lo que nunca puedes compartir con herramientas de IA
 
-Regardless of the tool, IPA prohibits sharing these without specific use-case approval:
+Independientemente de la herramienta, IPA prohibe compartir lo siguiente sin aprobacion especifica:
 
-- **PII from research participants**: names, addresses, phone numbers, ID numbers, identifiable photos or audio
-- **Sensitive Personal Information (SPI)**: health data, biometric data, sexual orientation, political opinions, criminal history, data about children under 13
-- **IPA credentials**: passwords, API keys, authentication tokens, encryption keys
-- **Contractually restricted data**: information under NDAs, donor restrictions, embargoed findings
+- **PII de participantes de investigacion**: nombres, direcciones, telefonos, numeros de identificacion, fotos o audio identificable
+- **Informacion Personal Sensible (SPI)**: datos de salud, datos biometricos, orientacion sexual, opiniones politicas, historial criminal, datos de menores de 13 anos
+- **Credenciales de IPA**: contrasenas, API keys, tokens de autenticacion, claves de encriptacion
+- **Datos restringidos por contrato**: informacion bajo NDAs, restricciones de donantes, hallazgos embargados
 
 ::: {.callout-warning appearance="simple"}
-**If your dataset contains ANY SPI, the entire dataset is classified as HIGHLY CONFIDENTIAL**, even if most fields are regular PII. Contact MIST before using any AI tool.
+**Si tu dataset contiene CUALQUIER SPI, todo el dataset se clasifica como ALTAMENTE CONFIDENCIAL**, incluso si la mayoria de los campos son PII regular. Contacta a MIST antes de usar cualquier herramienta de IA.
 :::
 
 ---
 
-### Safe vs. Unsafe
+### Seguro vs. No seguro
 
-> Before sending a prompt, ask: "Does this require Claude Code to see individual-level data or personal details?" If yes, rephrase to focus on the **code**, not the **data**.
+> Antes de enviar un prompt, preguntate: "Esto requiere que Claude Code vea datos a nivel individual o detalles personales?" Si la respuesta es si, reformula para enfocarte en el **codigo**, no en los **datos**.
 
-| Scenario | Verdict |
-|----------|---------|
-| "Write a do-file that cleans survey data following this structure" | ✅ Safe (code, no data) |
-| "Clean this survey data" | ❌ Unsafe (requires reading data) |
-| "Why is my merge failing? Here is the log" | ✅ Safe (logs have aggregates) |
-| "Show me the first 20 rows of the baseline dataset" | ❌ Unsafe (individual-level data) |
-| "Debug this r(111) error in my do-file" | ✅ Safe (reads code, not data) |
-| "Summarize attendance for Maria Garcia in Centro Zonal Norte" | ❌ Unsafe (names + location = PII) |
+| Escenario | Veredicto |
+|-----------|-----------|
+| "Escribe un do-file que limpie datos de encuesta siguiendo esta estructura" | ✅ Seguro (codigo, no datos) |
+| "Limpia estos datos de encuesta" | ❌ No seguro (requiere leer datos) |
+| "Por que falla mi merge? Aqui esta el log" | ✅ Seguro (los logs tienen agregados) |
+| "Muestrame las primeras 20 filas del dataset de linea base" | ❌ No seguro (datos individuales) |
+| "Diagnostica este error r(111) en mi do-file" | ✅ Seguro (lee codigo, no datos) |
+| "Resume la asistencia de Maria Garcia en Centro Zonal Norte" | ❌ No seguro (nombres + ubicacion = PII) |
 
 ::: {.callout-tip appearance="simple"}
-**Using AI for code generation with non-sensitive data is pre-approved** under IPA guidelines. Writing do-files, debugging Stata errors, and generating LaTeX tables are all standard, approved uses of Claude Code.
+**Usar IA para generacion de codigo con datos no sensibles esta pre-aprobado** bajo las guias de IPA. Escribir do-files, diagnosticar errores de Stata y generar tablas en LaTeX son usos estandar y aprobados de Claude Code.
 :::
 
 
 ## 4. Prompting (~10 min)
 
-### The Single Most Important Idea
+### La idea mas importante
 
 :::{.callout-important appearance="simple"}
-**Great plans produce great outputs. Poor prompts produce poor, uncontrolled, random outputs.** The quality of what Claude Code delivers is directly proportional to the clarity and specificity of what you ask for. This is the one thing to internalize before anything else.
+**Buenos planes producen buenos resultados. Malos prompts producen resultados pobres, descontrolados y aleatorios.** La calidad de lo que Claude Code entrega es directamente proporcional a la claridad y especificidad de lo que pides. Esta es la unica cosa que hay que internalizar antes de todo lo demas.
 :::
 
-### Use Plan Mode for Anything Non-Trivial
+### Usa el modo plan para cualquier tarea no trivial
 
-For any task that involves more than a quick question or a one-line edit, start by asking Claude Code to **plan before it acts**. Type `/plan` or ask it to "plan this first" before making changes.
+Para cualquier tarea que implique mas que una pregunta rapida o una edicion de una linea, empieza pidiendo a Claude Code que **planifique antes de actuar**. Escribe `/plan` o pidele que "planifique primero" antes de hacer cambios.
 
-Plan mode forces Claude Code to outline its approach and get your approval before writing code. This matters because:
+El modo plan obliga a Claude Code a delinear su enfoque y obtener tu aprobacion antes de escribir codigo. Esto importa porque:
 
-- You catch misunderstandings **before** Claude Code edits 10 files in the wrong direction
-- You stay in control of the analytical approach
-- The plan itself becomes a record of what was done and why
+- Detectas malentendidos **antes** de que Claude Code edite 10 archivos en la direccion equivocada
+- Mantienes el control del enfoque analitico
+- El plan mismo se convierte en un registro de lo que se hizo y por que
 
 ::::: {.two-col}
 :::: {.col-left}
 
 :::{.card .card-danger}
-#### Without Planning
+#### Sin planificar
 ```
-Write me an attrition analysis do-file
+Escribeme un do-file de analisis de desercion
 ```
-Claude Code guesses the specification, variable names, and output format. You spend more time fixing than you saved.
+Claude Code adivina la especificacion, nombres de variables y formato de salida. Terminas gastando mas tiempo corrigiendo del que ahorraste.
 :::
 
 ::::
 :::: {.col-right}
 
 :::{.card .card-safe}
-#### With Planning
+#### Con planificacion
 ```
-I need an attrition analysis. Use plan mode.
-The outcome is a binary attrition indicator.
-Regress on treatment with strata FE and
-clustered SEs at the UDS level. Export with
-esttab to LaTeX.
+Necesito un analisis de desercion. Usa plan mode.
+El outcome es un indicador binario de desercion.
+Regresa sobre tratamiento con EF de estrato y
+EE agrupados a nivel de UDS. Exporta con
+esttab a LaTeX.
 ```
-Claude Code outlines its plan. You approve, adjust, or redirect before any code is written.
+Claude Code delinea su plan. Tu apruebas, ajustas o rediriges antes de que se escriba cualquier codigo.
 :::
 
 ::::
@@ -559,116 +560,116 @@ Claude Code outlines its plan. You approve, adjust, or redirect before any code 
 
 ---
 
-### Five Patterns for Effective Prompts
+### Cinco patrones para prompts efectivos
 
-**Pattern 1: Describe the output, not the steps**
+**Patron 1: Describe el resultado, no los pasos**
 
 ::: {.panel-tabset}
-#### ❌ Weak
+#### ❌ Debil
 
 ```
-Use regress, then outreg2, then add a title, then save as .tex
+Usa regress, luego outreg2, luego agrega un titulo, luego guarda como .tex
 ```
 
-#### ✅ Strong
+#### ✅ Fuerte
 
 ```
-Run an ITT regression of FFMQ on treatment with strata fixed effects
-and SEs clustered at the UDS level. Export to LaTeX using esttab.
+Ejecuta una regresion ITT de FFMQ sobre tratamiento con efectos fijos de
+estrato y errores estandar agrupados a nivel de UDS. Exporta a LaTeX usando esttab.
 ```
 :::
 
-**Pattern 2: Reference project conventions**
+**Patron 2: Referencia convenciones del proyecto**
 
 ::: {.panel-tabset}
-#### ❌ Weak
+#### ❌ Debil
 
 ```
-Make a nice table with the results
+Haz una tabla bonita con los resultados
 ```
 
-#### ✅ Strong
+#### ✅ Fuerte
 
 ```
-Export using the esttab pattern in CLAUDE_DELIVERABLES_GUIDE.md.
-Match the column structure of the attrition tables in outputs/tables/.
+Exporta usando el patron de esttab en CLAUDE_DELIVERABLES_GUIDE.md.
+Usa la misma estructura de columnas que las tablas de desercion en outputs/tables/.
 ```
 :::
 
-**Pattern 3: Provide context about errors**
+**Patron 3: Da contexto sobre los errores**
 
 ::: {.panel-tabset}
-#### ❌ Weak
+#### ❌ Debil
 
 ```
-I got r(111), please fix
+Me salio r(111), arreglalo
 ```
 
-#### ✅ Strong
+#### ✅ Fuerte
 
 ```
-I ran my attrition analysis and got r(111). Here are the
-last 30 lines of the log: [paste log excerpt].
-The error is on the line referencing `treatment_status`.
+Corri mi analisis de desercion y me salio r(111). Aqui estan las
+ultimas 30 lineas del log: [pega el extracto del log].
+El error esta en la linea que referencia `treatment_status`.
 ```
 :::
 
-**Pattern 4: Ask for explanations alongside code**
+**Patron 4: Pide explicaciones junto con el codigo**
 
 ::: {.panel-tabset}
-#### ❌ Weak
+#### ❌ Debil
 
 ```
-Write the merge command
+Escribe el comando de merge
 ```
 
-#### ✅ Strong
+#### ✅ Fuerte
 
 ```
-Write the merge command and explain why you chose 1:1 vs m:1.
-Also explain what the assert results mean.
+Escribe el comando de merge y explica por que elegiste 1:1 vs m:1.
+Tambien explica que significan los resultados del assert.
 ```
 :::
 
-**Pattern 5: Iterate, do not start over**
+**Patron 5: Itera, no empieces de cero**
 
 ::: {.panel-tabset}
-#### ❌ Weak
+#### ❌ Debil
 
 ```
-[rewrites the entire prompt from scratch]
+[reescribe todo el prompt desde cero]
 ```
 
-#### ✅ Strong
+#### ✅ Fuerte
 
 ```
-The table looks right. Add baseline controls as a second column
-and include the F-test for joint significance at the bottom.
+La tabla se ve bien. Agrega controles de linea base como segunda
+columna e incluye el test F de significancia conjunta al final.
 ```
 :::
 
-Claude Code remembers the conversation. Build on its output rather than starting over.
+Claude Code recuerda la conversacion. Construye sobre su output en lugar de empezar de cero.
 
 ::: {.callout-tip appearance="simple"}
-**Go deeper on prompting.** The [Blattman guide on prompting](https://claudeblattman.com/essentials/prompting) covers this topic in much more depth: how to structure complex requests, the Prompt-Plan-Review loop, and strategies for getting consistent results. I found it extremely helpful for improving my own prompts — I recommend reading it after completing this guide.
+**Profundiza en prompting.** La [guia de Blattman sobre prompting](https://claudeblattman.com/essentials/prompting) cubre este tema con mucha mas profundidad: como estructurar solicitudes complejas, el ciclo Prompt-Plan-Review, y estrategias para obtener resultados consistentes. Me parecio extremadamente util para mejorar mis propios prompts — la recomiendo despues de completar esta guia.
 :::
 
 
-## 5. Practice (~25 min)
+## 5. Practica (~25 min)
 
-### Exercise 1: Debug a Stata Error
+### Ejercicio 1: Diagnosticar un error de Stata
 
 :::{.exercise-banner}
-**Hands-on** · 10–15 minutes · Uses Stata's built-in `auto` dataset
+**Practico** · 10–15 minutos · Usa el dataset integrado `auto` de Stata
 :::
 
-**Scenario:** You wrote a do-file that uses Stata's built-in `auto` dataset, but it has an error. The log shows:
+**Escenario:** Escribiste un do-file que usa el dataset integrado `auto` de Stata, pero tiene un error. El log muestra:
 
 ```stata
 . sysuse auto, clear
 (1978 automobile data)
 
-. * Summary stats by car origin
+. * Estadisticas por origen del auto
 . gen high_mileage = (mpg > 25)
 
 . regress high_mileage fuel_economy weight foreign, robust
@@ -679,131 +680,131 @@ end of do-file
 r(111);
 ```
 
-**Your task:**
+**Tu tarea:**
 
-1. Open Claude Code in any project folder (`claude` in the terminal)
-2. Paste the log and ask: *"I got this r(111) error. What is wrong and how do I fix it?"*
-3. Read the diagnosis. Does Claude Code identify that `fuel_economy` does not exist in the `auto` dataset and that `mpg` is the correct variable?
-4. Follow up: *"What other fuel-related variables exist in sysuse auto?"*
-5. Evaluate the proposed fix
+1. Abre Claude Code en cualquier carpeta de proyecto (`claude` en la terminal)
+2. Pega el log y pregunta: *"Me salio este error r(111). Que esta mal y como lo arreglo?"*
+3. Lee el diagnostico. Claude Code identifica que `fuel_economy` no existe en el dataset `auto` y que `mpg` es la variable correcta?
+4. Haz seguimiento: *"Que otras variables relacionadas con combustible existen en sysuse auto?"*
+5. Evalua la correccion propuesta
 
-**What to look for:**
+**Que buscar:**
 
-- Does it correctly identify `r(111)` as "variable not found"?
-- Does it suggest the right replacement variable (`mpg`)?
-- Does it explain why (the `auto` dataset uses `mpg`, not `fuel_economy`)?
+- Identifica correctamente `r(111)` como "variable not found"?
+- Sugiere la variable correcta de reemplazo (`mpg`)?
+- Explica por que (el dataset `auto` usa `mpg`, no `fuel_economy`)?
 
 ::: {.callout-tip collapse="true" appearance="simple"}
-## Reveal Answer
+## Revelar respuesta
 
-The variable `fuel_economy` does not exist in the `auto` dataset. The correct variable is `mpg` (miles per gallon). Claude Code should suggest replacing `fuel_economy` with `mpg` in the regression command. This is a common error pattern: using a variable name that seems logical but does not match the actual dataset. The fix is `regress high_mileage mpg weight foreign, robust`.
+La variable `fuel_economy` no existe en el dataset `auto`. La variable correcta es `mpg` (millas por galon). Claude Code deberia sugerir reemplazar `fuel_economy` con `mpg` en el comando de regresion. Este es un patron de error comun: usar un nombre de variable que parece logico pero no coincide con el dataset real. La correccion es `regress high_mileage mpg weight foreign, robust`.
 :::
 
 ---
 
-### Exercise 2: Write a Summary Statistics Do-File
+### Ejercicio 2: Escribir un do-file de estadisticas descriptivas
 
 :::{.exercise-banner}
-**Hands-on** · 15–20 minutes · Uses Stata's built-in `auto` dataset
+**Practico** · 15–20 minutos · Usa el dataset integrado `auto` de Stata
 :::
 
-**Scenario:** You need a summary statistics table comparing domestic and foreign cars using Stata's built-in `auto` dataset.
+**Escenario:** Necesitas una tabla de estadisticas descriptivas comparando autos domesticos y extranjeros usando el dataset integrado `auto` de Stata.
 
-**Step 1: Write the prompt.** Use this specification (remember Pattern 1 and plan mode):
+**Paso 1: Escribe el prompt.** Usa esta especificacion (recuerda el Patron 1 y el modo plan):
 
 ::::: {.two-col}
 :::: {.col-left}
 
 **Variables:**
 
-- `price` (car price in USD)
-- `mpg` (miles per gallon)
-- `weight` (car weight in lbs)
-- `length` (car length in inches)
-- `headroom` (headroom in inches)
+- `price` (precio del auto en USD)
+- `mpg` (millas por galon)
+- `weight` (peso del auto en libras)
+- `length` (largo del auto en pulgadas)
+- `headroom` (espacio para la cabeza en pulgadas)
 
 ::::
 :::: {.col-right}
 
-**Requirements:**
+**Requisitos:**
 
-- Breakdown by origin (`foreign`: 0 = Domestic, 1 = Foreign)
-- Mean, SD, N, and t-test p-value for difference
-- Use `sysuse auto` as the dataset
-- Save the do-file as `exercise_sumstats.do`
-- Ask Claude Code to use plan mode first
+- Desglose por origen (`foreign`: 0 = Domestico, 1 = Extranjero)
+- Media, DE, N, y p-valor de un t-test de diferencia
+- Usar `sysuse auto` como dataset
+- Guardar el do-file como `exercise_sumstats.do`
+- Pedir a Claude Code que use plan mode primero
 
 ::::
 :::::
 
 ::: {.callout-note appearance="simple"}
-**Hint:** Try prompting like this: *"Use plan mode. I need a do-file that produces a summary statistics table from sysuse auto, comparing domestic vs foreign cars. Variables: price, mpg, weight, length, headroom. Show mean, SD, N, and a t-test p-value for each. Save as exercise_sumstats.do."*
+**Tip:** Intenta hacer el prompt asi: *"Usa plan mode. Necesito un do-file que produzca una tabla de estadisticas descriptivas de sysuse auto, comparando autos domesticos vs extranjeros. Variables: price, mpg, weight, length, headroom. Muestra media, DE, N, y un p-valor de t-test para cada una. Guarda como exercise_sumstats.do."*
 :::
 
-**Step 2: Review the output** against this checklist:
+**Paso 2: Revisa el output** contra esta lista:
 
-- [ ] Does it load `sysuse auto, clear`?
-- [ ] Does it produce stats by `foreign` (0/1)?
-- [ ] Does it include a t-test of difference?
-- [ ] Is the code readable with comments?
-- [ ] Could you run it in Stata right now?
+- [ ] Carga `sysuse auto, clear`?
+- [ ] Produce estadisticas por `foreign` (0/1)?
+- [ ] Incluye un t-test de diferencia?
+- [ ] El codigo es legible con comentarios?
+- [ ] Lo podrias ejecutar en Stata ahora mismo?
 
-**Step 3: Iterate.** Ask Claude Code for two modifications:
+**Paso 3: Itera.** Pide a Claude Code dos modificaciones:
 
-1. *"Add a row for `rep78` (repair record). Handle the missing values in that variable."*
-2. *"Add variable labels to the table so it shows 'Price (USD)' instead of 'price'."*
+1. *"Agrega una fila para `rep78` (registro de reparaciones). Maneja los valores faltantes en esa variable."*
+2. *"Agrega etiquetas de variable a la tabla para que muestre 'Precio (USD)' en vez de 'price'."*
 
-**Step 4: Evaluate.** Did Claude Code modify the do-file without breaking the existing structure? Did it handle the missing values in `rep78` correctly?
+**Paso 4: Evalua.** Claude Code modifico el do-file sin romper la estructura existente? Manejo correctamente los valores faltantes en `rep78`?
 
 ::: {.callout-tip collapse="true" appearance="simple"}
-## Reveal: Strong Output Characteristics
+## Revelar: Caracteristicas de un buen output
 
-- Loads `sysuse auto, clear`
-- Loops over outcome variables to avoid repetitive code
-- Uses `eststo` and `esttab`, or `tabstat`, or `estpost` with `ttest`
-- Handles missing values in `rep78` explicitly
-- Variable labels applied for display
-- Code is well-commented and runnable
-- No hard-coded paths (uses `auto` which needs no path)
+- Carga `sysuse auto, clear`
+- Usa un loop sobre las variables de resultado (evita codigo repetitivo)
+- Usa `eststo` y `esttab`, o `tabstat`, o `estpost` con `ttest`
+- Maneja valores faltantes en `rep78` explicitamente
+- Etiquetas de variable aplicadas para visualizacion
+- Codigo bien comentado y ejecutable
+- Sin rutas fijas (usa `auto` que no necesita ruta)
 :::
 
 ---
 
-### Quick Reference
+### Referencia rapida
 
 ::::: {.two-col}
 :::: {.col-left}
 
-**Common interactions:**
+**Interacciones comunes:**
 
-| What You Want | What to Type |
-|---------------|-------------|
-| Start Claude Code | `claude` in the terminal |
-| Plan before acting | `/plan` or *"use plan mode"* |
-| Edit a file | *"Edit [path] to [change]"* |
-| Create a file | *"Create a do-file that [spec]"* |
-| Debug an error | Paste the log and ask *"What is wrong?"* |
-| Exit | `/exit` or `Ctrl+C` |
+| Que quieres | Que escribir |
+|-------------|-------------|
+| Iniciar Claude Code | `claude` en la terminal |
+| Planificar antes de actuar | `/plan` o *"usa plan mode"* |
+| Editar un archivo | *"Edita [ruta] para [cambio]"* |
+| Crear un archivo | *"Crea un do-file que [especificacion]"* |
+| Diagnosticar un error | Pega el log y pregunta *"Que esta mal?"* |
+| Salir | `/exit` o `Ctrl+C` |
 
 ::::
 :::: {.col-right}
 
-**Safe vs. unsafe at a glance:**
+**Seguro vs. no seguro de un vistazo:**
 
 :::{.card .card-safe}
-#### ✅ Safe
-- "Write a do-file that..."
-- "Debug this log output..."
-- "Explain this Stata command..."
-- "Generate a LaTeX table for..."
+#### ✅ Seguro
+- "Escribe un do-file que..."
+- "Diagnostica este log..."
+- "Explica este comando de Stata..."
+- "Genera una tabla en LaTeX para..."
 :::
 
 :::{.card .card-danger}
-#### ❌ Never
-- "Read the raw survey data..."
-- "Show me observations where name =..."
-- "List all respondent names..."
-- "Open the file on D: drive..."
+#### ❌ Nunca
+- "Lee los datos crudos de la encuesta..."
+- "Muestrame observaciones donde nombre =..."
+- "Lista todos los nombres de encuestados..."
+- "Abre el archivo en la unidad D:..."
 :::
 
 ::::
@@ -811,45 +812,45 @@ The variable `fuel_economy` does not exist in the `auto` dataset. The correct va
 
 ---
 
-### Next Steps
+### Siguientes pasos
 
 ::::: {.grid}
 :::: {.g-col-6}
 :::{.card}
-### 🟢 Start Here
-Ask Claude Code to **explain** an unfamiliar section of an existing do-file.
+### 🟢 Empieza aqui
+Pide a Claude Code que **explique** una seccion desconocida de un do-file existente.
 :::
 ::::
 :::: {.g-col-6}
 :::{.card}
-### 🔵 Then Try
-Paste a **Stata error** from a log and ask for a diagnosis.
+### 🔵 Luego intenta
+Pega un **error de Stata** de un log y pide un diagnostico.
 :::
 ::::
 :::: {.g-col-6}
 :::{.card}
-### 🟣 Build Up
-Ask Claude Code to **review** a do-file for coding standard violations.
+### 🟣 Avanza
+Pide a Claude Code que **revise** un do-file contra estandares de codigo.
 :::
 ::::
 :::: {.g-col-6}
 :::{.card}
-### 🟠 Go Deeper
-Work through the [Blattman AI guide](https://claudeblattman.com/) for advanced workflows, custom skills, and MCP integrations.
+### 🟠 Profundiza
+Trabaja con la [guia de Blattman](https://claudeblattman.com/) para flujos avanzados, skills personalizados e integraciones MCP.
 :::
 ::::
 :::::
 
-**Resources:**
+**Recursos:**
 
-- [IPA AI Usage Guidelines](https://ipastorage.box.com/s/mvr67ygvz1y3v8qmgjey67lk7msmyeks) (required reading for all IPA AI tool use)
-- [Blattman AI Guide](https://claudeblattman.com/) (recommended for going deeper)
-- [Claude Code documentation](https://docs.anthropic.com/en/docs/claude-code/overview)
-- [IPA Stata template](https://github.com/PovertyAction/ipa-stata-template)
-- MIST helpdesk for AI use case approvals or questions
+- [IPA AI Usage Guidelines](https://ipastorage.box.com/s/mvr67ygvz1y3v8qmgjey67lk7msmyeks) (lectura obligatoria para todo uso de IA en IPA)
+- [Guia de Blattman sobre IA](https://claudeblattman.com/) (recomendada para profundizar)
+- [Documentacion de Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview)
+- [Plantilla Stata de IPA](https://github.com/PovertyAction/ipa-stata-template)
+- Mesa de ayuda MIST para aprobaciones o preguntas sobre uso de IA
 
 ::: {.callout-note appearance="simple"}
-Claude Code is a tool, not a replacement for analytical judgment. Always review code it generates, verify statistical choices, and confirm outputs before sharing. You remain responsible for the accuracy and quality of your work, even when AI helped create it.
+Claude Code es una herramienta, no un reemplazo del juicio analitico. Siempre revisa el codigo que genera, verifica las decisiones estadisticas, y confirma que los outputs cumplan tus expectativas antes de compartir resultados. Tu sigues siendo responsable de la precision y calidad de tu trabajo, incluso cuando la IA ayudo a crearlo.
 :::
 
 :::
