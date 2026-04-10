@@ -47,14 +47,94 @@ Programa de educacion a cuidadores implementado por ICBF en Colombia.
 
 Este archivo se sube a Git. Todos los miembros del equipo comparten las mismas instrucciones.
 
+::: {.callout-tip collapse="true"}
+## Plantilla CLAUDE.md para proyectos IPA (clic para expandir)
+
+Copia esta plantilla a la raiz de tu proyecto y adapta cada seccion. Para un ejemplo completo, consulta el [CLAUDE.md de ipa-stata-template](https://github.com/PovertyAction/ipa-stata-template).
+
+```markdown
+# CLAUDE.md
+
+## Descripcion del proyecto
+[Nombre del proyecto] — [descripcion de una linea].
+Implementado por [organizacion] en [pais/region].
+
+## Reglas criticas
+- NUNCA leer, abrir, ni mostrar archivos en `data/raw/` ni datos con PII.
+- No usar `capture` excepto para `cap mkdir`.
+- Globals de rutas estan definidos en `do_files/00_run.do`.
+- Usar convenciones de valores faltantes IPA: .d (don't know), .r (refused),
+  .n (not applicable), .s (skipped).
+
+## Estructura del proyecto
+- `do_files/`   — Scripts de Stata. `00_run.do` es el maestro.
+- `data/`       — Datos crudos, limpios, finales. NO leer raw/.
+- `outputs/`    — Tablas (`tables/`) y graficos (`figures/`).
+- `logs/`       — Logs de ejecucion de Stata.
+
+## Estandares de codigo
+- Seguir IPA Data Cleaning Guide y estandares DIME.
+- Variables con prefijos descriptivos (e.g., `bl_` baseline, `el_` endline).
+- Headers estandar IPA en cada do-file (proyecto, autor, fecha, proposito).
+- Usar `assert` para validacion defensiva.
+
+## Comandos comunes
+just stata-run                     # Ejecutar pipeline completo
+just stata-script 01_data_cleaning # Ejecutar script individual
+```
+
+Prueba tu CLAUDE.md: abre Claude Code y pregunta *"Que proyecto es este?"*. Si responde correctamente, tu archivo funciona.
+:::
+
 ### Skills: los manuales de referencia
 
-El directorio `.claude/skills/` contiene instrucciones especializadas. Por ejemplo, el skill de Stata contiene estandares IPA/DIME, headers de do-files, convenciones de rutas y manejo de valores faltantes. El skill de escritura IPA contiene reglas de estilo, voz activa, acronimos y formato de citas.
+El directorio `.claude/skills/` contiene instrucciones especializadas que Claude Code carga automaticamente segun lo que le pidas. Cada skill es un archivo Markdown con reglas para un dominio especifico.
 
-Claude Code carga el skill relevante automaticamente segun lo que le pidas.
+```
+.claude/
+└── skills/
+    ├── stata.md          # Estandares IPA/DIME, headers, convenciones
+    └── writing.md        # Estilo IPA, voz activa, formato de citas
+```
+
+Por ejemplo, un skill de Stata podria contener:
+
+```markdown
+# Skill: Stata IPA
+
+## Headers de do-file
+Cada do-file debe empezar con: proyecto, autor, fecha, proposito.
+
+## Valores faltantes
+Usar extended missing values: .d (don't know), .r (refused),
+.n (not applicable), .s (skipped). Nunca usar solo "."
+
+## Rutas
+Usar globals definidos en 00_run.do. Nunca hardcodear rutas.
+```
+
+Cuando le pides a Claude Code que escriba un do-file, carga automaticamente el skill de Stata. Cuando le pides que redacte un memo, carga el de escritura. No necesitas indicarle cual skill usar.
 
 > **Modelo mental:** `CLAUDE.md` es el briefing para un nuevo miembro del equipo. Los skills son los manuales de referencia en su escritorio.
 
 ### Configuracion y permisos
 
-El archivo `.claude/settings.json` controla que comandos puede ejecutar Claude Code sin pedir permiso. Lo mantiene el lider del proyecto — no necesitas modificar estos archivos.
+El archivo `.claude/settings.json` controla que comandos puede ejecutar Claude Code sin pedir permiso. Normalmente lo configura el lider del proyecto.
+
+```json
+{
+  "permissions": {
+    "allow": [
+      "just stata-run",
+      "just stata-script *",
+      "just lint-stata"
+    ],
+    "deny": [
+      "rm -rf *",
+      "git push --force"
+    ]
+  }
+}
+```
+
+Los comandos en `allow` se ejecutan sin pedirte confirmacion. Los de `deny` estan bloqueados. Todo lo demas te pide aprobacion antes de ejecutarse.

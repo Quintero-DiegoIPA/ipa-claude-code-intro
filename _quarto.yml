@@ -10,6 +10,8 @@ website:
     left:
       - href: index.qmd
         text: Inicio
+      - href: quickstart.qmd
+        text: Demo
       - href: setup.qmd
         text: Instalacion
       - href: concepts.qmd
