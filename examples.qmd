@@ -1,53 +1,77 @@
 ---
-title: "Ejemplos reales"
-subtitle: "Productos construidos con Claude Code"
+title: "Que se puede lograr"
+subtitle: "Productos reales construidos con Claude Code"
 ---
 
-Estos son algunos productos reales que he construido con la ayuda de Claude Code en el proyecto Sanar para Crecer (SpC) de IPA Colombia. Los incluyo para dar una idea concreta de lo que se puede lograr.
+Todo lo que se muestra en esta pagina fue construido con Claude Code en un proyecto real de IPA Colombia. No son demos — son entregables que se compartieron con donantes, equipos de investigacion y socios de implementacion.
 
-::: {.callout-note}
-Claude Code no hizo estos productos solo. En todos los casos, yo defini la especificacion, revise cada output, y tome las decisiones analiticas. Claude Code acelero el proceso de escritura de codigo, generacion de tablas, y produccion de graficos.
-:::
-
----
-
-## Reporte MEL completo
-
-El reporte de Monitoreo, Evaluacion y Aprendizaje (MEL) del proyecto SpC fue construido como un pipeline automatizado: scripts de Stata generan tablas y graficos, que luego se compilan en un documento Quarto. Claude Code ayudo a escribir y depurar los do-files de analisis, generar las tablas en LaTeX con `esttab`, y estructurar el documento Quarto.
-
-El reporte incluye analisis de asistencia, desercion, fidelidad de implementacion, y calidad de sesiones — todo generado desde Stata y compilado automaticamente.
-
-### Grafico de ejemplo: retencion acumulada
-
-Este grafico muestra la retencion de participantes a lo largo de las 10 sesiones del programa. Fue generado por un do-file de Stata que Claude Code ayudo a escribir y depurar.
-
-![Retencion acumulada respecto a la primera sesion, muestra RCT. El grafico muestra el porcentaje de participantes que permanecieron en cada sesion, con una linea de referencia al 80%.](images/example_retention_chart.png)
-
-El do-file que produce este grafico fue escrito iterativamente con Claude Code: primero le pedi que generara la estructura basica, luego que ajustara las etiquetas, los colores del esquema IPA, y la nota al pie con los detalles metodologicos.
+Claude Code no hizo estos productos solo. En todos los casos, defini la especificacion, revise cada output, y tome las decisiones analiticas. Pero Claude Code transformo tareas que tomaban dias en tareas de horas.
 
 ---
 
-## Presentacion de resultados (PowerPoint)
+## Un pipeline completo de analisis MEL
 
-Las presentaciones de resultados del proyecto SpC fueron construidas programaticamente con un pipeline de Node.js + pptxgenjs. Claude Code ayudo a disenar el script que toma las tablas de Stata y las convierte en diapositivas con formato IPA.
+El resultado mas ambicioso: un pipeline de 12 scripts de Stata que produce automaticamente todas las tablas, graficos y analisis del reporte de Monitoreo, Evaluacion y Aprendizaje (MEL) de un programa con 600+ participantes en 8 municipios.
 
-El flujo es: Stata genera las tablas → Claude Code ayuda a escribir el script de Node.js → el script produce el `.pptx` automaticamente. Esto permite regenerar la presentacion completa cada vez que se actualizan los datos, sin editar diapositivas manualmente.
+Un solo comando ejecuta todo el pipeline:
+
+```bash
+just stata-run   # Corre los 12 scripts en secuencia
+```
+
+El pipeline incluye: limpieza de datos de asistencia, analisis de desercion, barreras de participacion, fidelidad de implementacion, calidad de sesiones, y analisis de dosis-respuesta. Claude Code escribio y depuro la mayoria de estos scripts iterativamente — yo definia la especificacion analitica, el generaba el codigo, yo revisaba los resultados y pedia ajustes.
+
+### Algunos graficos producidos por el pipeline
+
+![Patron de participacion sesion a sesion: asistentes regulares, re-enganchados, ausencias por primera vez, ausencias repetidas y no asistentes. N = 595 participantes asignados a tratamiento.](images/example_attendance_barriers.png)
+
+![Cambio neto en participacion entre sesiones consecutivas. Las barras verdes muestran ganancia de participantes, las naranjas muestran perdida.](images/example_waterfall.png)
+
+![Mapa de entrega de sesiones por Centro Zonal. Cada punto es una sesion, los colores representan diferentes grupos dentro del mismo centro.](images/example_session_delivery.png)
 
 ---
 
-## Graficos de calidad de implementacion
+## Presentaciones generadas programaticamente
 
-Este grafico muestra las tendencias de calidad de sesion a lo largo del programa, basado en reportes de facilitadores. Los indices de calidad de espacio, implementacion y sesion se normalizan a una escala de 0 a 1 para comparabilidad.
+Las presentaciones de resultados no se hacen manualmente en PowerPoint — se generan con un script de Node.js que usa la libreria pptxgenjs. Claude Code ayudo a disenar todo el sistema:
 
-![Tendencias de indices de calidad por sesion. Los tres indices (espacio, implementacion, sesion) se mantienen altos y estables a lo largo del programa.](images/example_quality_trends.png)
+- Un script de ~1,000 lineas con funciones reutilizables: `topbar()`, `footer()`, `sidebar()`, `callout()`, `table()`
+- Colores y tipografia IPA aplicados automaticamente
+- Las tablas de Stata alimentan directamente las diapositivas
 
-Claude Code ayudo a construir el indice compuesto, normalizar las escalas, y generar el grafico con el esquema de colores del proyecto.
+El flujo es: Stata genera tablas → el script de Node.js las lee → produce un `.pptx` listo para presentar. Cuando se actualizan los datos, se regenera la presentacion completa sin editar una sola diapositiva manualmente.
+
+---
+
+## Un sistema de instrucciones para que Claude trabaje autonomamente
+
+Quizas lo mas util a largo plazo: Claude Code no necesita que le explique el proyecto cada vez que inicio una sesion. Tres documentos le dan contexto persistente:
+
+**`CLAUDE.md`** — El briefing del proyecto. Define las dos muestras (COMPLETA para monitoreo, RCT para impacto), el mapa del pipeline, las reglas de PII, las convenciones de codigo, y los globals de rutas.
+
+**`CLAUDE_STATA_GUIDE.md`** — Le ensena a Claude como ejecutar Stata en este proyecto. Incluye la instruccion de ejecutar scripts autonomamente despues de editarlos, leer el log, y reportar resultados sin esperar a que se lo pidan.
+
+**`CLAUDE_DELIVERABLES_GUIDE.md`** — Documenta el pipeline de Stata a LaTeX: patrones de `esttab`/`outreg2`, colores IPA para graficos, compilacion de tablas, y analisis de sensibilidad.
+
+El resultado: cuando pido "corre el script de desercion y dime si paso", Claude Code ejecuta el script, lee el log, identifica si hubo errores, reporta los coeficientes clave, y me dice donde guardo los outputs. Si falla, diagnostica el error y lo corrige antes de reportar.
+
+---
+
+## Skills personalizados
+
+Mas alla del proyecto, construi skills reutilizables que Claude Code carga automaticamente:
+
+- **Skill de Stata**: estandares IPA/DIME, headers de do-files, cuatro etapas del flujo de datos (importar, desidentificar, limpiar, construir), convenciones de valores faltantes extendidos
+- **Skill de escritura IPA**: reglas de estilo, voz activa, acronimos, formato de citas, terminologia preferida
+- **Skill de presentaciones**: framework para generar `.pptx` programaticamente con marca IPA
+
+Estos skills funcionan en cualquier proyecto — no son especificos de un solo estudio.
 
 ---
 
 ## Que tienen en comun estos ejemplos
 
-1. **Yo defini la especificacion.** Claude Code no decide que analizar ni como presentarlo.
-2. **Claude Code acelero la ejecucion.** Escribir do-files, generar tablas, depurar errores, y formatear graficos es donde mas tiempo ahorra.
-3. **Todo es reproducible.** Los scripts generan los outputs automaticamente. No hay edicion manual de tablas ni graficos.
-4. **Itere mucho.** Ninguno de estos productos salio bien a la primera. El ciclo fue: pedir → revisar → ajustar → repetir.
+1. **La especificacion siempre fue mia.** Claude Code no decide que analizar ni como presentarlo.
+2. **El valor esta en la velocidad de ejecucion.** Escribir do-files, generar tablas, depurar errores, formatear graficos — ahi es donde mas tiempo ahorra.
+3. **Todo es reproducible.** Un comando regenera todo. No hay edicion manual.
+4. **Nada salio bien a la primera.** El ciclo fue siempre: pedir → revisar → ajustar → repetir.
