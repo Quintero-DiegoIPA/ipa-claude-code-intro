@@ -1,0 +1,73 @@
+/* ===== Google Fonts (loaded in index.qmd) ===== */
+
+/* ===== Top banner ===== */
+.site-banner {
+  background: #332d1a;
+  border-bottom: 1px solid #5c5330;
+  padding: 0.5rem 1.5rem;
+  font-size: 0.8rem;
+  color: #d4c89a;
+  text-align: center;
+  margin: -1rem -1rem 1.5rem -1rem;
+  line-height: 1.5;
+}
+
+.site-banner a {
+  color: #79b8ff;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.banner-badge {
+  display: inline-block;
+  background: #f0ad4e;
+  color: #1a1a2e;
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.12rem 0.45rem;
+  border-radius: 0.2rem;
+  margin-right: 0.4rem;
+  vertical-align: middle;
+}
+
+/* ===== Callouts ===== */
+.callout {
+  border-radius: 0.3rem;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+}
+
+/* ===== Tables ===== */
+table {
+  font-size: 0.88rem;
+}
+
+th {
+  font-weight: 600;
+}
+
+/* ===== Code blocks ===== */
+pre {
+  border-radius: 0.4rem;
+  font-size: 0.82rem;
+}
+
+code {
+  font-size: 0.85em;
+}
+
+/* ===== Images ===== */
+img {
+  border-radius: 0.4rem;
+  margin: 0.5rem 0;
+}
+
+/* ===== Blockquote ===== */
+blockquote {
+  border-left: 3px solid #555;
+  padding: 0.5rem 1rem;
+  margin: 0.8rem 0;
+  font-style: italic;
+}
