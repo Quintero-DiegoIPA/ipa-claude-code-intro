@@ -87,7 +87,20 @@ La tabla se ve bien. Agrega controles de linea base como segunda
 columna e incluye el test F de significancia conjunta al final.
 ```
 
+## Comandos utiles
+
+Ademas de escribir prompts, Claude Code tiene comandos que puedes usar durante una sesion:
+
+| Comando | Que hace |
+|---------|----------|
+| `/plan` | Planificar antes de actuar — Claude Code delinea su enfoque y espera tu aprobacion |
+| `/compact` | Comprimir el contexto de la conversacion cuando se vuelve larga |
+| `/clear` | Limpiar la conversacion y empezar de cero |
+| `/cost` | Ver cuanto ha costado la sesion actual |
+| `/doctor` | Diagnosticar problemas de configuracion o conexion |
+| `/exit` | Salir de Claude Code |
+
 ::: {.callout-tip}
 ## Profundiza en prompting
-La [guia de Blattman sobre prompting](https://claudeblattman.com/essentials/prompting) cubre este tema con mucha mas profundidad. Me parecio extremadamente util para mejorar mis propios prompts — la recomiendo despues de completar esta guia.
+La [guia de Blattman sobre prompting](https://claudeblattman.com/essentials/prompting) cubre este tema con mucha mas profundidad y es un buen siguiente paso despues de esta guia.
 :::

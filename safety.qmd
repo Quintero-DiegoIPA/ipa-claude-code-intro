@@ -25,6 +25,10 @@ Claude Code envia tus mensajes y contenido de archivos a los servidores de Anthr
 **Donde encaja Claude Code?** Usa una API key de Anthropic o una cuenta Claude Max/Pro. Ambas envian datos a la nube de Anthropic. Bajo las guias de IPA, Claude Code sigue las mismas reglas que la licencia institucional de Claude: aprobado para datos publicos e internos, no aprobado para PII ni datos restringidos por contratos.
 :::
 
+## Por que estas reglas te benefician
+
+Al separar el codigo de los datos, Claude Code te ayuda con la parte mas tediosa del trabajo — sintaxis, formato, depuracion, documentacion — mientras tu controlas la parte mas importante: los datos y las decisiones analiticas. Estas reglas no son restricciones arbitrarias. Son el marco que hace posible usar Claude Code en proyectos con datos reales de sujetos humanos.
+
 ## Las cuatro reglas
 
 1. **No PII en los prompts.** No escribas ni pegues nombres, numeros de cedula, direcciones, telefonos, ni IDs de participantes.

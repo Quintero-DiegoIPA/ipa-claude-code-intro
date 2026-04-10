@@ -15,9 +15,11 @@ subtitle: "Guia practica para IPA Colombia"
 
 ## De que se trata esta guia
 
-Claude Code es un asistente de codigo con inteligencia artificial que se ejecuta en la terminal. Lee los archivos de tu proyecto, entiende la estructura, y puede escribir o editar codigo directamente en tu maquina. Esta guia es una introduccion practica para cualquier persona en IPA Colombia que quiera empezar a usarlo.
+Escribir un do-file de estadisticas descriptivas con manejo de missings, etiquetas y formato LaTeX toma unas dos horas. Con Claude Code, toma 15 minutos — y sale mejor comentado. Diagnosticar por que un merge produce 135 observaciones inesperadas toma media hora de comparar datasets. Con Claude Code, una pregunta.
 
-No se requiere experiencia previa con VS Code ni con Claude Code. La guia toma entre **50 y 75 minutos**, incluyendo dos ejercicios practicos.
+Claude Code es un asistente de codigo con IA que se ejecuta en tu terminal. Lee los archivos de tu proyecto, entiende la estructura, y escribe o edita codigo directamente en tu maquina. Esta guia te ensena a usarlo de forma segura en proyectos de IPA Colombia.
+
+No se requiere experiencia previa con VS Code ni con Claude Code. La guia toma entre **50 y 75 minutos**, incluyendo tres ejercicios practicos.
 
 ::: {.callout-important}
 ## Lectura obligatoria previa
@@ -28,11 +30,12 @@ Esta guia complementa las [IPA AI Usage Guidelines](https://ipastorage.box.com/s
 
 | | Modulo | Tiempo | Que cubre |
 |---|---|---|---|
+| | [Demo](quickstart.qmd) | ~2 min | Claude Code en accion — dos escenarios reales sin instalar nada |
 | 1 | [Instalacion](setup.qmd) | ~15 min | GitHub, estructura de proyecto, VS Code, instalar Claude Code |
 | 2 | [Conceptos](concepts.qmd) | ~10 min | Que es Claude Code, que puede hacer, CLAUDE.md y skills |
 | 3 | [Seguridad](safety.qmd) | ~10 min | Clasificacion de datos, reglas de PII, escenarios seguros/no seguros |
 | 4 | [Prompting](prompting.qmd) | ~10 min | Modo plan, cinco patrones para prompts efectivos |
-| 5 | [Practica](exercises.qmd) | ~25 min | Dos ejercicios con el dataset `auto` de Stata |
+| 5 | [Practica](exercises.qmd) | ~30 min | Tres ejercicios: diagnostico, do-file, y configuracion de proyecto |
 | | [Ejemplos](examples.qmd) | — | Productos reales construidos con Claude Code |
 
 ## Esto es solo la punta del iceberg

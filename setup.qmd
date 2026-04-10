@@ -12,7 +12,12 @@ Antes de empezar, confirma que tienes lo siguiente:
 - Una **API key de Anthropic** o una **cuenta Claude Max/Pro** (pregunta a tu lider de proyecto)
 - Recomendado: una cuenta de [GitHub](https://github.com/) y un repositorio de proyecto clonado
 
-## Que es GitHub?
+::: {.callout-tip}
+**Ya conoces Git y VS Code?** Salta directo a [Instalar Claude Code](#instalar-claude-code).
+:::
+
+::: {.callout-note collapse="true"}
+## Que es GitHub? (expandir si es nuevo para ti)
 
 GitHub es una plataforma donde los equipos almacenan y colaboran en codigo. Es como una carpeta compartida con superpoderes: guarda un historial completo de cada cambio, permite que varias personas trabajen en los mismos archivos sin sobreescribirse, y proporciona un respaldo fuera de tu computador.
 
@@ -25,6 +30,7 @@ En IPA, cada proyecto tiene un **repositorio** (repo) en GitHub. Un repositorio 
 | **Commit & Push** | Guardar un snapshot de tus cambios (commit) y subirlos a GitHub (push). |
 
 No necesitas ser experto en Git. Estos tres conceptos son suficientes para empezar, y Claude Code puede ayudarte con los comandos.
+:::
 
 ## Estructura de carpetas del proyecto
 
@@ -51,7 +57,8 @@ La plantilla soporta tres niveles: **Minimo** (solo Git + Stata), **Task Runner*
 Si ya tienes un repositorio de proyecto, no necesitas empezar de cero. La estructura anterior es una referencia.
 :::
 
-## VS Code: tu espacio de trabajo
+::: {.callout-note collapse="true"}
+## VS Code: tu espacio de trabajo (expandir si es nuevo para ti)
 
 Visual Studio Code (VS Code) es un editor de codigo gratuito donde se ejecuta Claude Code. Descargalo en [code.visualstudio.com](https://code.visualstudio.com/).
 
@@ -61,6 +68,7 @@ Visual Studio Code (VS Code) es un editor de codigo gratuito donde se ejecuta Cl
 | **Editor** | Area principal donde se abren archivos como pestanas | — |
 | **Terminal** | Linea de comandos integrada. Aqui corre Claude Code | `` Ctrl+` `` |
 | **Extensiones** | Marketplace de complementos | `Ctrl+Shift+X` |
+:::
 
 Instala estas extensiones en la terminal de VS Code:
 
@@ -108,3 +116,44 @@ claude
 ```
 
 Escribe `What project is this?` para verificar que Claude Code lee tu `CLAUDE.md` correctamente.
+
+## Problemas comunes
+
+::: {.callout-warning collapse="true"}
+## `npm install` falla con error de permisos
+
+**Windows:** Cierra VS Code y reabrelo como Administrador (clic derecho → "Ejecutar como administrador").
+
+**macOS/Linux:** Usa `sudo npm install -g @anthropic-ai/claude-code`. Si el problema persiste, verifica que Node.js se instalo correctamente con `node --version`.
+:::
+
+::: {.callout-warning collapse="true"}
+## Claude Code no reconoce la API key
+
+La variable de entorno no se carga automaticamente en terminales ya abiertas. Despues de configurar `ANTHROPIC_API_KEY`:
+
+1. **Cierra y reabre la terminal** en VS Code (o cierra y reabre VS Code completo)
+2. Verifica con `echo $ANTHROPIC_API_KEY` (macOS/Linux) o `echo %ANTHROPIC_API_KEY%` (Windows CMD)
+3. Si sigue vacio, revisa que agregaste la linea al archivo correcto (`~/.zshrc`, `~/.bashrc`, o las variables de entorno del sistema en Windows)
+:::
+
+::: {.callout-warning collapse="true"}
+## Claude Code dice que no encuentra el proyecto
+
+Claude Code necesita ejecutarse desde la raiz de tu proyecto — la carpeta que contiene los do-files y, idealmente, un archivo `CLAUDE.md`.
+
+1. Verifica que estas en la carpeta correcta: `pwd` en la terminal
+2. Si no tienes `CLAUDE.md`, Claude Code aun funciona pero sin contexto del proyecto. Consulta el [modulo de conceptos](concepts.qmd#claudemd-el-briefing-del-proyecto) para crear uno.
+:::
+
+::: {.callout-warning collapse="true"}
+## La version de Node.js es muy antigua
+
+Claude Code requiere Node.js 18 o posterior. Verifica tu version con `node --version`. Si es anterior a 18, descarga la version LTS mas reciente en [nodejs.org](https://nodejs.org/).
+:::
+
+::: {.callout-warning collapse="true"}
+## Las extensiones de VS Code no se instalan con `code --install-extension`
+
+En algunos sistemas, el comando `code` no esta en el PATH. Alternativa: abre VS Code, presiona `Ctrl+Shift+X`, busca cada extension por nombre, y haz clic en "Install".
+:::

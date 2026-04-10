@@ -1,46 +1,55 @@
 ---
 title: "5. Ejercicios practicos"
-subtitle: "~25 minutos · Usan el dataset integrado auto de Stata"
+subtitle: "~30 minutos · Tres ejercicios progresivos"
 ---
 
-## Ejercicio 1: Diagnosticar un error de Stata
+## Ejercicio 1: Diagnosticar un merge problematico
 
 *10–15 minutos*
 
-Escribiste un do-file que usa el dataset integrado `auto` de Stata, pero tiene un error. El log muestra:
+Estas limpiando datos y haces un merge entre tu encuesta de linea base y las caracteristicas de las unidades de servicio. El log muestra un resultado inesperado:
 
 ```stata
-. sysuse auto, clear
-(1978 automobile data)
+. use "$data/clean/baseline_clean.dta", clear
+(Baseline survey - HtG 3.0)
 
-. gen high_mileage = (mpg > 25)
+. merge m:1 uds_id using "$data/clean/uds_characteristics.dta"
 
-. regress high_mileage fuel_economy weight foreign, robust
-variable fuel_economy not found
-r(111);
+    Result                      Number of obs
+    -----------------------------------------
+    Not matched                           147
+        from master                        12  (_merge==1)
+        from using                        135  (_merge==2)
+    Matched                             2,841  (_merge==3)
+    -----------------------------------------
 
-end of do-file
-r(111);
+. tab _merge
+
+                 _merge |      Freq.     Percent        Cum.
+------------------------+-----------------------------------
+        Master only (1) |         12        0.40        0.40
+         Using only (2) |        135        4.52        4.93
+            Matched (3) |      2,841       95.07      100.00
+------------------------+-----------------------------------
+                  Total |      2,988      100.00
 ```
+
+Esperabas que todas las UDS del archivo `using` emparejaran. 135 no lo hicieron. Algo anda mal.
 
 ### Tu tarea
 
 1. Abre Claude Code en cualquier carpeta de proyecto (`claude` en la terminal)
-2. Pega el log y pregunta: *"Me salio este error r(111). Que esta mal y como lo arreglo?"*
-3. Lee el diagnostico. Identifica que `fuel_economy` no existe en `auto` y que `mpg` es la correcta?
-4. Haz seguimiento: *"Que otras variables relacionadas con combustible existen en sysuse auto?"*
-5. Evalua la correccion propuesta
+2. Pega el log y pregunta: *"Hice este merge y tengo 135 observaciones con _merge==2 que no esperaba. Que puede estar causando esto y como lo diagnostico?"*
+3. Lee el diagnostico. Propone multiples hipotesis? (formato de variable, espacios, UDS sin encuestas?)
+4. Haz seguimiento: *"uds_id es string en un archivo y numerico en el otro. Como lo arreglo de forma reproducible?"*
+5. Evalua si la solucion es correcta y si es reproducible (va en el do-file, no es manual)
 
-### Que buscar
+### Criterios de evaluacion
 
-- Identifica correctamente `r(111)` como "variable not found"?
-- Sugiere `mpg` como reemplazo?
-- Explica por que?
-
-::: {.callout-tip collapse="true"}
-## Revelar respuesta
-La variable `fuel_economy` no existe en el dataset `auto`. La correcta es `mpg` (millas por galon). La correccion es `regress high_mileage mpg weight foreign, robust`. Este es un patron comun: usar un nombre que parece logico pero no coincide con el dataset real.
-:::
+- Propone **multiples hipotesis** en vez de asumir una sola causa?
+- Sugiere comandos de diagnostico concretos (e.g., `describe`, `assert`, `list`)?
+- La solucion propuesta es **reproducible** (codigo en el do-file, no edicion manual)?
+- Menciona la importancia de verificar **despues** del fix (e.g., `assert _merge==3`)?
 
 ---
 
@@ -75,9 +84,58 @@ Pide dos modificaciones:
 
 Modifico el do-file sin romper la estructura existente? Manejo correctamente los valores faltantes en `rep78`?
 
-::: {.callout-tip collapse="true"}
-## Revelar: buen output
-Un buen do-file carga `sysuse auto, clear`, usa un loop sobre las variables, maneja valores faltantes en `rep78` explicitamente, aplica etiquetas de variable, esta bien comentado, y es ejecutable sin modificaciones.
+### Criterios de evaluacion
+
+- Carga `sysuse auto, clear` al inicio?
+- Usa un loop o estructura repetible (no copia-pega por variable)?
+- Maneja los valores faltantes de `rep78` explicitamente (no los ignora)?
+- Aplica etiquetas de variable legibles?
+- El codigo esta comentado y es ejecutable sin modificaciones?
+- Modifico sin romper la estructura que ya habia generado?
+
+---
+
+## Ejercicio 3: Configura tu proyecto con CLAUDE.md
+
+*10–15 minutos*
+
+Los ejercicios anteriores usaron datos de practica. Este ejercicio usa tu proyecto real — es donde Claude Code empieza a ser verdaderamente util.
+
+### Paso 1: Crea tu CLAUDE.md
+
+Abre la [plantilla de CLAUDE.md](concepts.qmd#plantilla-claudemd-para-proyectos-ipa-clic-para-expandir) del modulo de conceptos. Copiala a la raiz de tu repositorio de proyecto y adapta cada seccion:
+
+- Cambia la descripcion del proyecto
+- Agrega las reglas especificas de tu proyecto (convenciones de variables, rutas, restricciones de datos)
+- Lista los comandos que usas frecuentemente
+
+### Paso 2: Prueba tu CLAUDE.md
+
+Abre Claude Code desde la raiz de tu proyecto y pregunta:
+
+> *"Que proyecto es este?"*
+
+Claude Code deberia responder con la informacion de tu `CLAUDE.md`. Si no lo hace, verifica que el archivo esta en la raiz del proyecto (no dentro de una subcarpeta).
+
+### Paso 3: Prueba una regla
+
+Agrega una regla especifica a tu CLAUDE.md, por ejemplo:
+
+```markdown
+## Reglas del proyecto
+- Todos los do-files deben usar header estandar IPA.
+```
+
+Luego pide a Claude Code: *"Crea un do-file vacio para limpieza de datos."* Verifica que el do-file generado incluye el header que especificaste.
+
+### Criterios de evaluacion
+
+- Claude Code identifica correctamente tu proyecto cuando le preguntas?
+- El do-file generado sigue la regla que agregaste?
+- Si no la sigue, tu regla esta escrita de forma clara y especifica?
+
+::: {.callout-note}
+Un buen CLAUDE.md es especifico. "Seguir estandares IPA" es vago. "Usar extended missing values: .d, .r, .n, .s. Nunca usar solo punto (.)" es accionable.
 :::
 
 ---
