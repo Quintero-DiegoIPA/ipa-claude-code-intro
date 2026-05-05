@@ -1,0 +1,8 @@
+---
+title: "Gestión de tareas"
+subtitle: "En construcción"
+---
+
+::: {.callout-note}
+En construcción.
+:::

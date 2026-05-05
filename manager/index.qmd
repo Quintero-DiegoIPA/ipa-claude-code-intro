@@ -1,0 +1,8 @@
+---
+title: "Para Equipos y PMs"
+subtitle: "En construcción"
+---
+
+::: {.callout-note}
+Esta página se está armando como parte del piloto de fusión con la guía de Juan Felipe García (Country Director, IPA Colombia). Vuelve pronto.
+:::

@@ -1,0 +1,8 @@
+---
+title: "Cómo empezar"
+subtitle: "En construcción"
+---
+
+::: {.callout-note}
+En construcción.
+:::

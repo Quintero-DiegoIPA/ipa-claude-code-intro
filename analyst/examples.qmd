@@ -23,11 +23,11 @@ El pipeline incluye: limpieza de datos de asistencia, analisis de desercion, bar
 
 ### Algunos graficos producidos por el pipeline
 
-![Patron de participacion sesion a sesion: asistentes regulares, re-enganchados, ausencias por primera vez, ausencias repetidas y no asistentes. N = 595 participantes asignados a tratamiento.](images/example_attendance_barriers.png)
+![Patron de participacion sesion a sesion: asistentes regulares, re-enganchados, ausencias por primera vez, ausencias repetidas y no asistentes. N = 595 participantes asignados a tratamiento.](../images/example_attendance_barriers.png)
 
-![Cambio neto en participacion entre sesiones consecutivas. Las barras verdes muestran ganancia de participantes, las naranjas muestran perdida.](images/example_waterfall.png)
+![Cambio neto en participacion entre sesiones consecutivas. Las barras verdes muestran ganancia de participantes, las naranjas muestran perdida.](../images/example_waterfall.png)
 
-![Mapa de entrega de sesiones por Centro Zonal. Cada punto es una sesion, los colores representan diferentes grupos dentro del mismo centro.](images/example_session_delivery.png)
+![Mapa de entrega de sesiones por Centro Zonal. Cada punto es una sesion, los colores representan diferentes grupos dentro del mismo centro.](../images/example_session_delivery.png)
 
 ---
 
