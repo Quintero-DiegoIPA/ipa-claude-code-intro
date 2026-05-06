@@ -1,8 +1,29 @@
 ---
 title: "Recursos"
-subtitle: "En construcción"
+subtitle: "Compartido · Links útiles y soporte"
 ---
 
-::: {.callout-note}
-En construcción.
-:::
+## Documentación oficial
+
+- [Documentación de Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview) — referencia oficial de Anthropic
+- [IPA AI Usage Guidelines (Box)](https://ipastorage.box.com/s/mvr67ygvz1y3v8qmgjey67lk7msmyeks) — política institucional de IPA, lectura obligatoria
+
+## Recursos técnicos para Analistas
+
+- [Plantilla `ipa-stata-template`](https://github.com/PovertyAction/ipa-stata-template) — estructura estándar de proyecto Stata IPA
+- [DIME Analytics Stata Coding Standards](https://dimewiki.worldbank.org/Stata_Coding_Practices) — estándares de código
+- [Guía de Chris Blattman sobre IA](https://claudeblattman.com/) — siguiente paso después de esta guía
+
+## Recursos para Equipos y PMs
+
+- [Repositorio original de Juan Felipe](https://github.com/juanfegarIPA/claude-code-ipa-colombia) — versión MkDocs original de la guía gerencial
+- [Box Drive](https://www.box.com/drive) — sincronización de Box necesaria para varios módulos
+- [Node.js](https://nodejs.org/) — necesario para presentaciones IPA y otras automatizaciones
+- [Git para Windows](https://git-scm.com/downloads/win) — requisito previo de la app de escritorio
+
+## Soporte
+
+- **Cuestiones técnicas de Claude Code**: support@poverty-action.org
+- **Casos de uso de IA / aprobaciones**: [ipahelpdesk.freshservice.com](https://ipahelpdesk.freshservice.com) (asunto: "AI Use Case")
+- **Datos confidenciales / Azure OpenAI / LLMs locales**: researchsupport@poverty-action.org (GRDS)
+- **Feedback sobre esta guía**: [dquintero@poverty-action.org](mailto:dquintero@poverty-action.org) o [GitHub Issues](https://github.com/Quintero-DiegoIPA/ipa-claude-code-intro/issues)

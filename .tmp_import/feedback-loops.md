@@ -1,15 +1,8 @@
----
-title: "Bucles de feedback"
-subtitle: "Compartido · La práctica más importante"
----
+# Bucles de feedback — la práctica más importante
 
 Una de las cosas que hace que Claude Code se vuelva genuinamente útil con el tiempo es la práctica de guardar las correcciones que le das. Sin esto, repites las mismas correcciones para siempre. Con esto, cada corrección queda como aprendizaje acumulado.
 
 Esta página explica cómo funciona, por qué importa, y cómo armar el bucle desde el primer día.
-
-::: {.callout-tip}
-**¿Funciona también para código?** Sí. El bucle de feedback aplica tanto a tareas de redacción (emails, briefings) como a código (do-files de Stata, scripts de Python). Si Claude te entrega un do-file con headers no-IPA, lo corriges y le dices "guarda eso como regla", la próxima vez aplica el header correcto desde el primer draft.
-:::
 
 ---
 
@@ -33,7 +26,7 @@ El bucle de feedback es una práctica simple:
 4. Claude agrega una entrada a `feedback.md` con la corrección y el contexto.
 5. La próxima vez que pidas algo parecido, Claude lee `feedback.md` ANTES de redactar y aplica la regla.
 
-Después de dos o tres meses haciendo esto, `feedback.md` tiene 30–50 reglas específicas y Claude redacta más cerca de tu estilo desde el primer draft.
+Después de dos o tres meses haciendo esto, `feedback.md` tiene 30-50 reglas específicas y Claude redacta más cerca de tu estilo desde el primer draft.
 
 ---
 
@@ -46,20 +39,14 @@ Después de dos o tres meses haciendo esto, `feedback.md` tiene 30–50 reglas e
 
 ## 2026-04-29 | teams | equipo
 - No firmar mensajes con mi nombre al final, salvo si lo pido explícito.
-
-## 2026-05-02 | do-file Stata | proyecto SpC
-- Header siempre con "Project, Author, Date, Purpose" en bloque comentado.
-- Usar missing values extendidos (.d .r .n .s) — nunca solo "."
 ```
 
 Las reglas son específicas, accionables, sin teoría. Cuanto más concreta la regla, más fácil aplicarla bien.
 
 **Una regla buena**:
-
 > "En reuniones con academia, no usar 'partnership' como verbo (ej: 'partnering with X'). Usar 'colaboración con' o 'trabajar con'."
 
 **Una regla mala**:
-
 > "Ser más conciso." (demasiado vago para aplicar)
 
 ---
@@ -82,12 +69,7 @@ La diferencia entre "uso ocasionalmente Claude pero no me termina de funcionar" 
 
 ## Cómo arrancar
 
-1. Si todavía no tienes `feedback.md` en tu workspace, descárgalo:
-
-    <a href="../downloads/feedback.md" download="feedback.md" class="btn-download">Descargar feedback.md</a>
-
-   y guárdalo al lado de tu `CLAUDE.md`.
-
+1. Si todavía no tienes `feedback.md` en tu workspace, descárgalo desde el [Paso 4 de la página Cómo empezar](empezar.md#paso-4-descargar-tu-feedbackmd-y-guardarlo-en-el-workspace) y guárdalo al lado de tu `CLAUDE.md`.
 2. La primera vez que corrijas algo a Claude, después de aprobar la versión final pasa este prompt:
 
 ```
@@ -104,10 +86,12 @@ No intentes prellenar `feedback.md` con reglas teóricas. Las reglas que funcion
 ## Más allá de redacción
 
 El bucle de feedback aplica a casi todo lo que hagas con Claude:
-
 - Si Claude estructura mal una síntesis, le dices la corrección y la guardas.
 - Si Claude usa un formato de tabla que no te sirve, lo guardas.
 - Si Claude clasifica mal un tipo de tarea o documento, lo guardas.
-- Si Claude exporta una tabla de Stata sin las columnas que esperabas, le dices el formato correcto y lo guardas.
 
 Cuanto más diversa la fuente de las reglas, más útil se vuelve el archivo.
+
+---
+
+**Siguiente paso**: si todavía no has visto la página de [cómo empezar](empezar.md), revísala — el feedback loop está integrado en el Paso 4.

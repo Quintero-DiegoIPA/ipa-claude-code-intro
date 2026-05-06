@@ -1,38 +1,23 @@
----
-title: "Seguridad de datos"
-subtitle: "Compartido · ~15 minutos · OBLIGATORIO"
----
+# Qué puedo y qué no puedo hacer con Claude — Referencia Rápida
 
-::: {.callout-caution}
-## Este es el módulo más importante
-Lee las [IPA AI Usage Guidelines](https://ipastorage.box.com/s/mvr67ygvz1y3v8qmgjey67lk7msmyeks) completas antes de usar Claude Code en cualquier proyecto. Lo que sigue es un resumen aplicado a Claude Code, alineado con IPA AI Usage Guidelines v1.0 (marzo 2026).
-:::
+**Juan Felipe García, con apoyo de Claude · IPA Colombia · Abril 2026**
+**Alineado con:** IPA AI Usage Guidelines v1.0 (marzo 2026)
+**Licencia requerida:** Claude Enterprise (asignada por IPA)
+
+---
 
 ## La regla de oro
 
-Antes de poner cualquier información de IPA en Claude Code, hazte esta pregunta:
+Antes de poner cualquier información de IPA en Claude, hazte esta pregunta:
 
-> **Si esta información se divulgara públicamente, ¿le haría daño a una persona, a IPA o a un aliado?**
+> **Si esta información se divulgara públicamente, le haría daño a una persona, a IPA o a un aliado?**
 
 - **No**: es información INTERNAL o PUBLIC. Claude Enterprise la cubre.
-- **Sí**: determina el nivel de daño y actúa en consecuencia (ver tablas abajo).
+- **Sí**: determina el nivel de daño y actúa en consecuencia (ver tabla abajo).
 
-## 1. Clasificación de datos de IPA (4 niveles)
+---
 
-IPA usa un sistema de cuatro niveles. **Antes de usar cualquier herramienta de IA, clasifica los datos con los que vas a trabajar.**
-
-| Clasificación | Ejemplos | ¿Claude Code? |
-|---|---|---|
-| **Público** | Artículos publicados, blogs públicos, datasets anonimizados publicados | ✅ Sí |
-| **Interno** | Documentación de proyecto, do-files, borradores sin contenido sensible | ✅ Sí |
-| **Confidencial** | Datasets con PII (nombres, cédula), datos no publicados, hallazgos embargados, presupuestos restringidos por donante | ⚠️ No. Usar Azure OpenAI o LLMs locales |
-| **Altamente confidencial** | Datos de salud, biométricos, datos sensibles de menores, performance reviews | 🛑 Contactar a MIST primero |
-
-Claude Code envía tus mensajes y contenido de archivos a los servidores de Anthropic. Esto lo hace apropiado para datos **públicos** e **internos**. Para datos **confidenciales** con PII, las vías aprobadas por IPA son Azure OpenAI (vía API) y LLMs locales/offline.
-
-## 2. Tabla por tipo de dato institucional
-
-Para situaciones administrativas/operativas (no research), usa esta clasificación complementaria:
+## Tabla de decisión por tipo de dato
 
 | Tipo de dato | Clasificación IPA | Claude Enterprise | Ejemplos en Colombia |
 |---|---|---|---|
@@ -44,7 +29,9 @@ Para situaciones administrativas/operativas (no research), usa esta clasificaci�
 | Datos de participantes de investigación (PII/SPI) | **PROHIBIDA** | No, sin aprobación IRB | Nombres, ubicaciones, características identificables de participantes |
 | Actas de junta/asamblea, informe de gestión (ESAL Colombia) | **PUBLIC** | Sí, sin restricción | Documentos legalmente públicos bajo ley colombiana de ESALs |
 
-## 3. Por situación de trabajo
+---
+
+## Por situación de trabajo
 
 ### Comunicaciones y mensajería (emails, Teams, WhatsApp)
 
@@ -87,48 +74,9 @@ Para situaciones administrativas/operativas (no research), usa esta clasificaci�
 - **Cuidado**: datos de investigación no publicados (incluso anonimizados) — tratar como CONFIDENTIAL, usar Azure OpenAI o LLMs locales
 - **No**: datos que puedan identificar participantes de investigación — nunca sin aprobación IRB
 
-## 4. Las cuatro reglas
+---
 
-1. **No PII en los prompts.** No escribas ni pegues nombres, números de cédula, direcciones, teléfonos, ni IDs de participantes.
-2. **No archivos de datos crudos.** Nunca pidas a Claude Code abrir archivos en `data/raw/` ni en bóvedas encriptadas.
-3. **No datos a nivel individual.** No pidas filas de datos. Incluso datos desidentificados pueden reidentificarse en muestras pequeñas.
-4. **Revisar antes de hacer commit.** Revisa cada archivo que Claude Code cree o modifique. Confirma que no se filtró PII.
-
-## 5. Lo que nunca puedes compartir
-
-Independientemente de la herramienta, IPA prohíbe compartir lo siguiente sin aprobación específica:
-
-- **PII de participantes**: nombres, direcciones, teléfonos, números de identificación
-- **Información Personal Sensible (SPI)**: datos de salud, biométricos, orientación sexual, opiniones políticas, datos de menores de 13 años
-- **Credenciales de IPA**: contraseñas, API keys, tokens de autenticación
-- **Datos restringidos por contrato**: información bajo NDAs, restricciones de donantes, hallazgos embargados
-
-::: {.callout-warning}
-Si tu dataset contiene **cualquier SPI**, todo el dataset se clasifica como **altamente confidencial**. Contacta a MIST antes de usar cualquier herramienta de IA.
-:::
-
-## 6. Seguro vs. no seguro — escenarios
-
-Antes de enviar un prompt, pregúntate: *"¿Esto requiere que Claude Code vea datos individuales o detalles personales?"* Si sí, reformula para enfocarte en el **código** o **estructura**, no en los **datos** o **cifras**.
-
-| Escenario | Veredicto |
-|-----------|-----------|
-| "Escribe un do-file que limpie datos de encuesta siguiendo esta estructura" | ✅ Seguro |
-| "Limpia estos datos de encuesta" (con datos pegados) | ❌ No seguro |
-| "Por qué falla mi merge? Aquí está el log" | ✅ Seguro |
-| "Muéstrame las primeras 20 filas del dataset de línea base" | ❌ No seguro |
-| "Diagnostica este error r(111) en mi do-file" | ✅ Seguro |
-| "Resume la asistencia de María García en Centro Zonal Norte" | ❌ No seguro |
-| "Redacta un email a un donante sobre el avance del proyecto X" | ✅ Seguro |
-| "Redacta este email — pega el monto exacto y el nombre del beneficiario" | ❌ No seguro |
-| "Hazme un brief para una reunión con [aliado]" usando contexto público | ✅ Seguro |
-| "Resume las notas de mi reunión 1:1 con [persona del equipo]" | ⚠️ Cuidado — sin cifras de salario, sin valoraciones de desempeño |
-
-## 7. Por qué estas reglas te benefician
-
-Al separar el código y la estructura de los datos sensibles, Claude Code te ayuda con la parte más tediosa del trabajo — sintaxis, formato, depuración, redacción, documentación — mientras tú controlas la parte más importante: los datos y las decisiones. Estas reglas no son restricciones arbitrarias. Son el marco que hace posible usar Claude Code en proyectos reales de IPA.
-
-## 8. Qué cambió con la licencia Enterprise
+## Qué cambió con la licencia Enterprise
 
 | Antes (licencia Pro personal) | Ahora (Enterprise) |
 |---|---|
@@ -138,10 +86,11 @@ Al separar el código y la estructura de los datos sensibles, Claude Code te ayu
 | Sin logs de auditoría ni controles de admin | Admin puede configurar retención, auditoría, políticas org |
 
 **Lo que NO cambió con Enterprise:**
-
 - Evaluaciones de desempeño **siguen prohibidas** sin aprobación MIST (es restricción de contenido, no de licencia)
 - La buena práctica de **no incluir cifras específicas** de salarios o presupuestos en prompts sigue vigente
 - Los datos de **participantes de investigación** siguen prohibidos sin IRB
+
+---
 
 ## Si algo sale mal
 
@@ -154,8 +103,9 @@ Los lineamientos están diseñados para habilitar innovación, no para generar m
 
 ---
 
-*Contactos útiles:*
+*Este documento complementa, no reemplaza, los IPA AI Usage Guidelines (v1.0, marzo 2026). Para situaciones no cubiertas aquí, consulta los lineamientos completos o contacta a MIST.*
 
+*Contactos útiles:*
 - **Azure OpenAI**: researchsupport@poverty-action.org (GRDS)
 - **Aprobación de casos de uso**: ipahelpdesk.freshservice.com (asunto: "AI Use Case")
 - **Licencias Claude Enterprise**: support@poverty-action.org
