@@ -1,45 +1,64 @@
-# Getting Started with Claude Code — IPA Colombia
+# Claude Code para IPA Colombia — Guía bifurcada
 
-A practical onboarding guide for IPA Colombia Research Analysts who want to start using [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview) for Stata-based research workflows.
+Sitio Quarto con dos rutas según el tipo de trabajo: una para **Research Analysts** que escriben código (Stata, do-files, MEL), y otra para **Equipos y PMs** que delegan trabajo administrativo (comunicaciones, weekly reviews, procurement, presentaciones).
 
-## What This Is
+## Rutas
 
-A self-contained Quarto HTML document (50–75 minutes) that takes you from zero to productive with Claude Code. It covers:
+- **`/`** — Hub bifurcado, lleva al usuario a la ruta correcta.
+- **`/analyst/`** — Para Research Analysts. Cubre VS Code + terminal, CLAUDE.md como briefing del proyecto, ejercicios prácticos de Stata.
+- **`/manager/`** — Para Equipos y PMs. Cubre app de escritorio, 7 módulos por capacidad, 4 starter packs por rol, plantillas descargables.
+- **`/shared/`** — Compartido y obligatorio para ambas rutas: seguridad de datos (IPA AI Usage Guidelines), bucles de feedback, prompting, recursos.
+- **`/downloads/`** — Plantillas `.md` listas para descargar (CLAUDE.md, feedback.md, comunicaciones.md, etc.).
 
-- **VS Code basics**: terminal, file explorer, extensions, navigation
-- **Claude Code setup**: installation, API key, first run
-- **Project instructions**: how `CLAUDE.md` and skills work
-- **Security and PII rules**: what to never do with research data
-- **Prompt engineering**: five patterns for effective Stata prompts
-- **Two hands-on exercises**: debug a Stata error, write a descriptive statistics do-file
+## Origen
 
-## Audience
+La ruta `/manager/` está adaptada del trabajo de **Juan Felipe García** (Country Director, IPA Colombia) — la versión MkDocs original vive en [juanfegarIPA/claude-code-ipa-colombia](https://github.com/juanfegarIPA/claude-code-ipa-colombia). Esta guía consolida ambas y mantiene un único stack técnico (Quarto + Terminal Noir).
 
-Research analysts proficient in Stata who have never used VS Code or Claude Code. The guide assumes familiarity with IPA and DIME Analytics coding standards.
+## Stack técnico
 
-## How to Use
+- **Quarto** + GitHub Pages (deploy automático via `quarto-actions/publish@v2`)
+- **Terminal Noir** — tema dark custom con paleta IPA green (#4ea55b), tipografía DM Sans + JetBrains Mono
+- **Sidebars bifurcados** activados por path (`analyst/` ve sidebar analyst, `manager/` ve sidebar manager)
 
-### Option 1: Read the rendered HTML
+## Cómo correr localmente
 
-Download `claude-code-guide.html` and open it in any browser. The file is fully self-contained (no external dependencies).
-
-### Option 2: Render from source
-
-If you have [Quarto](https://quarto.org/docs/get-started/) installed:
+Requiere [Quarto](https://quarto.org/docs/get-started/) instalado.
 
 ```bash
-quarto render claude-code-guide.qmd --to html
+quarto preview      # servidor de desarrollo con hot reload
+quarto render       # build completo a _site/
 ```
 
-## Prerequisites
+## Estructura del repo
 
-To follow the exercises in the guide, you need:
+```
+ipa-claude-code-intro/
+├── _quarto.yml             # navbar + 2 sidebars + format html
+├── styles.css              # Terminal Noir + extras (cards, buttons, grid)
+├── index.qmd               # Hub bifurcado
+├── README.md               # este archivo
+│
+├── analyst/                # Ruta A
+│   ├── index.qmd, quickstart.qmd, setup.qmd, concepts.qmd,
+│   ├── exercises.qmd, examples.qmd
+│
+├── manager/                # Ruta B
+│   ├── index.qmd, empezar.qmd, instalar.qmd, plantillas.qmd
+│   ├── modulos/            # 7 módulos por capacidad
+│   └── starters/           # 4 starter packs por rol
+│
+├── shared/                 # Núcleo compartido
+│   ├── safety.qmd, feedback-loops.qmd, prompting.qmd, recursos.qmd
+│
+├── images/                 # Gráficos SpC para examples
+├── downloads/              # Plantillas .md descargables
+└── .github/workflows/      # GitHub Actions de deploy
+```
 
-- Stata 17 or later (installed and licensed)
-- A GitHub repository cloned locally
-- Node.js 18 or later ([download](https://nodejs.org/))
-- An Anthropic API key
+## Audiencia
 
-## License
+Ambas rutas asumen familiaridad con el trabajo cotidiano en IPA y con las [IPA AI Usage Guidelines](https://ipastorage.box.com/s/mvr67ygvz1y3v8qmgjey67lk7msmyeks). La ruta analyst asume Stata avanzado; la ruta manager no asume programación.
 
-This guide is shared for internal IPA use. Contact the IPA Colombia MEL team for questions.
+## Contacto
+
+Feedback: [dquintero@poverty-action.org](mailto:dquintero@poverty-action.org) · [GitHub Issues](https://github.com/Quintero-DiegoIPA/ipa-claude-code-intro/issues).
