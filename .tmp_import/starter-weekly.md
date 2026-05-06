@@ -1,13 +1,10 @@
----
-title: "Starter: Weekly review"
-subtitle: "Cierre estructurado de semana"
----
+# Starter: Weekly review
 
 Setup para hacer una revisión semanal estructurada de tu trabajo, conversacional con Claude.
 
 ## Para qué sirve
 
-Sin estructura, las semanas se acumulan: tareas viejas que nadie cancela, compromisos que se pierden, riesgos que escalan en silencio. Este starter te da un espacio fijo (30–45 minutos un día fijo de la semana) donde Claude te lleva por 5 bloques, tú decides qué hacer con cada cosa, y queda registro escrito.
+Sin estructura, las semanas se acumulan: tareas viejas que nadie cancela, compromisos que se pierden, riesgos que escalan en silencio. Este starter te da un espacio fijo (30-45 minutos un día fijo de la semana) donde Claude te lleva por 5 bloques, tú decides qué hacer con cada cosa, y queda registro escrito.
 
 ## Para quién
 
@@ -36,9 +33,9 @@ Una carpeta `revisiones/` dentro de tu workspace con esta estructura:
 
 ## Paso 1 — Descarga el archivo CLAUDE.md del starter
 
-<a href="../../downloads/starters/weekly-review-CLAUDE.md" download="CLAUDE.md" class="btn-download">Descargar CLAUDE.md del starter de weekly review</a>
+Haz clic en el botón. El archivo `CLAUDE.md` se descarga a tu carpeta de Descargas.
 
-El archivo se baja a tu carpeta de Descargas. Renómbralo a `CLAUDE.md` exactamente si el navegador le agregó algún prefijo.
+[:material-download: Descargar CLAUDE.md del starter de weekly review](../downloads/starters/weekly-review/CLAUDE.md.txt){ .md-button .md-button--primary download="CLAUDE.md" }
 
 ---
 
@@ -97,13 +94,13 @@ proyectos en curso.
 
 **Qué hace Claude**: te pregunta una por una tus tareas activas (en curso, esperando respuesta, ideas) y tus proyectos (qué son, tu rol, estado verde/amarillo/rojo, próximo hito). Va llenando los archivos a medida que respondes.
 
-**Qué tienes que hacer tú**: contestar con tu información real. No intentes ser exhaustivo. 10–15 tareas y los 4–5 proyectos más relevantes son suficientes para empezar.
+**Qué tienes que hacer tú**: contestar con tu información real. No intentes ser exhaustivo. 10-15 tareas y los 4-5 proyectos más relevantes son suficientes para empezar.
 
 ---
 
 ## Paso 6 — Agenda tu primera revisión
 
-Reserva 30–45 minutos en tu calendario para tu primera revisión semanal. La recomendación es agendarlo recurrente — los viernes en la tarde funciona bien para muchos managers.
+Reserva 30-45 minutos en tu calendario para tu primera revisión semanal. La recomendación es agendarlo recurrente — los viernes en la tarde funciona bien para muchos managers.
 
 ---
 

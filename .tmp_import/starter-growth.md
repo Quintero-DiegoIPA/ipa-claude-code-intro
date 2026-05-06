@@ -1,7 +1,4 @@
----
-title: "Starter: Growth"
-subtitle: "Desarrollo de proyectos, fundraising, alianzas"
----
+# Starter: Growth
 
 Setup para gestionar tu trabajo de desarrollo de proyectos: relaciones con donantes, partners, gobierno, PIs, y oportunidades en distintos estados de maduración.
 
@@ -39,9 +36,9 @@ Una carpeta `growth/` dentro de tu workspace con esta estructura:
 
 ## Paso 1 — Descarga el archivo CLAUDE.md del starter
 
-<a href="../../downloads/starters/growth-CLAUDE.md" download="CLAUDE.md" class="btn-download">Descargar CLAUDE.md del starter de growth</a>
+Haz clic en el botón. El archivo `CLAUDE.md` se descarga a tu carpeta de Descargas (Downloads).
 
-El archivo se baja a tu carpeta de Descargas. Cuando lo descargues, asegúrate de que el nombre quede exactamente `CLAUDE.md` — no `growth-CLAUDE.md`. Si quedó con prefijo, renómbralo antes del paso siguiente.
+[:material-download: Descargar CLAUDE.md del starter de growth](../downloads/starters/growth/CLAUDE.md.txt){ .md-button .md-button--primary download="CLAUDE.md" }
 
 ---
 

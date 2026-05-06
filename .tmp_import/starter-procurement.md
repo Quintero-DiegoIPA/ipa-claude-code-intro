@@ -1,7 +1,4 @@
----
-title: "Starter: Procurement"
-subtitle: "Decisiones de compra con IPA P&Ps"
----
+# Starter: Procurement
 
 Setup para gestionar tus decisiones de procurement como manager IPA Colombia: cuándo aplica proceso competitivo, cuándo aplica sole source justification (SSJ), dónde guardar la documentación de cada caso.
 
@@ -36,9 +33,9 @@ Si tu rol no involucra procurement (la mayoría se maneja directamente desde ope
 
 ## Paso 1 — Descarga el archivo CLAUDE.md del starter
 
-<a href="../../downloads/starters/procurement-CLAUDE.md" download="CLAUDE.md" class="btn-download">Descargar CLAUDE.md del starter de procurement</a>
+[:material-download: Descargar CLAUDE.md del starter de procurement](../downloads/starters/procurement/CLAUDE.md.txt){ .md-button .md-button--primary download="CLAUDE.md" }
 
-El archivo se baja a tu carpeta de Descargas. Confirma que el nombre final sea exactamente `CLAUDE.md`.
+El archivo se baja a tu carpeta de Descargas.
 
 ---
 

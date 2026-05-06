@@ -1,7 +1,4 @@
----
-title: "Starter: People layer"
-subtitle: "Memoria personal de tu red"
----
+# Starter: People layer
 
 Setup para construir tu memoria personal de las personas con las que trabajas: a quién le escribes, por qué importa cada uno, cuándo fue el último contacto, qué se acordó.
 
@@ -40,9 +37,9 @@ Si tu rol es muy interno con equipo fijo, este starter no aplica.
 
 ## Paso 1 — Descarga el archivo CLAUDE.md del starter
 
-<a href="../../downloads/starters/people-CLAUDE.md" download="CLAUDE.md" class="btn-download">Descargar CLAUDE.md del starter de people layer</a>
+[:material-download: Descargar CLAUDE.md del starter de people layer](../downloads/starters/people/CLAUDE.md.txt){ .md-button .md-button--primary download="CLAUDE.md" }
 
-El archivo se baja a tu carpeta de Descargas. Asegúrate de que el nombre final quede exactamente `CLAUDE.md`.
+El archivo se baja a tu carpeta de Descargas.
 
 ---
 
@@ -89,7 +86,7 @@ esa carpeta y crea las subcarpetas internal/, external/ y groups/ vacías.
 
 ## Paso 5 — Crea los primeros archivos de personas
 
-No empieces queriendo cubrir 50 personas. Empieza con las 5–10 que más afectan tu trabajo en este momento.
+No empieces queriendo cubrir 50 personas. Empieza con las 5-10 que más afectan tu trabajo en este momento.
 
 Pasa este prompt:
 
@@ -140,12 +137,10 @@ más de 6 meses, y dime si vale la pena retomar o cerrar.
 
 ## Reglas críticas
 
-::: {.callout-warning}
 1. **Confidencialidad**: este es un archivo personal y operativo. No incluyas información sensible que no estarías cómodo de tener escrita (notas disciplinarias, especulación dañina, datos de salud).
 2. **Datos de participantes de investigación NUNCA acá**. Esto es para tu red profesional, no para datos de campo.
 3. **Una persona = un archivo**. No fragmentar por proyecto.
 4. **Actualizar después de cada interacción importante**, mientras tienes el contexto fresco. Si lo dejas para "después", no pasa.
-:::
 
 ---
 
