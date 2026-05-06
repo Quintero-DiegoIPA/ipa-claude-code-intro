@@ -440,3 +440,118 @@ input[type="checkbox"] {
   .site-banner { font-size: 0.72rem; padding: 0.4rem 1rem; }
   pre { font-size: 0.76rem !important; padding: 0.8rem 1rem !important; }
 }
+
+/* =================================================================
+   MERGE-PILOT EXTRAS — Audience cards, download buttons, feature grid
+   ================================================================= */
+
+/* ===== Audience card (used on hub) ===== */
+.audience-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem 1.6rem;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.audience-card:hover {
+  border-color: var(--accent-primary-dim);
+  transform: translateY(-2px);
+}
+
+.audience-card h3 {
+  margin-top: 0 !important;
+  font-size: 1.1rem !important;
+  text-transform: none !important;
+  letter-spacing: -0.01em !important;
+}
+
+.audience-card ul {
+  margin-bottom: 1rem;
+}
+
+/* ===== CTA button ===== */
+.btn-cta,
+a.btn-cta {
+  display: inline-block;
+  background: var(--accent-primary);
+  color: var(--bg-deep) !important;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  padding: 0.55rem 1.1rem;
+  border-radius: var(--radius-sm);
+  border: none !important;
+  text-decoration: none !important;
+  transition: background 0.2s ease;
+}
+
+.btn-cta:hover,
+a.btn-cta:hover {
+  background: var(--accent-hover);
+  color: var(--bg-deep) !important;
+}
+
+/* ===== Download button ===== */
+.btn-download,
+a.btn-download {
+  display: inline-block;
+  background: transparent;
+  color: var(--accent-primary) !important;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--accent-primary-dim) !important;
+  border-radius: var(--radius-sm);
+  text-decoration: none !important;
+  transition: background 0.15s ease, border-color 0.15s ease;
+  white-space: nowrap;
+}
+
+.btn-download::before {
+  content: "↓ ";
+  opacity: 0.7;
+}
+
+.btn-download:hover,
+a.btn-download:hover {
+  background: var(--accent-primary-dim);
+  border-color: var(--accent-primary) !important;
+  color: var(--accent-primary) !important;
+}
+
+/* ===== Feature grid (cards layout) ===== */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.feature-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.1rem 1.2rem;
+  transition: border-color 0.2s ease;
+}
+
+.feature-card:hover {
+  border-color: var(--accent-primary-dim);
+}
+
+.feature-card h3 {
+  margin-top: 0 !important;
+  font-size: 0.85rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.feature-card p:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .feature-grid { grid-template-columns: 1fr; }
+}
