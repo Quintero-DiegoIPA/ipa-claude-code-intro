@@ -1,9 +1,14 @@
 project:
   type: website
   output-dir: _site
+  render:
+    - "index.qmd"
+    - "analyst/**/*.qmd"
+    - "shared/**/*.qmd"
+    - "manager/**/*.qmd"
   resources:
-    - images/
-    - downloads/
+    - "images/**"
+    - "downloads/**"
 
 website:
   title: "Claude Code para IPA"
