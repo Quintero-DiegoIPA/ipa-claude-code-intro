@@ -6,6 +6,8 @@ subtitle: "Cómo Claude Code ejecuta, lee logs y reporta resultados"
 ::: {.callout-note}
 ## De dónde viene este patrón
 Lo que sigue es el flujo que usamos en el repo de **SpC** (Sanar para Crecer 3.0). Está documentado allá en `documentation/CLAUDE_STATA_GUIDE.md` y se invoca desde `CLAUDE.md` en la raíz. Este módulo es la versión genérica adaptada a cualquier proyecto IPA que use la plantilla `ipa-stata-template`.
+
+**Hay seguramente muchas otras formas de integrar Claude con Stata** — vía la app de escritorio, vía notebooks `nbstata`, vía wrappers personalizados, o vía workflows distintos al "run-and-report". Esta es simplemente la que a nosotros nos funcionó en SpC y la que decidimos documentar. Si encuentras una mejor para tu proyecto, abre un issue y la sumamos como alternativa.
 :::
 
 ## La idea central: Claude corre y reporta — no espera
