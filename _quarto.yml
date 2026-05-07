@@ -49,6 +49,7 @@ website:
         - analyst/quickstart.qmd
         - analyst/setup.qmd
         - analyst/concepts.qmd
+        - analyst/stata-workflow.qmd
         - section: "Compartido"
           contents:
             - shared/safety.qmd
