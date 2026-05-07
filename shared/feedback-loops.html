@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>1. Instalacion y configuracion – Claude Code para IPA</title>
+<title>Bucles de feedback – Claude Code para IPA</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -58,24 +58,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-4d9afe2b8d18ee9fa5d0d57b5ed4214d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-5117057932df29c28a0ac1b44d22c14e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-4d9afe2b8d18ee9fa5d0d57b5ed4214d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-5117057932df29c28a0ac1b44d22c14e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -106,17 +106,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <style>html{ scroll-behavior: smooth; }</style>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-sidebar floating nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Claude Code para IPA</span>
     </a>
   </div>
@@ -127,37 +127,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Inicio</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./quickstart.html"> 
-<span class="menu-text">Demo</span></a>
+    <a class="nav-link active" href="../analyst/index.html" aria-current="page"> 
+<span class="menu-text">Para Analistas</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./setup.html" aria-current="page"> 
-<span class="menu-text">Instalacion</span></a>
+    <a class="nav-link" href="../manager/index.html"> 
+<span class="menu-text">Para Equipos</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./concepts.html"> 
-<span class="menu-text">Conceptos</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-compartido" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Compartido</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-compartido">    
+        <li>
+    <a class="dropdown-item" href="../shared/safety.html">
+ <span class="dropdown-text">Seguridad</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./safety.html"> 
-<span class="menu-text">Seguridad</span></a>
+        <li>
+    <a class="dropdown-item" href="../shared/prompting.html">
+ <span class="dropdown-text">Prompting</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./prompting.html"> 
-<span class="menu-text">Prompting</span></a>
+        <li>
+    <a class="dropdown-item" href="../shared/feedback-loops.html">
+ <span class="dropdown-text">Feedback loops</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./exercises.html"> 
-<span class="menu-text">Practica</span></a>
+        <li>
+    <a class="dropdown-item" href="../shared/recursos.html">
+ <span class="dropdown-text">Recursos</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./examples.html"> 
-<span class="menu-text">Ejemplos</span></a>
-  </li>  
+    </ul>
+  </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
@@ -171,32 +174,115 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
       </div> <!-- /container-fluid -->
     </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../shared/safety.html">Compartido</a></li><li class="breadcrumb-item"><a href="../shared/feedback-loops.html">Bucles de feedback</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analyst/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Para Analistas</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analyst/quickstart.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Demo: Claude Code en accion</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analyst/setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Instalación y configuración</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analyst/concepts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2. Conceptos clave</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Compartido</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../shared/safety.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Seguridad de datos</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../shared/prompting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prompting</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../shared/feedback-loops.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Bucles de feedback</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analyst/exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5. Ejercicios practicos</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analyst/examples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Que se puede lograr</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">En esta página</h2>
    
   <ul class="collapse">
-  <li><a href="#que-necesitas" id="toc-que-necesitas" class="nav-link active" data-scroll-target="#que-necesitas">Que necesitas</a></li>
-  <li><a href="#estructura-de-carpetas-del-proyecto" id="toc-estructura-de-carpetas-del-proyecto" class="nav-link" data-scroll-target="#estructura-de-carpetas-del-proyecto">Estructura de carpetas del proyecto</a></li>
-  <li><a href="#instalar-claude-code" id="toc-instalar-claude-code" class="nav-link" data-scroll-target="#instalar-claude-code">Instalar Claude Code</a></li>
-  <li><a href="#autenticacion" id="toc-autenticacion" class="nav-link" data-scroll-target="#autenticacion">Autenticacion</a></li>
-  <li><a href="#lanzar-y-verificar" id="toc-lanzar-y-verificar" class="nav-link" data-scroll-target="#lanzar-y-verificar">Lanzar y verificar</a></li>
-  <li><a href="#problemas-comunes" id="toc-problemas-comunes" class="nav-link" data-scroll-target="#problemas-comunes">Problemas comunes</a></li>
+  <li><a href="#el-problema-sin-feedback" id="toc-el-problema-sin-feedback" class="nav-link active" data-scroll-target="#el-problema-sin-feedback">El problema sin feedback</a></li>
+  <li><a href="#el-bucle-de-feedback" id="toc-el-bucle-de-feedback" class="nav-link" data-scroll-target="#el-bucle-de-feedback">El bucle de feedback</a></li>
+  <li><a href="#cómo-se-ve-una-entrada-en-feedback.md" id="toc-cómo-se-ve-una-entrada-en-feedback.md" class="nav-link" data-scroll-target="#cómo-se-ve-una-entrada-en-feedback.md">Cómo se ve una entrada en <code>feedback.md</code></a></li>
+  <li><a href="#reglas-graduadas" id="toc-reglas-graduadas" class="nav-link" data-scroll-target="#reglas-graduadas">Reglas graduadas</a></li>
+  <li><a href="#por-qué-importa" id="toc-por-qué-importa" class="nav-link" data-scroll-target="#por-qué-importa">Por qué importa</a></li>
+  <li><a href="#cómo-arrancar" id="toc-cómo-arrancar" class="nav-link" data-scroll-target="#cómo-arrancar">Cómo arrancar</a></li>
+  <li><a href="#más-allá-de-redacción" id="toc-más-allá-de-redacción" class="nav-link" data-scroll-target="#más-allá-de-redacción">Más allá de redacción</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../shared/safety.html">Compartido</a></li><li class="breadcrumb-item"><a href="../shared/feedback-loops.html">Bucles de feedback</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">1. Instalacion y configuracion</h1>
-<p class="subtitle lead">~15 minutos</p>
+<h1 class="title">Bucles de feedback</h1>
+<p class="subtitle lead">Compartido · La práctica más importante</p>
 </div>
 
 
@@ -213,296 +299,103 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="que-necesitas" class="level2">
-<h2 class="anchored" data-anchor-id="que-necesitas">Que necesitas</h2>
-<p>Antes de empezar, confirma que tienes lo siguiente:</p>
+<p>Una de las cosas que hace que Claude Code se vuelva genuinamente útil con el tiempo es la práctica de guardar las correcciones que le das. Sin esto, repites las mismas correcciones para siempre. Con esto, cada corrección queda como aprendizaje acumulado.</p>
+<p>Esta página explica cómo funciona, por qué importa, y cómo armar el bucle desde el primer día.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>¿Funciona también para código?</strong> Sí. El bucle de feedback aplica tanto a tareas de redacción (emails, briefings) como a código (do-files de Stata, scripts de Python). Si Claude te entrega un do-file con headers no-IPA, lo corriges y le dices “guarda eso como regla”, la próxima vez aplica el header correcto desde el primer draft.</p>
+</div>
+</div>
+<hr>
+<section id="el-problema-sin-feedback" class="level2">
+<h2 class="anchored" data-anchor-id="el-problema-sin-feedback">El problema sin feedback</h2>
+<p>Imagina la primera vez que le pides a Claude que te redacte un email a un partner. El draft que entrega tiene un saludo demasiado formal. Tú le dices “cámbialo a Hola, [nombre],” y lo arregla. Genial.</p>
+<p>La próxima vez que le pidas un email, Claude vuelve a usar saludo formal. Vuelves a corregirlo. Otra vez. Y otra. Pasan tres meses y has gastado horas en repetir la misma corrección.</p>
+<p>El problema es que Claude empieza cada conversación desde cero. No recuerda cómo le pediste antes que fueran las cosas, salvo que tú se lo digas explícitamente.</p>
+<hr>
+</section>
+<section id="el-bucle-de-feedback" class="level2">
+<h2 class="anchored" data-anchor-id="el-bucle-de-feedback">El bucle de feedback</h2>
+<p>El bucle de feedback es una práctica simple:</p>
+<ol type="1">
+<li>Claude entrega un draft.</li>
+<li>Tú lo corriges en alguna dimensión (tono, formato, fraseo, estructura).</li>
+<li>Antes de cerrar, le dices a Claude: “guarda esa corrección como regla para próximas veces”.</li>
+<li>Claude agrega una entrada a <code>feedback.md</code> con la corrección y el contexto.</li>
+<li>La próxima vez que pidas algo parecido, Claude lee <code>feedback.md</code> ANTES de redactar y aplica la regla.</li>
+</ol>
+<p>Después de dos o tres meses haciendo esto, <code>feedback.md</code> tiene 30–50 reglas específicas y Claude redacta más cerca de tu estilo desde el primer draft.</p>
+<hr>
+</section>
+<section id="cómo-se-ve-una-entrada-en-feedback.md" class="level2">
+<h2 class="anchored" data-anchor-id="cómo-se-ve-una-entrada-en-feedback.md">Cómo se ve una entrada en <code>feedback.md</code></h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2026-04-27 | email | partner externo</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Saludo: usar "Hola <span class="co">[</span><span class="ot">Nombre</span><span class="co">]</span>," — nunca "Estimado/a" salvo si es gobierno o donante institucional formal.</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Cierre: "Gracias," sin "Saludos cordiales" ni firmas inflamadas.</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2026-04-29 | teams | equipo</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>No firmar mensajes con mi nombre al final, salvo si lo pido explícito.</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2026-05-02 | do-file Stata | proyecto SpC</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Header siempre con "Project, Author, Date, Purpose" en bloque comentado.</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Usar missing values extendidos (.d .r .n .s) — nunca solo "."</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Las reglas son específicas, accionables, sin teoría. Cuanto más concreta la regla, más fácil aplicarla bien.</p>
+<p><strong>Una regla buena</strong>:</p>
+<blockquote class="blockquote">
+<p>“En reuniones con academia, no usar ‘partnership’ como verbo (ej: ‘partnering with X’). Usar ‘colaboración con’ o ‘trabajar con’.”</p>
+</blockquote>
+<p><strong>Una regla mala</strong>:</p>
+<blockquote class="blockquote">
+<p>“Ser más conciso.” (demasiado vago para aplicar)</p>
+</blockquote>
+<hr>
+</section>
+<section id="reglas-graduadas" class="level2">
+<h2 class="anchored" data-anchor-id="reglas-graduadas">Reglas graduadas</h2>
+<p>Cuando una regla aparece tres o más veces (es decir, te has tenido que recordar a Claude tres veces que aplique la misma cosa), es señal de que esa regla es universal y vale la pena moverla a un archivo más permanente. Claude propone graduar la regla y, si confirmas, la mueve a una sección “Reglas graduadas” en <code>feedback.md</code> o a un archivo separado de voz/estilo.</p>
+<p>Esto evita que <code>feedback.md</code> se vuelva una lista interminable y mantiene las reglas activas frescas.</p>
+<hr>
+</section>
+<section id="por-qué-importa" class="level2">
+<h2 class="anchored" data-anchor-id="por-qué-importa">Por qué importa</h2>
+<p>Sin feedback loops, Claude Code es una herramienta que repite siempre lo mismo y tú gastas tiempo corrigiendo. Con feedback loops, Claude Code es una herramienta que se ajusta a ti.</p>
+<p>La diferencia entre “uso ocasionalmente Claude pero no me termina de funcionar” y “Claude se siente como una extensión de mi forma de trabajar” suele ser exactamente esta práctica. Es invisible las primeras semanas y muy visible al tercer mes.</p>
+<hr>
+</section>
+<section id="cómo-arrancar" class="level2">
+<h2 class="anchored" data-anchor-id="cómo-arrancar">Cómo arrancar</h2>
+<ol type="1">
+<li><p>Si todavía no tienes <code>feedback.md</code> en tu workspace, descárgalo:</p>
+<p><a href="../downloads/feedback.md" download="feedback.md" class="btn-download">Descargar feedback.md</a></p>
+<p>y guárdalo al lado de tu <code>CLAUDE.md</code>.</p></li>
+<li><p>La primera vez que corrijas algo a Claude, después de aprobar la versión final pasa este prompt:</p></li>
+</ol>
+<pre><code>Guarda esa corrección en feedback.md como regla para próximas veces.</code></pre>
+<ol start="3" type="1">
+<li>Claude te muestra cómo va a quedar la entrada que agregaría en <code>feedback.md</code>. Si la entrada está bien, le confirmas y la guarda.</li>
+<li>La próxima vez que pidas algo similar, Claude lee <code>feedback.md</code> antes de redactar y aplica la regla automáticamente.</li>
+</ol>
+<p>No intentes prellenar <code>feedback.md</code> con reglas teóricas. Las reglas que funcionan son las que vienen de correcciones reales en trabajo real.</p>
+<hr>
+</section>
+<section id="más-allá-de-redacción" class="level2">
+<h2 class="anchored" data-anchor-id="más-allá-de-redacción">Más allá de redacción</h2>
+<p>El bucle de feedback aplica a casi todo lo que hagas con Claude:</p>
 <ul>
-<li><strong>Stata 17</strong> o posterior, instalado y con licencia</li>
-<li><strong>Node.js 18</strong> o posterior (<a href="https://nodejs.org/">descargar</a>)</li>
-<li>Una <strong>API key de Anthropic</strong> o una <strong>cuenta Claude Max/Pro</strong> (pregunta a tu lider de proyecto)</li>
-<li>Recomendado: una cuenta de <a href="https://github.com/">GitHub</a> y un repositorio de proyecto clonado</li>
+<li>Si Claude estructura mal una síntesis, le dices la corrección y la guardas.</li>
+<li>Si Claude usa un formato de tabla que no te sirve, lo guardas.</li>
+<li>Si Claude clasifica mal un tipo de tarea o documento, lo guardas.</li>
+<li>Si Claude exporta una tabla de Stata sin las columnas que esperabas, le dices el formato correcto y lo guardas.</li>
 </ul>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><strong>Ya conoces Git y VS Code?</strong> Salta directo a <a href="#instalar-claude-code">Instalar Claude Code</a>.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span>Que es GitHub? (expandir si es nuevo para ti)
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>GitHub es una plataforma donde los equipos almacenan y colaboran en codigo. Es como una carpeta compartida con superpoderes: guarda un historial completo de cada cambio, permite que varias personas trabajen en los mismos archivos sin sobreescribirse, y proporciona un respaldo fuera de tu computador.</p>
-<p>En IPA, cada proyecto tiene un <strong>repositorio</strong> (repo) en GitHub. Un repositorio es una carpeta que contiene todos los do-files, documentacion y configuracion de un proyecto. Cada analista <strong>clona</strong> (descarga) una copia a su propio computador para trabajar.</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 55%">
-<col style="width: 44%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Concepto</th>
-<th>Que es</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Repositorio</strong></td>
-<td>Carpeta de proyecto en GitHub. Contiene do-files, documentacion y configs.</td>
-</tr>
-<tr class="even">
-<td><strong>Clonar</strong></td>
-<td>Descargar una copia del repo a tu computador.</td>
-</tr>
-<tr class="odd">
-<td><strong>Commit &amp; Push</strong></td>
-<td>Guardar un snapshot de tus cambios (commit) y subirlos a GitHub (push).</td>
-</tr>
-</tbody>
-</table>
-<p>No necesitas ser experto en Git. Estos tres conceptos son suficientes para empezar, y Claude Code puede ayudarte con los comandos.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="estructura-de-carpetas-del-proyecto" class="level2">
-<h2 class="anchored" data-anchor-id="estructura-de-carpetas-del-proyecto">Estructura de carpetas del proyecto</h2>
-<p>Los proyectos de IPA deben seguir una estructura estandarizada. La plantilla oficial esta en <a href="https://github.com/PovertyAction/ipa-stata-template">PovertyAction/ipa-stata-template</a>. Para iniciar un proyecto nuevo, haz clic en <strong>“Use this template”</strong>.</p>
-<pre><code>mi-proyecto/
-├── do_files/           # Scripts de Stata
-│   └── 00_run.do       # Do-file maestro
-├── data/               # Datos crudos, limpios, finales
-├── outputs/            # Tablas y graficos
-│   ├── tables/
-│   └── figures/
-├── logs/               # Logs de ejecucion
-├── ado/                # Paquetes locales de Stata
-├── documentation/      # Guias del proyecto
-├── .env                # Ruta local de Stata (no se sube a Git)
-└── .here               # Marcador de raiz del proyecto</code></pre>
-<p>La plantilla soporta tres niveles: <strong>Minimo</strong> (solo Git + Stata), <strong>Task Runner</strong> (agrega <code>just</code> para automatizacion), y <strong>Completo</strong> (herramientas de Python, pre-commit hooks e integracion con Claude Code).</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Si ya tienes un repositorio de proyecto, no necesitas empezar de cero. La estructura anterior es una referencia.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span>VS Code: tu espacio de trabajo (expandir si es nuevo para ti)
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Visual Studio Code (VS Code) es un editor de codigo gratuito donde se ejecuta Claude Code. Descargalo en <a href="https://code.visualstudio.com/">code.visualstudio.com</a>.</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 30%">
-<col style="width: 39%">
-<col style="width: 30%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Panel</th>
-<th>Funcion</th>
-<th>Atajo</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Barra lateral</strong></td>
-<td>Estructura de carpetas del proyecto</td>
-<td><code>Ctrl+B</code></td>
-</tr>
-<tr class="even">
-<td><strong>Editor</strong></td>
-<td>Area principal donde se abren archivos como pestanas</td>
-<td>—</td>
-</tr>
-<tr class="odd">
-<td><strong>Terminal</strong></td>
-<td>Linea de comandos integrada. Aqui corre Claude Code</td>
-<td><code>Ctrl+`</code></td>
-</tr>
-<tr class="even">
-<td><strong>Extensiones</strong></td>
-<td>Marketplace de complementos</td>
-<td><code>Ctrl+Shift+X</code></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<p>Instala estas extensiones en la terminal de VS Code:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> kylebarron.stata-enhanced</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> anthropic.claude-code</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> eamodio.gitlens</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="instalar-claude-code" class="level2">
-<h2 class="anchored" data-anchor-id="instalar-claude-code">Instalar Claude Code</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install <span class="at">-g</span> @anthropic-ai/claude-code</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Nota
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Error de permisos en Windows? Reabre VS Code como Administrador. En macOS, usa <code>sudo</code>.</p>
-</div>
-</div>
-</section>
-<section id="autenticacion" class="level2">
-<h2 class="anchored" data-anchor-id="autenticacion">Autenticacion</h2>
-<p><strong>Opcion A: API Key (pago por uso).</strong> Estandar para proyectos IPA con facturacion compartida.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Windows (PowerShell)</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="op">[</span>System<span class="op">.</span><span class="fu">Environment</span><span class="op">]::</span>SetEnvironmentVariable<span class="op">(</span><span class="st">"ANTHROPIC_API_KEY"</span><span class="op">,</span> <span class="st">"sk-ant-tu-clave-aqui"</span><span class="op">,</span> <span class="st">"User"</span><span class="op">)</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># macOS / Linux (agregar a ~/.zshrc o ~/.bashrc)</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">ANTHROPIC_API_KEY</span><span class="op">=</span><span class="st">"sk-ant-tu-clave-aqui"</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Opcion B: Cuenta Claude (Max / Pro).</strong> Lanza Claude Code y sigue el prompt de login en el navegador. No se necesita variable de entorno.</p>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Advertencia
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><strong>Manten tus credenciales privadas.</strong> Nunca pegues tu API key en documentos compartidos, Slack, o Git. Las <a href="https://ipastorage.box.com/s/mvr67ygvz1y3v8qmgjey67lk7msmyeks">IPA AI Usage Guidelines</a> lo prohiben explicitamente.</p>
-</div>
-</div>
-</section>
-<section id="lanzar-y-verificar" class="level2">
-<h2 class="anchored" data-anchor-id="lanzar-y-verificar">Lanzar y verificar</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /ruta/a/tu/proyecto</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">claude</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Escribe <code>What project is this?</code> para verificar que Claude Code lee tu <code>CLAUDE.md</code> correctamente.</p>
-</section>
-<section id="problemas-comunes" class="level2">
-<h2 class="anchored" data-anchor-id="problemas-comunes">Problemas comunes</h2>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Advertencia</span><code>npm install</code> falla con error de permisos
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><strong>Windows:</strong> Cierra VS Code y reabrelo como Administrador (clic derecho → “Ejecutar como administrador”).</p>
-<p><strong>macOS/Linux:</strong> Usa <code>sudo npm install -g @anthropic-ai/claude-code</code>. Si el problema persiste, verifica que Node.js se instalo correctamente con <code>node --version</code>.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Advertencia</span>Claude Code no reconoce la API key
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>La variable de entorno no se carga automaticamente en terminales ya abiertas. Despues de configurar <code>ANTHROPIC_API_KEY</code>:</p>
-<ol type="1">
-<li><strong>Cierra y reabre la terminal</strong> en VS Code (o cierra y reabre VS Code completo)</li>
-<li>Verifica con <code>echo $ANTHROPIC_API_KEY</code> (macOS/Linux) o <code>echo %ANTHROPIC_API_KEY%</code> (Windows CMD)</li>
-<li>Si sigue vacio, revisa que agregaste la linea al archivo correcto (<code>~/.zshrc</code>, <code>~/.bashrc</code>, o las variables de entorno del sistema en Windows)</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Advertencia</span>Claude Code dice que no encuentra el proyecto
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Claude Code necesita ejecutarse desde la raiz de tu proyecto — la carpeta que contiene los do-files y, idealmente, un archivo <code>CLAUDE.md</code>.</p>
-<ol type="1">
-<li>Verifica que estas en la carpeta correcta: <code>pwd</code> en la terminal</li>
-<li>Si no tienes <code>CLAUDE.md</code>, Claude Code aun funciona pero sin contexto del proyecto. Consulta el <a href="./concepts.html#claudemd-el-briefing-del-proyecto">modulo de conceptos</a> para crear uno.</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Advertencia</span>La version de Node.js es muy antigua
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Claude Code requiere Node.js 18 o posterior. Verifica tu version con <code>node --version</code>. Si es anterior a 18, descarga la version LTS mas reciente en <a href="https://nodejs.org/">nodejs.org</a>.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Advertencia</span>Las extensiones de VS Code no se instalan con <code>code --install-extension</code>
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>En algunos sistemas, el comando <code>code</code> no esta en el PATH. Alternativa: abre VS Code, presiona <code>Ctrl+Shift+X</code>, busca cada extension por nombre, y haz clic en “Install”.</p>
-</div>
-</div>
-</div>
+<p>Cuanto más diversa la fuente de las reglas, más útil se vuelve el archivo.</p>
 
 
 </section>
@@ -920,7 +813,7 @@ Advertencia
       &nbsp;
     </div>   
     <div class="nav-footer-center">
-<p>Construido con <a href="https://docs.anthropic.com/en/docs/claude-code/overview">Claude Code</a> · IPA Colombia · <a href="mailto:dquintero@poverty-action.org">Feedback</a></p>
+<p>Construido con <a href="https://docs.anthropic.com/en/docs/claude-code/overview">Claude Code</a> · IPA Colombia · Feedback: <a href="mailto:dquintero@poverty-action.org">Diego Quintero</a> (analista) o <a href="mailto:jfgarcia@poverty-action.org">Juan Felipe Garcia</a> (manager)</p>
 </div>
     <div class="nav-footer-right">
       &nbsp;
@@ -931,5 +824,5 @@ Advertencia
 
 
 
-<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

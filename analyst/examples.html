@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>4. Prompting – Claude Code para IPA</title>
+<title>Que se puede lograr – Claude Code para IPA</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +20,62 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-4d9afe2b8d18ee9fa5d0d57b5ed4214d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-5117057932df29c28a0ac1b44d22c14e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-4d9afe2b8d18ee9fa5d0d57b5ed4214d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-5117057932df29c28a0ac1b44d22c14e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -71,17 +106,17 @@ ul.task-list li input[type="checkbox"] {
 <style>html{ scroll-behavior: smooth; }</style>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-sidebar floating nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Claude Code para IPA</span>
     </a>
   </div>
@@ -92,37 +127,40 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Inicio</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./quickstart.html"> 
-<span class="menu-text">Demo</span></a>
+    <a class="nav-link active" href="../analyst/index.html" aria-current="page"> 
+<span class="menu-text">Para Analistas</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./setup.html"> 
-<span class="menu-text">Instalacion</span></a>
+    <a class="nav-link" href="../manager/index.html"> 
+<span class="menu-text">Para Equipos</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./concepts.html"> 
-<span class="menu-text">Conceptos</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-compartido" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Compartido</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-compartido">    
+        <li>
+    <a class="dropdown-item" href="../shared/safety.html">
+ <span class="dropdown-text">Seguridad</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./safety.html"> 
-<span class="menu-text">Seguridad</span></a>
+        <li>
+    <a class="dropdown-item" href="../shared/prompting.html">
+ <span class="dropdown-text">Prompting</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link active" href="./prompting.html" aria-current="page"> 
-<span class="menu-text">Prompting</span></a>
+        <li>
+    <a class="dropdown-item" href="../shared/feedback-loops.html">
+ <span class="dropdown-text">Feedback loops</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./exercises.html"> 
-<span class="menu-text">Practica</span></a>
+        <li>
+    <a class="dropdown-item" href="../shared/recursos.html">
+ <span class="dropdown-text">Recursos</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./examples.html"> 
-<span class="menu-text">Ejemplos</span></a>
-  </li>  
+    </ul>
+  </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
@@ -136,20 +174,103 @@ ul.task-list li input[type="checkbox"] {
 </div>
       </div> <!-- /container-fluid -->
     </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../analyst/examples.html">Que se puede lograr</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analyst/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Para Analistas</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analyst/quickstart.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Demo: Claude Code en accion</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analyst/setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Instalación y configuración</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analyst/concepts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2. Conceptos clave</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Compartido</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../shared/safety.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Seguridad de datos</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../shared/prompting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prompting</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../shared/feedback-loops.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bucles de feedback</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analyst/exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5. Ejercicios practicos</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analyst/examples.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Que se puede lograr</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">En esta página</h2>
    
   <ul class="collapse">
-  <li><a href="#la-idea-mas-importante" id="toc-la-idea-mas-importante" class="nav-link active" data-scroll-target="#la-idea-mas-importante">La idea mas importante</a></li>
-  <li><a href="#usa-el-modo-plan" id="toc-usa-el-modo-plan" class="nav-link" data-scroll-target="#usa-el-modo-plan">Usa el modo plan</a></li>
-  <li><a href="#cinco-patrones-para-prompts-efectivos" id="toc-cinco-patrones-para-prompts-efectivos" class="nav-link" data-scroll-target="#cinco-patrones-para-prompts-efectivos">Cinco patrones para prompts efectivos</a></li>
-  <li><a href="#comandos-utiles" id="toc-comandos-utiles" class="nav-link" data-scroll-target="#comandos-utiles">Comandos utiles</a></li>
+  <li><a href="#un-pipeline-completo-de-analisis-mel" id="toc-un-pipeline-completo-de-analisis-mel" class="nav-link active" data-scroll-target="#un-pipeline-completo-de-analisis-mel">Un pipeline completo de analisis MEL</a></li>
+  <li><a href="#presentaciones-generadas-programaticamente" id="toc-presentaciones-generadas-programaticamente" class="nav-link" data-scroll-target="#presentaciones-generadas-programaticamente">Presentaciones generadas programaticamente</a></li>
+  <li><a href="#un-sistema-de-instrucciones-para-que-claude-trabaje-autonomamente" id="toc-un-sistema-de-instrucciones-para-que-claude-trabaje-autonomamente" class="nav-link" data-scroll-target="#un-sistema-de-instrucciones-para-que-claude-trabaje-autonomamente">Un sistema de instrucciones para que Claude trabaje autonomamente</a></li>
+  <li><a href="#skills-personalizados" id="toc-skills-personalizados" class="nav-link" data-scroll-target="#skills-personalizados">Skills personalizados</a></li>
+  <li><a href="#que-tienen-en-comun-estos-ejemplos" id="toc-que-tienen-en-comun-estos-ejemplos" class="nav-link" data-scroll-target="#que-tienen-en-comun-estos-ejemplos">Que tienen en comun estos ejemplos</a></li>
   </ul>
 </nav>
     </div>
@@ -158,8 +279,8 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">4. Prompting</h1>
-<p class="subtitle lead">~10 minutos</p>
+<h1 class="title">Que se puede lograr</h1>
+<p class="subtitle lead">Productos reales construidos con Claude Code</p>
 </div>
 
 
@@ -176,120 +297,77 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="la-idea-mas-importante" class="level2">
-<h2 class="anchored" data-anchor-id="la-idea-mas-importante">La idea mas importante</h2>
-<p><strong>Buenos planes producen buenos resultados. Malos prompts producen resultados pobres, descontrolados y aleatorios.</strong> La calidad de lo que Claude Code entrega es directamente proporcional a la claridad y especificidad de lo que pides.</p>
+<p>Todo lo que se muestra en esta pagina fue construido con Claude Code en un proyecto real de IPA Colombia. No son demos — son entregables que se compartieron con donantes, equipos de investigacion y socios de implementacion.</p>
+<p>Claude Code no hizo estos productos solo. En todos los casos, defini la especificacion, revise cada output, y tome las decisiones analiticas. Pero Claude Code transformo tareas que tomaban dias en tareas de horas.</p>
+<hr>
+<section id="un-pipeline-completo-de-analisis-mel" class="level2">
+<h2 class="anchored" data-anchor-id="un-pipeline-completo-de-analisis-mel">Un pipeline completo de analisis MEL</h2>
+<p>El resultado mas ambicioso: un pipeline de 12 scripts de Stata que produce automaticamente todas las tablas, graficos y analisis del reporte de Monitoreo, Evaluacion y Aprendizaje (MEL) de un programa con 600+ participantes en 8 municipios.</p>
+<p>Un solo comando ejecuta todo el pipeline:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">just</span> stata-run   <span class="co"># Corre los 12 scripts en secuencia</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>El pipeline incluye: limpieza de datos de asistencia, analisis de desercion, barreras de participacion, fidelidad de implementacion, calidad de sesiones, y analisis de dosis-respuesta. Claude Code escribio y depuro la mayoria de estos scripts iterativamente — yo definia la especificacion analitica, el generaba el codigo, yo revisaba los resultados y pedia ajustes.</p>
+<section id="algunos-graficos-producidos-por-el-pipeline" class="level3">
+<h3 class="anchored" data-anchor-id="algunos-graficos-producidos-por-el-pipeline">Algunos graficos producidos por el pipeline</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/example_attendance_barriers.png" class="img-fluid figure-img"></p>
+<figcaption>Patron de participacion sesion a sesion: asistentes regulares, re-enganchados, ausencias por primera vez, ausencias repetidas y no asistentes. N = 595 participantes asignados a tratamiento.</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/example_waterfall.png" class="img-fluid figure-img"></p>
+<figcaption>Cambio neto en participacion entre sesiones consecutivas. Las barras verdes muestran ganancia de participantes, las naranjas muestran perdida.</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/example_session_delivery.png" class="img-fluid figure-img"></p>
+<figcaption>Mapa de entrega de sesiones por Centro Zonal. Cada punto es una sesion, los colores representan diferentes grupos dentro del mismo centro.</figcaption>
+</figure>
+</div>
+<hr>
 </section>
-<section id="usa-el-modo-plan" class="level2">
-<h2 class="anchored" data-anchor-id="usa-el-modo-plan">Usa el modo plan</h2>
-<p>Para cualquier tarea que implique mas que una pregunta rapida, empieza pidiendo a Claude Code que <strong>planifique antes de actuar</strong>. Escribe <code>/plan</code> o pidele “planifica primero”.</p>
-<p>El modo plan obliga a Claude Code a delinear su enfoque y obtener tu aprobacion antes de escribir codigo:</p>
+</section>
+<section id="presentaciones-generadas-programaticamente" class="level2">
+<h2 class="anchored" data-anchor-id="presentaciones-generadas-programaticamente">Presentaciones generadas programaticamente</h2>
+<p>Las presentaciones de resultados no se hacen manualmente en PowerPoint — se generan con un script de Node.js que usa la libreria pptxgenjs. Claude Code ayudo a disenar todo el sistema:</p>
 <ul>
-<li>Detectas malentendidos <strong>antes</strong> de que edite 10 archivos en la direccion equivocada</li>
-<li>Mantienes el control del enfoque analitico</li>
-<li>El plan mismo se convierte en un registro de lo que se hizo y por que</li>
+<li>Un script de ~1,000 lineas con funciones reutilizables: <code>topbar()</code>, <code>footer()</code>, <code>sidebar()</code>, <code>callout()</code>, <code>table()</code></li>
+<li>Colores y tipografia IPA aplicados automaticamente</li>
+<li>Las tablas de Stata alimentan directamente las diapositivas</li>
 </ul>
-<p><strong>Sin planificar:</strong></p>
-<pre><code>Escribeme un do-file de analisis de desercion</code></pre>
-<p>Claude Code adivina todo. Terminas gastando mas tiempo corrigiendo del que ahorraste.</p>
-<p><strong>Con planificacion:</strong></p>
-<pre><code>Necesito un analisis de desercion. Usa plan mode. El outcome es un
-indicador binario de desercion. Regresa sobre tratamiento con EF de
-estrato y EE agrupados a nivel de UDS. Exporta con esttab a LaTeX.</code></pre>
-<p>Claude Code delinea su plan. Tu apruebas, ajustas o rediriges antes de que se escriba codigo.</p>
+<p>El flujo es: Stata genera tablas → el script de Node.js las lee → produce un <code>.pptx</code> listo para presentar. Cuando se actualizan los datos, se regenera la presentacion completa sin editar una sola diapositiva manualmente.</p>
+<hr>
 </section>
-<section id="cinco-patrones-para-prompts-efectivos" class="level2">
-<h2 class="anchored" data-anchor-id="cinco-patrones-para-prompts-efectivos">Cinco patrones para prompts efectivos</h2>
-<section id="describe-el-resultado-no-los-pasos" class="level3">
-<h3 class="anchored" data-anchor-id="describe-el-resultado-no-los-pasos">1. Describe el resultado, no los pasos</h3>
-<p>Claude Code ya sabe la sintaxis de Stata.</p>
-<pre><code># ❌ Debil
-Usa regress, luego outreg2, luego agrega un titulo, luego guarda como .tex
-
-# ✅ Fuerte
-Ejecuta una regresion ITT de FFMQ sobre tratamiento con efectos fijos
-de estrato y EE agrupados a nivel de UDS. Exporta a LaTeX con esttab.</code></pre>
+<section id="un-sistema-de-instrucciones-para-que-claude-trabaje-autonomamente" class="level2">
+<h2 class="anchored" data-anchor-id="un-sistema-de-instrucciones-para-que-claude-trabaje-autonomamente">Un sistema de instrucciones para que Claude trabaje autonomamente</h2>
+<p>Quizas lo mas util a largo plazo: Claude Code no necesita que le explique el proyecto cada vez que inicio una sesion. Tres documentos le dan contexto persistente:</p>
+<p><strong><code>CLAUDE.md</code></strong> — El briefing del proyecto. Define las dos muestras (COMPLETA para monitoreo, RCT para impacto), el mapa del pipeline, las reglas de PII, las convenciones de codigo, y los globals de rutas.</p>
+<p><strong><code>CLAUDE_STATA_GUIDE.md</code></strong> — Le ensena a Claude como ejecutar Stata en este proyecto. Incluye la instruccion de ejecutar scripts autonomamente despues de editarlos, leer el log, y reportar resultados sin esperar a que se lo pidan.</p>
+<p><strong><code>CLAUDE_DELIVERABLES_GUIDE.md</code></strong> — Documenta el pipeline de Stata a LaTeX: patrones de <code>esttab</code>/<code>outreg2</code>, colores IPA para graficos, compilacion de tablas, y analisis de sensibilidad.</p>
+<p>El resultado: cuando pido “corre el script de desercion y dime si paso”, Claude Code ejecuta el script, lee el log, identifica si hubo errores, reporta los coeficientes clave, y me dice donde guardo los outputs. Si falla, diagnostica el error y lo corrige antes de reportar.</p>
+<hr>
 </section>
-<section id="referencia-convenciones-del-proyecto" class="level3">
-<h3 class="anchored" data-anchor-id="referencia-convenciones-del-proyecto">2. Referencia convenciones del proyecto</h3>
-<p>Apunta a la documentacion existente en vez de inventar formatos.</p>
-<pre><code>Exporta usando el patron de esttab en CLAUDE_DELIVERABLES_GUIDE.md.
-Usa la misma estructura de columnas que las tablas de desercion en outputs/tables/.</code></pre>
+<section id="skills-personalizados" class="level2">
+<h2 class="anchored" data-anchor-id="skills-personalizados">Skills personalizados</h2>
+<p>Mas alla del proyecto, construi skills reutilizables que Claude Code carga automaticamente:</p>
+<ul>
+<li><strong>Skill de Stata</strong>: estandares IPA/DIME, headers de do-files, cuatro etapas del flujo de datos (importar, desidentificar, limpiar, construir), convenciones de valores faltantes extendidos</li>
+<li><strong>Skill de escritura IPA</strong>: reglas de estilo, voz activa, acronimos, formato de citas, terminologia preferida</li>
+<li><strong>Skill de presentaciones</strong>: framework para generar <code>.pptx</code> programaticamente con marca IPA</li>
+</ul>
+<p>Estos skills funcionan en cualquier proyecto — no son especificos de un solo estudio.</p>
+<hr>
 </section>
-<section id="da-contexto-sobre-los-errores" class="level3">
-<h3 class="anchored" data-anchor-id="da-contexto-sobre-los-errores">3. Da contexto sobre los errores</h3>
-<p>Un codigo de error solo no es suficiente.</p>
-<pre><code>Corri mi analisis de desercion y me salio r(111). Aqui estan las ultimas
-30 lineas del log: [pega el extracto]. El error esta en la linea que
-referencia `treatment_status`.</code></pre>
-</section>
-<section id="pide-explicaciones-junto-con-el-codigo" class="level3">
-<h3 class="anchored" data-anchor-id="pide-explicaciones-junto-con-el-codigo">4. Pide explicaciones junto con el codigo</h3>
-<p>Especialmente util para aprender.</p>
-<pre><code>Escribe el comando de merge y explica por que elegiste 1:1 vs m:1.
-Tambien explica que significan los resultados del assert.</code></pre>
-</section>
-<section id="itera-no-empieces-de-cero" class="level3">
-<h3 class="anchored" data-anchor-id="itera-no-empieces-de-cero">5. Itera, no empieces de cero</h3>
-<p>Claude Code recuerda la conversacion.</p>
-<pre><code>La tabla se ve bien. Agrega controles de linea base como segunda
-columna e incluye el test F de significancia conjunta al final.</code></pre>
-</section>
-</section>
-<section id="comandos-utiles" class="level2">
-<h2 class="anchored" data-anchor-id="comandos-utiles">Comandos utiles</h2>
-<p>Ademas de escribir prompts, Claude Code tiene comandos que puedes usar durante una sesion:</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 47%">
-<col style="width: 52%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Comando</th>
-<th>Que hace</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>/plan</code></td>
-<td>Planificar antes de actuar — Claude Code delinea su enfoque y espera tu aprobacion</td>
-</tr>
-<tr class="even">
-<td><code>/compact</code></td>
-<td>Comprimir el contexto de la conversacion cuando se vuelve larga</td>
-</tr>
-<tr class="odd">
-<td><code>/clear</code></td>
-<td>Limpiar la conversacion y empezar de cero</td>
-</tr>
-<tr class="even">
-<td><code>/cost</code></td>
-<td>Ver cuanto ha costado la sesion actual</td>
-</tr>
-<tr class="odd">
-<td><code>/doctor</code></td>
-<td>Diagnosticar problemas de configuracion o conexion</td>
-</tr>
-<tr class="even">
-<td><code>/exit</code></td>
-<td>Salir de Claude Code</td>
-</tr>
-</tbody>
-</table>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Profundiza en prompting
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>La <a href="https://claudeblattman.com/essentials/prompting">guia de Blattman sobre prompting</a> cubre este tema con mucha mas profundidad y es un buen siguiente paso despues de esta guia.</p>
-</div>
-</div>
+<section id="que-tienen-en-comun-estos-ejemplos" class="level2">
+<h2 class="anchored" data-anchor-id="que-tienen-en-comun-estos-ejemplos">Que tienen en comun estos ejemplos</h2>
+<ol type="1">
+<li><strong>La especificacion siempre fue mia.</strong> Claude Code no decide que analizar ni como presentarlo.</li>
+<li><strong>El valor esta en la velocidad de ejecucion.</strong> Escribir do-files, generar tablas, depurar errores, formatear graficos — ahi es donde mas tiempo ahorra.</li>
+<li><strong>Todo es reproducible.</strong> Un comando regenera todo. No hay edicion manual.</li>
+<li><strong>Nada salio bien a la primera.</strong> El ciclo fue siempre: pedir → revisar → ajustar → repetir.</li>
+</ol>
 
 
 </section>
@@ -707,7 +785,7 @@ columna e incluye el test F de significancia conjunta al final.</code></pre>
       &nbsp;
     </div>   
     <div class="nav-footer-center">
-<p>Construido con <a href="https://docs.anthropic.com/en/docs/claude-code/overview">Claude Code</a> · IPA Colombia · <a href="mailto:dquintero@poverty-action.org">Feedback</a></p>
+<p>Construido con <a href="https://docs.anthropic.com/en/docs/claude-code/overview">Claude Code</a> · IPA Colombia · Feedback: <a href="mailto:dquintero@poverty-action.org">Diego Quintero</a> (analista) o <a href="mailto:jfgarcia@poverty-action.org">Juan Felipe Garcia</a> (manager)</p>
 </div>
     <div class="nav-footer-right">
       &nbsp;
@@ -718,5 +796,5 @@ columna e incluye el test F de significancia conjunta al final.</code></pre>
 
 
 
-<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>
