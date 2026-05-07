@@ -42,7 +42,7 @@ Programa de educacion a cuidadores implementado por ICBF en Colombia.
 ## Reglas del proyecto
 - PII: nunca leer o mostrar archivos de datos crudos.
 - No usar cap / capture excepto para cap mkdir.
-- Globals de rutas definidos en 0_paths.do.
+- Globals de rutas definidos en 00_run.do (master do-file).
 ```
 
 Este archivo se sube a Git. Todos los miembros del equipo comparten las mismas instrucciones.
@@ -68,9 +68,12 @@ Implementado por [organizacion] en [pais/region].
 
 ## Estructura del proyecto
 - `do_files/`   — Scripts de Stata. `00_run.do` es el maestro.
-- `data/`       — Datos crudos, limpios, finales. NO leer raw/.
+- `data/raw/`   — Datos crudos. NUNCA leer ni editar.
+- `data/clean/` — Datos limpios generados por scripts.
 - `outputs/`    — Tablas (`tables/`) y graficos (`figures/`).
 - `logs/`       — Logs de ejecucion de Stata.
+- `ado/`        — Paquetes locales aislados (reproducibilidad).
+- `.here`       — Marcador de raiz del proyecto (resuelto por `setroot`).
 
 ## Estandares de codigo
 - Seguir IPA Data Cleaning Guide y estandares DIME.
@@ -88,34 +91,60 @@ Prueba tu CLAUDE.md: abre Claude Code y pregunta *"Que proyecto es este?"*. Si r
 
 ### Skills: los manuales de referencia
 
-El directorio `.claude/skills/` contiene instrucciones especializadas que Claude Code carga automaticamente segun lo que le pidas. Cada skill es un archivo Markdown con reglas para un dominio especifico.
+El directorio `.claude/skills/` contiene instrucciones especializadas que Claude Code carga automaticamente segun lo que le pidas. Cada skill es una **carpeta** con un archivo `SKILL.md` (descripcion + frontmatter) y opcionalmente `references/` con material extenso.
+
+La plantilla [`ipa-stata-template`](https://github.com/PovertyAction/ipa-stata-template) ya viene con cinco skills oficiales preinstalados:
 
 ```
 .claude/
 └── skills/
-    ├── stata.md          # Estandares IPA/DIME, headers, convenciones
-    └── writing.md        # Estilo IPA, voz activa, formato de citas
+    ├── stata/
+    │   ├── SKILL.md                       # Headers, missing values, naming
+    │   └── references/
+    │       ├── coding_standards.md
+    │       ├── data_cleaning_checklist.md
+    │       └── missing_values.md
+    ├── markdownlint/SKILL.md              # Linting de archivos Markdown
+    ├── quarto/SKILL.md                    # Reportes Quarto
+    ├── ruff/SKILL.md                      # Lint Python (cuando aplica)
+    └── uv/SKILL.md                        # Gestor Python para tooling
 ```
 
-Por ejemplo, un skill de Stata podria contener:
+El `SKILL.md` de Stata empieza con un frontmatter YAML que describe **cuando se debe activar**, y luego enumera los principios y patrones:
 
-```markdown
-# Skill: Stata IPA
+```yaml
+---
+name: stata
+description: Use when writing, reviewing, or debugging Stata code for
+  data cleaning and analysis. Apply IPA/DIME coding standards.
+---
 
-## Headers de do-file
-Cada do-file debe empezar con: proyecto, autor, fecha, proposito.
+## Core Principles
+- Reproducible · Defensive · Documented · No PII
 
-## Valores faltantes
-Usar extended missing values: .d (don't know), .r (refused),
-.n (not applicable), .s (skipped). Nunca usar solo "."
+## Do-File Header
+* ==============================================================================
+* Project: [Project Name]
+* Purpose: [Brief description]
+* Author:  [Name]
+* Created: [Date]
+* ==============================================================================
+clear all
+set more off
+version 17.0
 
-## Rutas
-Usar globals definidos en 00_run.do. Nunca hardcodear rutas.
+## Missing Values
+Usar extended missing: .d (don't know), .r (refused),
+.n (not applicable), .s (skipped). Nunca solo "."
+
+## Variable Naming
+hh_ household · ind_ individual · bl_/el_ baseline/endline
+d_ dummy · n_ count
 ```
 
-Cuando le pides a Claude Code que escriba un do-file, carga automaticamente el skill de Stata. Cuando le pides que redacte un memo, carga el de escritura. No necesitas indicarle cual skill usar.
+Cuando le pides a Claude Code que escriba un do-file, carga automaticamente el skill `stata`. Cuando le pides que edite un Quarto report, carga el de `quarto`. No necesitas indicarle cual skill usar.
 
-> **Modelo mental:** `CLAUDE.md` es el briefing para un nuevo miembro del equipo. Los skills son los manuales de referencia en su escritorio.
+> **Modelo mental:** `CLAUDE.md` es el briefing para un nuevo miembro del equipo. Los skills son los manuales de referencia en su escritorio. Si usas `ipa-stata-template`, ya vienen escritos.
 
 ### Configuracion y permisos
 
@@ -127,7 +156,9 @@ El archivo `.claude/settings.json` controla que comandos puede ejecutar Claude C
     "allow": [
       "just stata-run",
       "just stata-script *",
-      "just lint-stata"
+      "just stata-build",
+      "just lint-stata",
+      "just fmt-all"
     ],
     "deny": [
       "rm -rf *",
@@ -137,4 +168,4 @@ El archivo `.claude/settings.json` controla que comandos puede ejecutar Claude C
 }
 ```
 
-Los comandos en `allow` se ejecutan sin pedirte confirmacion. Los de `deny` estan bloqueados. Todo lo demas te pide aprobacion antes de ejecutarse.
+Los comandos en `allow` se ejecutan sin pedirte confirmacion. Los de `deny` estan bloqueados. Todo lo demas te pide aprobacion antes de ejecutarse. La plantilla `ipa-stata-template` incluye un `settings.json` base con los comandos `just` mas usados ya pre-aprobados.
