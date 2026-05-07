@@ -1,4 +1,6 @@
-# Claude Code para IPA Colombia — Guía bifurcada
+# Claude Code para IPA Colombia — Guía bifurcada (mirror técnico)
+
+> **Mirror técnico.** La versión oficial vive ahora en [juanfegarIPA/claude-code-ipa-colombia](https://github.com/juanfegarIPA/claude-code-ipa-colombia) y se publica desde **<https://juanfegaripa.github.io/claude-code-ipa-colombia/>**. Este repo se mantiene como copia funcional / espacio de experimentación bajo Diego Quintero (analyst lead). Si vas a reportar un issue o abrir un PR, prefiere el repo oficial.
 
 Sitio Quarto con dos rutas según el tipo de trabajo: una para **Research Analysts** que escriben código (Stata, do-files, MEL), y otra para **Equipos y PMs** que delegan trabajo administrativo (comunicaciones, weekly reviews, procurement, presentaciones).
 
@@ -10,9 +12,15 @@ Sitio Quarto con dos rutas según el tipo de trabajo: una para **Research Analys
 - **`/shared/`** — Compartido y obligatorio para ambas rutas: seguridad de datos (IPA AI Usage Guidelines), bucles de feedback, prompting, recursos.
 - **`/downloads/`** — Plantillas `.md` listas para descargar (CLAUDE.md, feedback.md, comunicaciones.md, etc.).
 
-## Origen
+## Origen y autoría
 
-La ruta `/manager/` está adaptada del trabajo de **Juan Felipe García** (Country Director, IPA Colombia) — la versión MkDocs original vive en [juanfegarIPA/claude-code-ipa-colombia](https://github.com/juanfegarIPA/claude-code-ipa-colombia). Esta guía consolida ambas y mantiene un único stack técnico (Quarto + Terminal Noir).
+| Ruta | Autor | Contacto |
+|---|---|---|
+| Manager (módulos, starter packs, plantillas) | **Juan Felipe García** — Country Director, IPA Colombia | [jfgarcia@poverty-action.org](mailto:jfgarcia@poverty-action.org) |
+| Analyst (Stata, do-files, ejercicios, ejemplos) | **Diego Quintero Mogollón** — Research Analyst, IPA Colombia | [dquintero@poverty-action.org](mailto:dquintero@poverty-action.org) |
+| Núcleo compartido | Co-autoría | ambos |
+
+La fuente de verdad institucional vive en [juanfegarIPA/claude-code-ipa-colombia](https://github.com/juanfegarIPA/claude-code-ipa-colombia). Este mirror se mantiene como copia funcional bajo Diego para experimentación de la ruta analyst.
 
 ## Stack técnico
 
@@ -61,4 +69,6 @@ Ambas rutas asumen familiaridad con el trabajo cotidiano en IPA y con las [IPA A
 
 ## Contacto
 
-Feedback: [dquintero@poverty-action.org](mailto:dquintero@poverty-action.org) · [GitHub Issues](https://github.com/Quintero-DiegoIPA/ipa-claude-code-intro/issues).
+Feedback de la ruta analista: [dquintero@poverty-action.org](mailto:dquintero@poverty-action.org) o [GitHub Issues de este mirror](https://github.com/Quintero-DiegoIPA/ipa-claude-code-intro/issues).
+
+Feedback de la ruta manager o cualquier issue institucional: [jfgarcia@poverty-action.org](mailto:jfgarcia@poverty-action.org) o [GitHub Issues del repo oficial](https://github.com/juanfegarIPA/claude-code-ipa-colombia/issues).
