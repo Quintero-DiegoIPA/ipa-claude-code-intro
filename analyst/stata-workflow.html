@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Instalación y configuración – Claude Code para IPA</title>
+<title>Flujo de trabajo con Stata – Claude Code para IPA</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -179,7 +179,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../analyst/setup.html">Instalación y configuración</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../analyst/stata-workflow.html">Flujo de trabajo con Stata</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -205,7 +205,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../analyst/setup.html" class="sidebar-item-text sidebar-link active">
+  <a href="../analyst/setup.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Instalación y configuración</span></a>
   </div>
 </li>
@@ -217,7 +217,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../analyst/stata-workflow.html" class="sidebar-item-text sidebar-link">
+  <a href="../analyst/stata-workflow.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Flujo de trabajo con Stata</span></a>
   </div>
 </li>
@@ -272,14 +272,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">En esta página</h2>
    
   <ul class="collapse">
-  <li><a href="#paso-1-verifica-tu-licencia-enterprise" id="toc-paso-1-verifica-tu-licencia-enterprise" class="nav-link active" data-scroll-target="#paso-1-verifica-tu-licencia-enterprise">Paso 1: Verifica tu licencia Enterprise</a></li>
-  <li><a href="#paso-2-elige-cómo-usar-claude-code" id="toc-paso-2-elige-cómo-usar-claude-code" class="nav-link" data-scroll-target="#paso-2-elige-cómo-usar-claude-code">Paso 2: Elige cómo usar Claude Code</a></li>
-  <li><a href="#paso-3-instala-los-prerrequisitos" id="toc-paso-3-instala-los-prerrequisitos" class="nav-link" data-scroll-target="#paso-3-instala-los-prerrequisitos">Paso 3: Instala los prerrequisitos</a></li>
-  <li><a href="#paso-4-instala-vs-code-y-el-set-de-extensiones-ipa" id="toc-paso-4-instala-vs-code-y-el-set-de-extensiones-ipa" class="nav-link" data-scroll-target="#paso-4-instala-vs-code-y-el-set-de-extensiones-ipa">Paso 4: Instala VS Code y el set de extensiones IPA</a></li>
-  <li><a href="#paso-5-instala-claude-code-cli" id="toc-paso-5-instala-claude-code-cli" class="nav-link" data-scroll-target="#paso-5-instala-claude-code-cli">Paso 5: Instala Claude Code CLI</a></li>
-  <li><a href="#paso-6-estructura-de-proyecto-ipa" id="toc-paso-6-estructura-de-proyecto-ipa" class="nav-link" data-scroll-target="#paso-6-estructura-de-proyecto-ipa">Paso 6: Estructura de proyecto IPA</a></li>
-  <li><a href="#paso-7-tu-primera-conversación-con-claude-code" id="toc-paso-7-tu-primera-conversación-con-claude-code" class="nav-link" data-scroll-target="#paso-7-tu-primera-conversación-con-claude-code">Paso 7: Tu primera conversación con Claude Code</a></li>
-  <li><a href="#problemas-comunes" id="toc-problemas-comunes" class="nav-link" data-scroll-target="#problemas-comunes">Problemas comunes</a></li>
+  <li><a href="#la-idea-central-claude-corre-y-reporta-no-espera" id="toc-la-idea-central-claude-corre-y-reporta-no-espera" class="nav-link active" data-scroll-target="#la-idea-central-claude-corre-y-reporta-no-espera">La idea central: Claude corre y reporta — no espera</a></li>
+  <li><a href="#las-cuatro-reglas-que-nunca-se-rompen" id="toc-las-cuatro-reglas-que-nunca-se-rompen" class="nav-link" data-scroll-target="#las-cuatro-reglas-que-nunca-se-rompen">Las cuatro reglas que nunca se rompen</a></li>
+  <li><a href="#los-comandos-just-que-pre-apruebas" id="toc-los-comandos-just-que-pre-apruebas" class="nav-link" data-scroll-target="#los-comandos-just-que-pre-apruebas">Los comandos <code>just</code> que pre-apruebas</a></li>
+  <li><a href="#log-lifecycle-dónde-encontrar-el-output" id="toc-log-lifecycle-dónde-encontrar-el-output" class="nav-link" data-scroll-target="#log-lifecycle-dónde-encontrar-el-output">Log lifecycle — dónde encontrar el output</a></li>
+  <li><a href="#cómo-claude-detecta-errores" id="toc-cómo-claude-detecta-errores" class="nav-link" data-scroll-target="#cómo-claude-detecta-errores">Cómo Claude detecta errores</a></li>
+  <li><a href="#tabla-de-error-codes-comunes" id="toc-tabla-de-error-codes-comunes" class="nav-link" data-scroll-target="#tabla-de-error-codes-comunes">Tabla de error codes comunes</a></li>
+  <li><a href="#convención-ascii-only-para-paths" id="toc-convención-ascii-only-para-paths" class="nav-link" data-scroll-target="#convención-ascii-only-para-paths">Convención ASCII-only para paths</a></li>
+  <li><a href="#cómo-se-ve-en-claude.md-del-proyecto" id="toc-cómo-se-ve-en-claude.md-del-proyecto" class="nav-link" data-scroll-target="#cómo-se-ve-en-claude.md-del-proyecto">Cómo se ve en <code>CLAUDE.md</code> del proyecto</a></li>
+  <li><a href="#cuando-algo-no-encaja" id="toc-cuando-algo-no-encaja" class="nav-link" data-scroll-target="#cuando-algo-no-encaja">Cuando algo no encaja</a></li>
   </ul>
 </nav>
     </div>
@@ -288,8 +289,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Instalación y configuración</h1>
-<p class="subtitle lead">~15 minutos</p>
+<h1 class="title">Flujo de trabajo con Stata</h1>
+<p class="subtitle lead">Cómo Claude Code ejecuta, lee logs y reporta resultados</p>
 </div>
 
 
@@ -306,331 +307,259 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="paso-1-verifica-tu-licencia-enterprise" class="level2">
-<h2 class="anchored" data-anchor-id="paso-1-verifica-tu-licencia-enterprise">Paso 1: Verifica tu licencia Enterprise</h2>
-<ol type="1">
-<li>Ve a <a href="https://claude.ai">claude.ai</a> e inicia sesión con tu correo de IPA (<code>@poverty-action.org</code>)</li>
-<li>Si ves el logo de IPA o la indicación “Enterprise”, estás cubierto</li>
-<li>Si no, contacta a <code>support@poverty-action.org</code> para solicitar tu seat</li>
-</ol>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Nota
+<span class="screen-reader-only">Nota</span>De dónde viene este patrón
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>¿Por qué Enterprise y no API key?</strong> IPA tiene contrato Enterprise con Anthropic. Eso te cubre con un seat institucional, DPA contractual y políticas de retención que protegen los datos de IPA. La API key personal o cuenta Pro funcionan técnicamente, pero quedan fuera de la cobertura institucional — úsalas solo si tu seat aún no está aprovisionado.</p>
+<p>Lo que sigue es el flujo que usamos en el repo de <strong>SpC</strong> (Sanar para Crecer 3.0). Está documentado allá en <code>documentation/CLAUDE_STATA_GUIDE.md</code> y se invoca desde <code>CLAUDE.md</code> en la raíz. Este módulo es la versión genérica adaptada a cualquier proyecto IPA que use la plantilla <code>ipa-stata-template</code>.</p>
+<p><strong>Hay seguramente muchas otras formas de integrar Claude con Stata</strong> — vía la app de escritorio, vía notebooks <code>nbstata</code>, vía wrappers personalizados, o vía workflows distintos al “run-and-report”. Esta es simplemente la que a nosotros nos funcionó en SpC y la que decidimos documentar. Si encuentras una mejor para tu proyecto, abre un issue y la sumamos como alternativa.</p>
 </div>
 </div>
-<hr>
+<section id="la-idea-central-claude-corre-y-reporta-no-espera" class="level2">
+<h2 class="anchored" data-anchor-id="la-idea-central-claude-corre-y-reporta-no-espera">La idea central: Claude corre y reporta — no espera</h2>
+<p>El flujo que mejor funciona en proyectos Stata es uno donde <strong>Claude ejecuta el do-file que acaba de editar y reporta resultados sin esperar a que se le pida</strong>. La instrucción que va en tu <code>CLAUDE.md</code> es esta:</p>
+<blockquote class="blockquote">
+<p><strong>Después de editar cualquier do-file, ejecútalo autónomamente y reporta resultados — no esperes a que te pida. Lee el log y reporta: éxito o falla, resultados clave (β, N, F-stats), y dónde quedaron los outputs. Diagnostica y corrige errores antes de reportar. Solo escala si la causa raíz requiere un juicio sobre el análisis.</strong></p>
+</blockquote>
+<p>Esto cambia la dinámica: en vez de un loop “edita → me dices → corro → te respondo → pegas el log → me dices qué pasó”, el ciclo se cierra solo. Tú reaccionas al <strong>resultado</strong>, no al proceso.</p>
 </section>
-<section id="paso-2-elige-cómo-usar-claude-code" class="level2">
-<h2 class="anchored" data-anchor-id="paso-2-elige-cómo-usar-claude-code">Paso 2: Elige cómo usar Claude Code</h2>
-<p>Claude Code se puede usar de tres formas. Todas funcionan con tu licencia Enterprise:</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 25%">
-<col style="width: 29%">
-<col style="width: 44%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Forma</th>
-<th>Qué es</th>
-<th>Para quién</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Terminal (CLI) en VS Code</strong></td>
-<td>Línea de comandos integrada en el editor. Máxima integración con Stata, <code>just</code>, skills y el ecosistema IPA.</td>
-<td><strong>Recomendado para analistas</strong></td>
-</tr>
-<tr class="even">
-<td><strong>Aplicación de escritorio</strong></td>
-<td>App para Windows/Mac. Interfaz visual, sin terminal.</td>
-<td>Tareas administrativas o exploración casual</td>
-</tr>
-<tr class="odd">
-<td><strong>Web (claude.ai/code)</strong></td>
-<td>Desde el navegador, sin instalar nada.</td>
-<td>Probar rápido sin instalar</td>
-</tr>
-</tbody>
-</table>
+<section id="las-cuatro-reglas-que-nunca-se-rompen" class="level2">
+<h2 class="anchored" data-anchor-id="las-cuatro-reglas-que-nunca-se-rompen">Las cuatro reglas que nunca se rompen</h2>
+<p>Estas reglas son las que me hicieron confiable en SpC. Cópialas a tu <code>CLAUDE.md</code>:</p>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Advertencia</span>Por qué CLI para análisis Stata
+Advertencia
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>La app de escritorio funciona, pero <strong>no integra con el ecosistema IPA</strong>:</p>
-<ul>
-<li>No corre <code>just stata-run</code> ni los pipelines de la plantilla <code>ipa-stata-template</code></li>
-<li>No carga <code>.claude/skills/stata.md</code> con los estándares DIME del proyecto</li>
-<li>No edita do-files con syntax highlighting (no tiene la extensión <code>vscode-stata</code>)</li>
-<li>No deja ver el log de Stata mientras corre</li>
-</ul>
-<p>Para análisis serio: instala el CLI dentro de VS Code. Para weekly reviews, comunicaciones o procurement: la <a href="../manager/index.html">ruta de Equipos y PMs</a> describe la app de escritorio.</p>
-</div>
-</div>
-<hr>
-</section>
-<section id="paso-3-instala-los-prerrequisitos" class="level2">
-<h2 class="anchored" data-anchor-id="paso-3-instala-los-prerrequisitos">Paso 3: Instala los prerrequisitos</h2>
-<p>Antes de instalar Claude Code CLI, necesitas <strong>Git</strong> y <strong>Node.js</strong>.</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>¿Por qué Git?
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Versionar do-files es central a los estándares IPA/DIME — cada proyecto IPA vive en un repo de GitHub. Git también permite a Claude Code entender el historial de cambios, generar commits en tu nombre y leer el contexto del repo automáticamente. La plantilla <code>ipa-stata-template</code> se clona con <code>git clone</code>.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>¿Por qué Node.js?
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Claude Code CLI se distribuye como un paquete de <a href="https://npmjs.com">npm</a> (Node.js Package Manager). Instalar Node.js te da <code>npm</code>, y con <code>npm</code> se instala Claude Code en un solo comando. Adicionalmente, varios flujos generan documentos (PPTX con <code>pptxgenjs</code>, DOCX con <code>docx</code>) que también requieren Node. La app de escritorio NO necesita Node, pero el CLI sí.</p>
-</div>
-</div>
-<section id="instalar-git" class="level3">
-<h3 class="anchored" data-anchor-id="instalar-git">Instalar Git</h3>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Windows</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Mac</a></li></ul>
-<div class="tab-content">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">winget</span> install <span class="at">--id</span> Git.Git <span class="at">-e</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>O descarga el instalador desde <a href="https://git-scm.com/downloads/win">git-scm.com/downloads/win</a> y acepta todas las opciones por defecto.</p>
-</div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install git</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>La mayoría de Macs ya lo traen. Si falta, ejecuta <code>git --version</code> en Terminal y macOS te ofrecerá instalar las Command Line Tools.</p>
-</div>
+<ol type="1">
+<li><strong>Nunca llamar Stata directamente.</strong> Siempre vía <code>just</code>. El <code>Justfile</code> resuelve paths, mueve logs y detecta errores. Si Claude llama <code>stata-se -e do ...</code> directo, los logs quedan huérfanos y los errores pasan inadvertidos.</li>
+<li><strong>Nunca saltarse el log.</strong> Después de cada corrida, leer el log y buscar <code>r(\d+);</code> antes de reportar éxito.</li>
+<li><strong>Nunca correr análisis sobre PII.</strong> Si un dataset puede contener PII, parar y pedir al usuario que anonimice primero.</li>
+<li><strong>Nunca acceder a unidades encriptadas (D:, Cryptomator) directamente vía bash o PowerShell.</strong> Solo Stata (vía <code>just stata-script</code>) sabe acceder a ellas con seguridad. Probarlas con <code>ls</code>, <code>find</code> o <code>Test-Path</code> puede colgar el vault. Si hay un file-not-found, pedir al usuario que verifique que Cryptomator está desbloqueado — no hurgar la unidad.</li>
+</ol>
 </div>
 </div>
 </section>
-<section id="instalar-node.js" class="level3">
-<h3 class="anchored" data-anchor-id="instalar-node.js">Instalar Node.js</h3>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Windows</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Mac</a></li></ul>
-<div class="tab-content">
-<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
-<p>Descarga la <strong>versión LTS</strong> desde <a href="https://nodejs.org/">nodejs.org</a> e instala con opciones por defecto.</p>
-</div>
-<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install node</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>O descarga la versión LTS desde <a href="https://nodejs.org/">nodejs.org</a>.</p>
-</div>
-</div>
-</div>
-<p>Verifica con:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">node</span> <span class="at">--version</span>    <span class="co"># debe imprimir v18.x.x o superior</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> <span class="at">--version</span>     <span class="co"># debe imprimir 9.x.x o superior</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span>Otras herramientas opcionales del ecosistema IPA
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>La plantilla <code>ipa-stata-template</code> también usa <code>just</code> (task runner) y <code>uv</code> (gestor Python) en sus tiers más completos. No son necesarios para empezar — instálalos solo cuando los necesites:</p>
-<ul>
-<li><strong>Just</strong>: <code>winget install Casey.Just</code> (Windows) o <code>brew install just</code> (Mac)</li>
-<li><strong>uv</strong>: ver <a href="https://docs.astral.sh/uv/">docs.astral.sh/uv</a></li>
-</ul>
-</div>
-</div>
-</div>
-<hr>
-</section>
-</section>
-<section id="paso-4-instala-vs-code-y-el-set-de-extensiones-ipa" class="level2">
-<h2 class="anchored" data-anchor-id="paso-4-instala-vs-code-y-el-set-de-extensiones-ipa">Paso 4: Instala VS Code y el set de extensiones IPA</h2>
-<p>Descarga VS Code desde <a href="https://code.visualstudio.com/">code.visualstudio.com</a> e instálalo con opciones por defecto.</p>
-<p>La forma más limpia de instalar las extensiones es <strong>clonando primero un repo basado en <code>ipa-stata-template</code></strong>: el archivo <code>.vscode/extensions.json</code> define el set oficial, y al abrir el repo VS Code te ofrece instalarlas todas en un clic.</p>
-<p>Si prefieres instalarlas manualmente desde la terminal de VS Code:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Críticas para analistas IPA</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> kylebutts.vscode-stata           <span class="co"># ejecutar Stata</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> anthropic.claude-code            <span class="co"># Claude Code en VS Code</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> github.vscode-pull-request-github  <span class="co"># PRs y review</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Recomendadas para flujo IPA completo</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> quarto.quarto                    <span class="co"># reportes Quarto</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> skellock.just                    <span class="co"># syntax para justfiles</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> davidanson.vscode-markdownlint</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> yzhang.markdown-all-in-one</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> redhat.vscode-yaml</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Si tu proyecto usa Python</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> ms-python.python</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> ms-toolsai.jupyter</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> charliermarsh.ruff</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Nota
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>La extensión correcta para Stata es <code>kylebutts.vscode-stata</code> (la que define <code>ipa-stata-template</code>). Versiones anteriores de la guía recomendaban <code>kylebarron.stata-enhanced</code> — el template ya no la usa.</p>
-</div>
-</div>
-<hr>
-</section>
-<section id="paso-5-instala-claude-code-cli" class="level2">
-<h2 class="anchored" data-anchor-id="paso-5-instala-claude-code-cli">Paso 5: Instala Claude Code CLI</h2>
-<p>Abre la terminal de VS Code (<code>Ctrl+`</code>) y ejecuta:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install <span class="at">-g</span> @anthropic-ai/claude-code</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Verifica:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">claude</span> <span class="at">--version</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>La primera vez que ejecutes <code>claude</code>, te pedirá autenticarte. Inicia sesión con tu correo <code>@poverty-action.org</code> (Enterprise) — no necesitas configurar API keys.</p>
-<hr>
-</section>
-<section id="paso-6-estructura-de-proyecto-ipa" class="level2">
-<h2 class="anchored" data-anchor-id="paso-6-estructura-de-proyecto-ipa">Paso 6: Estructura de proyecto IPA</h2>
-<p>Los proyectos IPA siguen una estructura estandarizada. La plantilla oficial está en <a href="https://github.com/PovertyAction/ipa-stata-template">PovertyAction/ipa-stata-template</a>. Para iniciar un proyecto nuevo, abre el repo en GitHub y haz clic en <strong>“Use this template”</strong>.</p>
-<pre><code>mi-proyecto/
-├── do_files/           # Scripts de Stata
-│   └── 00_run.do       # Do-file maestro
-├── data/
-│   ├── raw/            # Datos crudos (NUNCA editar, NUNCA commit)
-│   └── clean/          # Datos limpios (generados)
-├── outputs/
-│   ├── tables/         # Tablas generadas
-│   └── figures/        # Gráficos generados
-├── logs/               # Logs de ejecución
-├── ado/                # Paquetes locales de Stata
-├── .vscode/            # Configuración VS Code (extensiones recomendadas)
-├── .claude/            # Skills y settings de Claude Code
-│   └── skills/         # Estándares Stata, missing values, etc.
-├── CLAUDE.md           # Briefing del proyecto para Claude Code
-├── .env                # Ruta local de Stata (no se sube a Git)
-└── .here               # Marcador de raíz del proyecto</code></pre>
-<p>La plantilla soporta cuatro tiers:</p>
+<section id="los-comandos-just-que-pre-apruebas" class="level2">
+<h2 class="anchored" data-anchor-id="los-comandos-just-que-pre-apruebas">Los comandos <code>just</code> que pre-apruebas</h2>
+<p>La plantilla <code>ipa-stata-template</code> define estas recetas. Para que Claude las ejecute sin pedir confirmación cada vez, agrégalas a <code>.claude/settings.json</code> de tu proyecto:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"permissions"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"allow"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Bash(just stata-run)"</span><span class="ot">,</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Bash(just stata-script:*)"</span><span class="ot">,</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Bash(just stata-do:*)"</span><span class="ot">,</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Bash(just stata-setup)"</span><span class="ot">,</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Bash(just lint-stata)"</span><span class="ot">,</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Bash(just fmt-all)"</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="ot">]</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 30%">
-<col style="width: 40%">
-<col style="width: 30%">
+<col style="width: 50%">
+<col style="width: 50%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>Tier</th>
-<th>Tiempo</th>
-<th>Para</th>
+<th>Comando</th>
+<th>Qué hace</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>1</td>
-<td>15 min</td>
-<td>Empezar — solo Git + Stata + Just</td>
+<td><code>just stata-run</code></td>
+<td>Ejecuta el pipeline maestro (<code>do_files/00_run.do</code>). Log: <code>logs/00_run.log</code>.</td>
 </tr>
 <tr class="even">
-<td>2</td>
-<td>+5 min</td>
-<td>Comandos simples (no escribir paths)</td>
+<td><code>just stata-script &lt;ruta&gt;</code></td>
+<td>Ejecuta un script individual. Log: <code>logs/&lt;basename&gt;.log</code>. Detecta errores vía exit code y scan del log.</td>
 </tr>
 <tr class="odd">
-<td>3</td>
-<td>+10 min</td>
-<td>Pipelines largos (&gt;5 min) — solo recompila lo que cambió</td>
+<td><code>just stata-do &lt;archivo&gt;</code></td>
+<td>Ejecuta cualquier <code>.do</code> por path. Log se mueve a <code>logs/</code>.</td>
 </tr>
 <tr class="even">
-<td>4</td>
-<td>+15 min</td>
-<td>Desarrollo completo — IDE + linting + skills de Claude</td>
+<td><code>just stata-setup</code></td>
+<td>Setup de una vez por máquina: instala <code>setroot</code> + paquetes Stata.</td>
+</tr>
+<tr class="odd">
+<td><code>just lint-stata</code></td>
+<td>Linting con <code>stata_linter</code>.</td>
 </tr>
 </tbody>
 </table>
-<p>Si ya tienes un repo de proyecto, no necesitas empezar de cero. Esta estructura es la referencia.</p>
-<hr>
 </section>
-<section id="paso-7-tu-primera-conversación-con-claude-code" class="level2">
-<h2 class="anchored" data-anchor-id="paso-7-tu-primera-conversación-con-claude-code">Paso 7: Tu primera conversación con Claude Code</h2>
-<p>Desde la terminal de VS Code, navega a la raíz de tu proyecto y ejecuta:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /ruta/a/tu/proyecto</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">claude</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Claude Code lee tu <code>CLAUDE.md</code> automáticamente. Para verificar:</p>
-<pre><code>What project is this?</code></pre>
-<p>Si responde correctamente describiendo tu proyecto, todo funciona. Si tu repo aún no tiene <code>CLAUDE.md</code>, el <a href="../analyst/concepts.html#claudemd-el-briefing-del-proyecto">módulo de Conceptos</a> te muestra cómo crear uno (la plantilla <code>ipa-stata-template</code> ya viene con uno listo).</p>
-<hr>
-</section>
-<section id="problemas-comunes" class="level2">
-<h2 class="anchored" data-anchor-id="problemas-comunes">Problemas comunes</h2>
+<section id="log-lifecycle-dónde-encontrar-el-output" class="level2">
+<h2 class="anchored" data-anchor-id="log-lifecycle-dónde-encontrar-el-output">Log lifecycle — dónde encontrar el output</h2>
+<p>Entender este flujo es crítico para debugging:</p>
+<ol type="1">
+<li>Stata corre en modo batch (<code>-e</code>) y escribe <code>.log</code> en la <strong>raíz del proyecto</strong> (al lado del Justfile).</li>
+<li>La receta del <code>Justfile</code> mueve el log inmediatamente a <code>logs/</code>.</li>
+<li>Claude lee el log desde <code>logs/</code> — <strong>nunca desde la raíz</strong>.</li>
+</ol>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th>Problema</th>
-<th>Solución</th>
+<th>Comando</th>
+<th>Log resultante</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>claude: command not found</code></td>
-<td>Reabre la terminal después de instalar Node. Si persiste, ejecuta <code>npm install -g @anthropic-ai/claude-code</code> de nuevo.</td>
+<td><code>just stata-run</code></td>
+<td><code>logs/00_run.log</code></td>
 </tr>
 <tr class="even">
-<td><code>npm install</code> falla con error de permisos (Windows)</td>
-<td>Cierra VS Code y reabre como Administrador.</td>
+<td><code>just stata-script 01_cleaning</code></td>
+<td><code>logs/01_cleaning.log</code></td>
 </tr>
 <tr class="odd">
-<td><code>npm install</code> falla con permisos (macOS/Linux)</td>
-<td>Usa <code>sudo npm install -g @anthropic-ai/claude-code</code>.</td>
+<td><code>just stata-script subdir/04_tablas</code></td>
+<td><code>logs/04_tablas.log</code></td>
 </tr>
 <tr class="even">
-<td>Claude no encuentra el proyecto</td>
-<td>Verifica que estás en la raíz: <code>pwd</code>. Claude Code busca <code>CLAUDE.md</code> en el directorio actual.</td>
+<td><code>just stata-do do_files/foo.do</code></td>
+<td><code>logs/foo.log</code></td>
 </tr>
 <tr class="odd">
-<td>Versión de Node muy antigua</td>
-<td>Verifica con <code>node --version</code>. Necesitas 18+. Reinstala la versión LTS desde <a href="https://nodejs.org/">nodejs.org</a>.</td>
-</tr>
-<tr class="even">
-<td>Error de autenticación</td>
-<td>Verifica que estás usando tu correo <code>@poverty-action.org</code> con seat Enterprise activo.</td>
-</tr>
-<tr class="odd">
-<td><code>code --install-extension</code> no funciona</td>
-<td>El comando <code>code</code> no está en el PATH. Alternativa: abre VS Code, <code>Ctrl+Shift+X</code>, busca cada extensión por nombre.</td>
-</tr>
-<tr class="even">
-<td>La extensión Stata no ejecuta do-files</td>
-<td>Verifica que tu <code>.env</code> apunta a la ruta correcta del ejecutable de Stata. La plantilla <code>ipa-stata-template</code> incluye un <code>.env-example</code>.</td>
+<td><code>just stata-setup</code></td>
+<td><code>logs/setup.log</code></td>
 </tr>
 </tbody>
 </table>
-<p>Para problemas técnicos no listados, consulta la <a href="https://docs.anthropic.com/en/docs/claude-code">documentación oficial</a> o escribe a <code>support@poverty-action.org</code>.</p>
+</section>
+<section id="cómo-claude-detecta-errores" class="level2">
+<h2 class="anchored" data-anchor-id="cómo-claude-detecta-errores">Cómo Claude detecta errores</h2>
+<p>Después de cada corrida, el patrón que Claude debe seguir:</p>
+<pre><code>1. Correr:           just stata-script &lt;nombre&gt;
+2. Leer log:         logs/&lt;basename&gt;.log
+3. Buscar r(\d+);    si no aparece y termina con "end of do-file" → éxito
+4. Si hay error:     leer 3-5 líneas antes del r(###); para identificar la causa
+5. Editar el do-file para corregir
+6. Re-correr y repetir hasta que pase</code></pre>
+<p><strong>Señales de éxito:</strong></p>
+<ul>
+<li>Log termina con <code>end of do-file</code></li>
+<li>No hay líneas que matcheen <code>r(\d+);</code></li>
+</ul>
+<p><strong>Señales de falla:</strong></p>
+<ul>
+<li>Líneas como <code>r(111);</code>, <code>r(198);</code> en cualquier punto del log</li>
+<li>Log truncado (sin <code>end of do-file</code> al final)</li>
+<li>Justfile sale con código distinto de cero</li>
+</ul>
+</section>
+<section id="tabla-de-error-codes-comunes" class="level2">
+<h2 class="anchored" data-anchor-id="tabla-de-error-codes-comunes">Tabla de error codes comunes</h2>
+<p>Los más frecuentes que Claude debe reconocer al instante:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Code</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>r(1)</code></td>
+<td>Interrupción del usuario (Ctrl+C)</td>
+</tr>
+<tr class="even">
+<td><code>r(100)</code></td>
+<td>Memoria insuficiente</td>
+</tr>
+<tr class="odd">
+<td><code>r(101)</code></td>
+<td>Demasiadas variables</td>
+</tr>
+<tr class="even">
+<td><code>r(111)</code></td>
+<td>Variable no encontrada</td>
+</tr>
+<tr class="odd">
+<td><code>r(198)</code></td>
+<td>Sintaxis inválida o opción incorrecta</td>
+</tr>
+<tr class="even">
+<td><code>r(199)</code></td>
+<td>Comando no reconocido (paquete no instalado)</td>
+</tr>
+<tr class="odd">
+<td><code>r(601)</code></td>
+<td>Archivo no encontrado</td>
+</tr>
+<tr class="even">
+<td><code>r(603)</code></td>
+<td>Archivo no se pudo abrir</td>
+</tr>
+</tbody>
+</table>
+<p>Para errores no listados: buscar la documentación de Stata o leer el contexto inmediatamente antes del <code>r(###);</code>.</p>
+</section>
+<section id="convención-ascii-only-para-paths" class="level2">
+<h2 class="anchored" data-anchor-id="convención-ascii-only-para-paths">Convención ASCII-only para paths</h2>
+<p>Todos los nombres de carpetas y do-files bajo <code>do_files/</code> deben ser <strong>ASCII puros</strong> — sin espacios, sin tildes, sin eñes. Esto significa que <code>just stata-script &lt;ruta&gt;</code> siempre funciona sin wrappers ni escapes raros. En vez de <code>2_RCT Analysis/3_Análisis niños endline survey</code>, usa <code>2_RCT_Analysis/3_Analisis_ninos_endline_survey</code>.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>La ñ rompe <code>statsmodels</code> en Python y muchos parsers; los espacios rompen quoting en PowerShell. Adoptar ASCII-only desde el inicio del proyecto te ahorra bugs aleatorios todo el camino.</p>
+</div>
+</div>
+</section>
+<section id="cómo-se-ve-en-claude.md-del-proyecto" class="level2">
+<h2 class="anchored" data-anchor-id="cómo-se-ve-en-claude.md-del-proyecto">Cómo se ve en <code>CLAUDE.md</code> del proyecto</h2>
+<p>Esta es la sección que va en <code>CLAUDE.md</code> de tu proyecto para activar el flujo:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## How to Run Stata</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>Full instructions: documentation/CLAUDE_STATA_GUIDE.md</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>Quick reference:</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    just stata-run                  # Run pipeline (00_run.do)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    just stata-script 01_cleaning   # Run a single script</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    just stata-setup                # One-time setup</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">## Claude's Workflow for Stata</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>After editing any do-file, run it autonomously and report results — do</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>not wait to be asked. Read the log and report: success/failure, key</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>results (β, N, F-stats), and output file locations. Diagnose and fix</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>errors before reporting back. Only escalate if the root cause requires</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>a judgment call about the analysis.</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="fu">## Project-Specific Rules</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>PII: Raw data contains PII — never read, process, or display raw</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  data files.</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>config.do is gitignored — never commit it; copy from config.do.template.</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Do not use cap / capture except for cap mkdir.</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Path globals are defined in 00_run.do. Never redefine them.</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Extended missing values: .d (don't know), .o (other), .n (not</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>  applicable), .r (refused), .s (skipped).</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="cuando-algo-no-encaja" class="level2">
+<h2 class="anchored" data-anchor-id="cuando-algo-no-encaja">Cuando algo no encaja</h2>
+<p>Si tu proyecto tiene particularidades — un wrapper para data en Box, un Cryptomator vault, scripts que dependen de scripts previos en orden estricto — escribe una <strong>guía dedicada</strong> en <code>documentation/CLAUDE_STATA_GUIDE.md</code> y referénciala desde <code>CLAUDE.md</code>. Eso fue lo que hicimos en SpC: el <code>CLAUDE.md</code> raíz queda corto y digerible (~100 líneas), y la guía técnica detallada vive en su propio archivo. Claude lee ambos automáticamente al iniciar sesión.</p>
 <hr>
-<p><strong>Siguiente paso:</strong> <a href="../analyst/concepts.html">Conceptos clave</a> — cómo Claude Code conoce tu proyecto (CLAUDE.md, skills, settings).</p>
+<p><strong>Siguiente paso:</strong> <a href="../shared/prompting.html">Prompting</a> — cómo escribir prompts que aprovechen este flujo.</p>
 
 
 </section>

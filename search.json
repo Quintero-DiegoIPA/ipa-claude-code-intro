@@ -1057,266 +1057,6 @@
     ]
   },
   {
-    "objectID": "analyst/quickstart.html",
-    "href": "analyst/quickstart.html",
-    "title": "Demo: Claude Code en accion",
-    "section": "",
-    "text": "Antes de instalar nada, mira como se ve una sesion real de Claude Code. Estos son dos escenarios tipicos del trabajo diario de un analista.",
-    "crumbs": [
-      "Para Analistas",
-      "Demo: Claude Code en accion"
-    ]
-  },
-  {
-    "objectID": "analyst/quickstart.html#escenario-1-diagnosticar-un-merge-que-no-cuadra",
-    "href": "analyst/quickstart.html#escenario-1-diagnosticar-un-merge-que-no-cuadra",
-    "title": "Demo: Claude Code en accion",
-    "section": "Escenario 1: Diagnosticar un merge que no cuadra",
-    "text": "Escenario 1: Diagnosticar un merge que no cuadra\nTu merge de linea base con seguimiento produce observaciones inesperadas. El log muestra:\n. use \"$data/clean/baseline_clean.dta\", clear\n(Baseline survey - HtG 3.0)\n\n. merge m:1 uds_id using \"$data/clean/uds_characteristics.dta\"\n\n    Result                      Number of obs\n    -----------------------------------------\n    Not matched                           147\n        from master                        12  (_merge==1)\n        from using                        135  (_merge==2)\n    Matched                             2,841  (_merge==3)\n    -----------------------------------------\n135 UDS del archivo using no emparejaron. Algo no cuadra. Le pegas el log a Claude Code:\n&gt; Me salio este resultado de merge. Esperaba que todas las UDS del using\n&gt; emparejaran. Por que hay 135 observaciones con _merge==2?\nClaude Code responde:\nEl problema es que 135 registros en uds_characteristics.dta tienen un\nuds_id que no aparece en baseline_clean.dta. Causas comunes:\n\n1. **Formatos diferentes**: uds_id es string en un archivo y numerico\n   en otro. Verifica con `describe uds_id` en ambos datasets.\n\n2. **Espacios extra**: Si uds_id es string, puede tener espacios al\n   inicio o final. Prueba `gen test = strtrim(uds_id)` y compara.\n\n3. **UDS sin encuestas**: Son UDS registradas pero sin participantes\n   encuestados en baseline.\n\nPara diagnosticar, ejecuta esto antes del merge:\n\n    use \"$data/clean/uds_characteristics.dta\", clear\n    tempfile uds\n    save `uds'\n\n    use \"$data/clean/baseline_clean.dta\", clear\n    merge m:1 uds_id using `uds', keep(using) nogenerate\n    list uds_id in 1/10\n\nEso te mostrara cuales UDS no emparejaron.\nHaces seguimiento:\n&gt; uds_id es string en un archivo y numerico en el otro. Como lo arreglo?\nConvierte a un formato comun antes del merge. Si uds_id deberia ser\nnumerico:\n\n    destring uds_id, replace\n\nSi deberia ser string:\n\n    tostring uds_id, replace\n\nAgrega esto al do-file de limpieza, antes del merge, para que sea\nreproducible.\nSin Claude Code, diagnosticar esto requiere: abrir ambos datasets, comparar tipos con describe, probar distintas hipotesis manualmente. Con Claude Code, llegas a la causa raiz en una pregunta.",
-    "crumbs": [
-      "Para Analistas",
-      "Demo: Claude Code en accion"
-    ]
-  },
-  {
-    "objectID": "analyst/quickstart.html#escenario-2-generar-una-tabla-de-balance",
-    "href": "analyst/quickstart.html#escenario-2-generar-una-tabla-de-balance",
-    "title": "Demo: Claude Code en accion",
-    "section": "Escenario 2: Generar una tabla de balance",
-    "text": "Escenario 2: Generar una tabla de balance\nNecesitas una tabla comparando grupo de tratamiento vs control para tu reporte.\n&gt; Usa plan mode. Necesito un do-file que produzca una tabla de balance\n&gt; para el RCT de SpC. Variables: edad del cuidador, anos de educacion,\n&gt; numero de hijos, ingreso mensual del hogar. Compara tratamiento\n&gt; (treatment==1) vs control (treatment==0). Incluye media, DE, diferencia,\n&gt; y p-valor. Exporta a LaTeX con esttab.\nClaude Code primero presenta un plan:\nPlan:\n1. Cargar datos limpios\n2. Definir lista de variables de balance\n3. Loop sobre variables: calcular media/DE por grupo con summarize\n4. Test de diferencia con ttest\n5. Almacenar resultados en matrices\n6. Exportar con esttab a LaTeX\n\n¿Apruebas este enfoque?\nApruebas, y Claude Code genera un do-file completo, comentado, y ejecutable. Si algo no se ve bien, iteras: “Agrega una columna con el N por grupo” o “Usa el formato de tabla de CLAUDE_DELIVERABLES_GUIDE.md.”\nSin Claude Code, escribes la tabla linea por linea, consultando la documentacion de esttab, ajustando formato por prueba y error. Con Claude Code, describes el resultado y el te da el codigo.",
-    "crumbs": [
-      "Para Analistas",
-      "Demo: Claude Code en accion"
-    ]
-  },
-  {
-    "objectID": "analyst/quickstart.html#listo-para-empezar",
-    "href": "analyst/quickstart.html#listo-para-empezar",
-    "title": "Demo: Claude Code en accion",
-    "section": "Listo para empezar?",
-    "text": "Listo para empezar?\nEstos son ejemplos simples. Claude Code puede ayudar con pipelines completos de analisis, graficos con formato IPA, documentos Quarto, y mucho mas. Pero primero necesitas instalarlo.\nIr a la instalacion →",
-    "crumbs": [
-      "Para Analistas",
-      "Demo: Claude Code en accion"
-    ]
-  },
-  {
-    "objectID": "analyst/exercises.html",
-    "href": "analyst/exercises.html",
-    "title": "5. Ejercicios practicos",
-    "section": "",
-    "text": "10–15 minutos\nEstas limpiando datos y haces un merge entre tu encuesta de linea base y las caracteristicas de las unidades de servicio. El log muestra un resultado inesperado:\n. use \"$data/clean/baseline_clean.dta\", clear\n(Baseline survey - HtG 3.0)\n\n. merge m:1 uds_id using \"$data/clean/uds_characteristics.dta\"\n\n    Result                      Number of obs\n    -----------------------------------------\n    Not matched                           147\n        from master                        12  (_merge==1)\n        from using                        135  (_merge==2)\n    Matched                             2,841  (_merge==3)\n    -----------------------------------------\n\n. tab _merge\n\n                 _merge |      Freq.     Percent        Cum.\n------------------------+-----------------------------------\n        Master only (1) |         12        0.40        0.40\n         Using only (2) |        135        4.52        4.93\n            Matched (3) |      2,841       95.07      100.00\n------------------------+-----------------------------------\n                  Total |      2,988      100.00\nEsperabas que todas las UDS del archivo using emparejaran. 135 no lo hicieron. Algo anda mal.\n\n\n\nAbre Claude Code en cualquier carpeta de proyecto (claude en la terminal)\nPega el log y pregunta: *“Hice este merge y tengo 135 observaciones con _merge==2 que no esperaba. Que puede estar causando esto y como lo diagnostico?“*\nLee el diagnostico. Propone multiples hipotesis? (formato de variable, espacios, UDS sin encuestas?)\nHaz seguimiento: “uds_id es string en un archivo y numerico en el otro. Como lo arreglo de forma reproducible?”\nEvalua si la solucion es correcta y si es reproducible (va en el do-file, no es manual)\n\n\n\n\n\nPropone multiples hipotesis en vez de asumir una sola causa?\nSugiere comandos de diagnostico concretos (e.g., describe, assert, list)?\nLa solucion propuesta es reproducible (codigo en el do-file, no edicion manual)?\nMenciona la importancia de verificar despues del fix (e.g., assert _merge==3)?",
-    "crumbs": [
-      "Para Analistas",
-      "5. Ejercicios practicos"
-    ]
-  },
-  {
-    "objectID": "analyst/exercises.html#ejercicio-1-diagnosticar-un-merge-problematico",
-    "href": "analyst/exercises.html#ejercicio-1-diagnosticar-un-merge-problematico",
-    "title": "5. Ejercicios practicos",
-    "section": "",
-    "text": "10–15 minutos\nEstas limpiando datos y haces un merge entre tu encuesta de linea base y las caracteristicas de las unidades de servicio. El log muestra un resultado inesperado:\n. use \"$data/clean/baseline_clean.dta\", clear\n(Baseline survey - HtG 3.0)\n\n. merge m:1 uds_id using \"$data/clean/uds_characteristics.dta\"\n\n    Result                      Number of obs\n    -----------------------------------------\n    Not matched                           147\n        from master                        12  (_merge==1)\n        from using                        135  (_merge==2)\n    Matched                             2,841  (_merge==3)\n    -----------------------------------------\n\n. tab _merge\n\n                 _merge |      Freq.     Percent        Cum.\n------------------------+-----------------------------------\n        Master only (1) |         12        0.40        0.40\n         Using only (2) |        135        4.52        4.93\n            Matched (3) |      2,841       95.07      100.00\n------------------------+-----------------------------------\n                  Total |      2,988      100.00\nEsperabas que todas las UDS del archivo using emparejaran. 135 no lo hicieron. Algo anda mal.\n\n\n\nAbre Claude Code en cualquier carpeta de proyecto (claude en la terminal)\nPega el log y pregunta: *“Hice este merge y tengo 135 observaciones con _merge==2 que no esperaba. Que puede estar causando esto y como lo diagnostico?“*\nLee el diagnostico. Propone multiples hipotesis? (formato de variable, espacios, UDS sin encuestas?)\nHaz seguimiento: “uds_id es string en un archivo y numerico en el otro. Como lo arreglo de forma reproducible?”\nEvalua si la solucion es correcta y si es reproducible (va en el do-file, no es manual)\n\n\n\n\n\nPropone multiples hipotesis en vez de asumir una sola causa?\nSugiere comandos de diagnostico concretos (e.g., describe, assert, list)?\nLa solucion propuesta es reproducible (codigo en el do-file, no edicion manual)?\nMenciona la importancia de verificar despues del fix (e.g., assert _merge==3)?",
-    "crumbs": [
-      "Para Analistas",
-      "5. Ejercicios practicos"
-    ]
-  },
-  {
-    "objectID": "analyst/exercises.html#ejercicio-2-escribir-un-do-file-de-estadisticas-descriptivas",
-    "href": "analyst/exercises.html#ejercicio-2-escribir-un-do-file-de-estadisticas-descriptivas",
-    "title": "5. Ejercicios practicos",
-    "section": "Ejercicio 2: Escribir un do-file de estadisticas descriptivas",
-    "text": "Ejercicio 2: Escribir un do-file de estadisticas descriptivas\n15–20 minutos\nNecesitas una tabla de estadisticas descriptivas comparando autos domesticos y extranjeros.\n\nPaso 1: Escribe el prompt\nUsa esta especificacion con plan mode:\n\n“Usa plan mode. Necesito un do-file que produzca una tabla de estadisticas descriptivas de sysuse auto, comparando autos domesticos vs extranjeros. Variables: price, mpg, weight, length, headroom. Muestra media, DE, N, y un p-valor de t-test para cada una. Guarda como exercise_sumstats.do.”\n\n\n\nPaso 2: Revisa el output\n\nCarga sysuse auto, clear?\nProduce estadisticas por foreign (0/1)?\nIncluye un t-test de diferencia?\nEl codigo es legible con comentarios?\nLo podrias ejecutar en Stata ahora mismo?\n\n\n\nPaso 3: Itera\nPide dos modificaciones:\n\n“Agrega una fila para rep78 (registro de reparaciones). Maneja los valores faltantes.”\n“Agrega etiquetas de variable a la tabla para que muestre ‘Precio (USD)’ en vez de ‘price’.”\n\n\n\nPaso 4: Evalua\nModifico el do-file sin romper la estructura existente? Manejo correctamente los valores faltantes en rep78?\n\n\nCriterios de evaluacion\n\nCarga sysuse auto, clear al inicio?\nUsa un loop o estructura repetible (no copia-pega por variable)?\nManeja los valores faltantes de rep78 explicitamente (no los ignora)?\nAplica etiquetas de variable legibles?\nEl codigo esta comentado y es ejecutable sin modificaciones?\nModifico sin romper la estructura que ya habia generado?",
-    "crumbs": [
-      "Para Analistas",
-      "5. Ejercicios practicos"
-    ]
-  },
-  {
-    "objectID": "analyst/exercises.html#ejercicio-3-configura-tu-proyecto-con-claude.md",
-    "href": "analyst/exercises.html#ejercicio-3-configura-tu-proyecto-con-claude.md",
-    "title": "5. Ejercicios practicos",
-    "section": "Ejercicio 3: Configura tu proyecto con CLAUDE.md",
-    "text": "Ejercicio 3: Configura tu proyecto con CLAUDE.md\n10–15 minutos\nLos ejercicios anteriores usaron datos de practica. Este ejercicio usa tu proyecto real — es donde Claude Code empieza a ser verdaderamente util.\n\nPaso 1: Crea tu CLAUDE.md\nAbre la plantilla de CLAUDE.md del modulo de conceptos. Copiala a la raiz de tu repositorio de proyecto y adapta cada seccion:\n\nCambia la descripcion del proyecto\nAgrega las reglas especificas de tu proyecto (convenciones de variables, rutas, restricciones de datos)\nLista los comandos que usas frecuentemente\n\n\n\nPaso 2: Prueba tu CLAUDE.md\nAbre Claude Code desde la raiz de tu proyecto y pregunta:\n\n“Que proyecto es este?”\n\nClaude Code deberia responder con la informacion de tu CLAUDE.md. Si no lo hace, verifica que el archivo esta en la raiz del proyecto (no dentro de una subcarpeta).\n\n\nPaso 3: Prueba una regla\nAgrega una regla especifica a tu CLAUDE.md, por ejemplo:\n## Reglas del proyecto\n- Todos los do-files deben usar header estandar IPA.\nLuego pide a Claude Code: “Crea un do-file vacio para limpieza de datos.” Verifica que el do-file generado incluye el header que especificaste.\n\n\nCriterios de evaluacion\n\nClaude Code identifica correctamente tu proyecto cuando le preguntas?\nEl do-file generado sigue la regla que agregaste?\nSi no la sigue, tu regla esta escrita de forma clara y especifica?\n\n\n\n\n\n\n\nNota\n\n\n\nUn buen CLAUDE.md es especifico. “Seguir estandares IPA” es vago. “Usar extended missing values: .d, .r, .n, .s. Nunca usar solo punto (.)” es accionable.",
-    "crumbs": [
-      "Para Analistas",
-      "5. Ejercicios practicos"
-    ]
-  },
-  {
-    "objectID": "analyst/exercises.html#referencia-rapida",
-    "href": "analyst/exercises.html#referencia-rapida",
-    "title": "5. Ejercicios practicos",
-    "section": "Referencia rapida",
-    "text": "Referencia rapida\n\nComandos comunes\n\n\n\nQue quieres\nQue escribir\n\n\n\n\nIniciar Claude Code\nclaude en la terminal\n\n\nPlanificar antes de actuar\n/plan o “usa plan mode”\n\n\nEditar un archivo\n“Edita [ruta] para [cambio]”\n\n\nCrear un archivo\n“Crea un do-file que [especificacion]”\n\n\nDiagnosticar un error\nPega el log y pregunta “Que esta mal?”\n\n\nSalir\n/exit o Ctrl+C\n\n\n\n\n\nSeguro vs. no seguro\n\n\n\n\n\n\n\n✅ Seguro\n❌ Nunca\n\n\n\n\n“Escribe un do-file que…”\n“Lee los datos crudos de la encuesta…”\n\n\n“Diagnostica este log…”\n“Muestrame observaciones donde nombre =…”\n\n\n“Explica este comando de Stata…”\n“Lista todos los nombres de encuestados…”\n\n\n“Genera una tabla en LaTeX para…”\n“Abre el archivo en la unidad D:…”\n\n\n\n\n\nSiguientes pasos\n\nEmpieza aqui. Pide a Claude Code que explique una seccion de un do-file existente.\nLuego intenta. Pega un error de Stata de un log y pide un diagnostico.\nAvanza. Pide que revise un do-file contra estandares de codigo.\nProfundiza. Trabaja con la guia de Blattman para flujos avanzados.\n\n\n\nRecursos\n\nIPA AI Usage Guidelines\nGuia de Blattman sobre IA\nDocumentacion de Claude Code\nPlantilla Stata de IPA\nMesa de ayuda MIST para aprobaciones",
-    "crumbs": [
-      "Para Analistas",
-      "5. Ejercicios practicos"
-    ]
-  },
-  {
-    "objectID": "analyst/concepts.html",
-    "href": "analyst/concepts.html",
-    "title": "2. Conceptos clave",
-    "section": "",
-    "text": "Claude Code es un asistente de codigo con IA construido por Anthropic. Se ejecuta dentro de la terminal de VS Code. A diferencia de chatbots en el navegador, lee los archivos de tu proyecto, entiende la estructura, y puede escribir o editar codigo directamente en tu maquina.\nTres capacidades lo distinguen:\n\nContexto del proyecto. Lee tus archivos automaticamente — do-files, configs, documentacion. No necesitas copiar y pegar en una ventana de chat.\nEdicion directa. Crea, modifica y elimina archivos en tu proyecto. Pide tu aprobacion antes de hacer cambios.\nInstrucciones persistentes. Sigue reglas escritas en un archivo CLAUDE.md en la raiz de tu proyecto — estandares de codigo, convenciones y reglas de seguridad.",
-    "crumbs": [
-      "Para Analistas",
-      "2. Conceptos clave"
-    ]
-  },
-  {
-    "objectID": "analyst/concepts.html#que-es-claude-code",
-    "href": "analyst/concepts.html#que-es-claude-code",
-    "title": "2. Conceptos clave",
-    "section": "",
-    "text": "Claude Code es un asistente de codigo con IA construido por Anthropic. Se ejecuta dentro de la terminal de VS Code. A diferencia de chatbots en el navegador, lee los archivos de tu proyecto, entiende la estructura, y puede escribir o editar codigo directamente en tu maquina.\nTres capacidades lo distinguen:\n\nContexto del proyecto. Lee tus archivos automaticamente — do-files, configs, documentacion. No necesitas copiar y pegar en una ventana de chat.\nEdicion directa. Crea, modifica y elimina archivos en tu proyecto. Pide tu aprobacion antes de hacer cambios.\nInstrucciones persistentes. Sigue reglas escritas en un archivo CLAUDE.md en la raiz de tu proyecto — estandares de codigo, convenciones y reglas de seguridad.",
-    "crumbs": [
-      "Para Analistas",
-      "2. Conceptos clave"
-    ]
-  },
-  {
-    "objectID": "analyst/concepts.html#que-puede-y-que-no-puede-hacer",
-    "href": "analyst/concepts.html#que-puede-y-que-no-puede-hacer",
-    "title": "2. Conceptos clave",
-    "section": "Que puede y que no puede hacer",
-    "text": "Que puede y que no puede hacer\n\n\n\n\n\n\n\n✅ Puede hacer\n❌ No puede hacer\n\n\n\n\nEscribir do-files siguiendo estandares IPA/DIME\nAcceder o leer datos que contengan PII\n\n\nDiagnosticar errores leyendo logs de Stata\nReemplazar tu juicio sobre diseno de investigacion\n\n\nGenerar tablas en LaTeX con esttab o outreg2\nEjecutar Stata por si solo (usa comandos just)\n\n\nExplicar codigo existente en lenguaje sencillo\nAcceder a Box, email u otros sistemas externos\n\n\nRevisar do-files contra estandares de codigo\nGarantizar metodologia estadistica correcta\n\n\nAyudar con comandos de Git\nRecordar entre sesiones separadas",
-    "crumbs": [
-      "Para Analistas",
-      "2. Conceptos clave"
-    ]
-  },
-  {
-    "objectID": "analyst/concepts.html#como-claude-code-conoce-tu-proyecto",
-    "href": "analyst/concepts.html#como-claude-code-conoce-tu-proyecto",
-    "title": "2. Conceptos clave",
-    "section": "Como Claude Code conoce tu proyecto",
-    "text": "Como Claude Code conoce tu proyecto\nClaude Code no empieza de cero cada vez. Tres mecanismos le dan conocimiento persistente:\n\nCLAUDE.md: el briefing del proyecto\nEs como el documento que escribirias para un nuevo miembro del equipo en su primer dia. Le dice a Claude Code que es el proyecto, que reglas seguir, y donde encontrar las cosas.\n# CLAUDE.md — Proyecto SpC\n\n## Que es este proyecto\nSpC 3.0 = Sanar para Crecer 3.0 (HtG)\nPrograma de educacion a cuidadores implementado por ICBF en Colombia.\n\n## Reglas del proyecto\n- PII: nunca leer o mostrar archivos de datos crudos.\n- No usar cap / capture excepto para cap mkdir.\n- Globals de rutas definidos en 00_run.do (master do-file).\nEste archivo se sube a Git. Todos los miembros del equipo comparten las mismas instrucciones.\n\n\n\n\n\n\nTipPlantilla CLAUDE.md para proyectos IPA (clic para expandir)\n\n\n\n\n\nCopia esta plantilla a la raiz de tu proyecto y adapta cada seccion. Para un ejemplo completo, consulta el CLAUDE.md de ipa-stata-template.\n# CLAUDE.md\n\n## Descripcion del proyecto\n[Nombre del proyecto] — [descripcion de una linea].\nImplementado por [organizacion] en [pais/region].\n\n## Reglas criticas\n- NUNCA leer, abrir, ni mostrar archivos en `data/raw/` ni datos con PII.\n- No usar `capture` excepto para `cap mkdir`.\n- Globals de rutas estan definidos en `do_files/00_run.do`.\n- Usar convenciones de valores faltantes IPA: .d (don't know), .r (refused),\n  .n (not applicable), .s (skipped).\n\n## Estructura del proyecto\n- `do_files/`   — Scripts de Stata. `00_run.do` es el maestro.\n- `data/raw/`   — Datos crudos. NUNCA leer ni editar.\n- `data/clean/` — Datos limpios generados por scripts.\n- `outputs/`    — Tablas (`tables/`) y graficos (`figures/`).\n- `logs/`       — Logs de ejecucion de Stata.\n- `ado/`        — Paquetes locales aislados (reproducibilidad).\n- `.here`       — Marcador de raiz del proyecto (resuelto por `setroot`).\n\n## Estandares de codigo\n- Seguir IPA Data Cleaning Guide y estandares DIME.\n- Variables con prefijos descriptivos (e.g., `bl_` baseline, `el_` endline).\n- Headers estandar IPA en cada do-file (proyecto, autor, fecha, proposito).\n- Usar `assert` para validacion defensiva.\n\n## Comandos comunes\njust stata-run                     # Ejecutar pipeline completo\njust stata-script 01_data_cleaning # Ejecutar script individual\nPrueba tu CLAUDE.md: abre Claude Code y pregunta “Que proyecto es este?”. Si responde correctamente, tu archivo funciona.\n\n\n\n\n\nSkills: los manuales de referencia\nEl directorio .claude/skills/ contiene instrucciones especializadas que Claude Code carga automaticamente segun lo que le pidas. Cada skill es una carpeta con un archivo SKILL.md (descripcion + frontmatter) y opcionalmente references/ con material extenso.\nLa plantilla ipa-stata-template ya viene con cinco skills oficiales preinstalados:\n.claude/\n└── skills/\n    ├── stata/\n    │   ├── SKILL.md                       # Headers, missing values, naming\n    │   └── references/\n    │       ├── coding_standards.md\n    │       ├── data_cleaning_checklist.md\n    │       └── missing_values.md\n    ├── markdownlint/SKILL.md              # Linting de archivos Markdown\n    ├── quarto/SKILL.md                    # Reportes Quarto\n    ├── ruff/SKILL.md                      # Lint Python (cuando aplica)\n    └── uv/SKILL.md                        # Gestor Python para tooling\nEl SKILL.md de Stata empieza con un frontmatter YAML que describe cuando se debe activar, y luego enumera los principios y patrones:\n---\nname: stata\ndescription: Use when writing, reviewing, or debugging Stata code for\n  data cleaning and analysis. Apply IPA/DIME coding standards.\n---\n\n## Core Principles\n- Reproducible · Defensive · Documented · No PII\n\n## Do-File Header\n* ==============================================================================\n* Project: [Project Name]\n* Purpose: [Brief description]\n* Author:  [Name]\n* Created: [Date]\n* ==============================================================================\nclear all\nset more off\nversion 17.0\n\n## Missing Values\nUsar extended missing: .d (don't know), .r (refused),\n.n (not applicable), .s (skipped). Nunca solo \".\"\n\n## Variable Naming\nhh_ household · ind_ individual · bl_/el_ baseline/endline\nd_ dummy · n_ count\nCuando le pides a Claude Code que escriba un do-file, carga automaticamente el skill stata. Cuando le pides que edite un Quarto report, carga el de quarto. No necesitas indicarle cual skill usar.\n\nModelo mental: CLAUDE.md es el briefing para un nuevo miembro del equipo. Los skills son los manuales de referencia en su escritorio. Si usas ipa-stata-template, ya vienen escritos.\n\n\n\nConfiguracion y permisos\nEl archivo .claude/settings.json controla que comandos puede ejecutar Claude Code sin pedir permiso. Normalmente lo configura el lider del proyecto.\n{\n  \"permissions\": {\n    \"allow\": [\n      \"just stata-run\",\n      \"just stata-script *\",\n      \"just stata-build\",\n      \"just lint-stata\",\n      \"just fmt-all\"\n    ],\n    \"deny\": [\n      \"rm -rf *\",\n      \"git push --force\"\n    ]\n  }\n}\nLos comandos en allow se ejecutan sin pedirte confirmacion. Los de deny estan bloqueados. Todo lo demas te pide aprobacion antes de ejecutarse. La plantilla ipa-stata-template incluye un settings.json base con los comandos just mas usados ya pre-aprobados.",
-    "crumbs": [
-      "Para Analistas",
-      "2. Conceptos clave"
-    ]
-  },
-  {
-    "objectID": "index.html#de-que-se-trata-esta-guia",
-    "href": "index.html#de-que-se-trata-esta-guia",
-    "title": "Claude Code para IPA Colombia",
-    "section": "De que se trata esta guia",
-    "text": "De que se trata esta guia\nClaude Code es un asistente de IA de Anthropic. A diferencia de un chatbot en el navegador, lee los archivos de tu proyecto, entiende la estructura, y puede escribir o editar archivos directamente en tu maquina. Esta guia te ensena a usarlo de forma segura en proyectos de IPA Colombia.\n\n\n\n\n\n\nImportanteLectura obligatoria previa\n\n\n\nEsta guia complementa las IPA AI Usage Guidelines. Revisalas primero para conocer el marco completo de clasificacion de datos y aprobaciones."
-  },
-  {
-    "objectID": "index.html#elige-tu-ruta",
-    "href": "index.html#elige-tu-ruta",
-    "title": "Claude Code para IPA Colombia",
-    "section": "Elige tu ruta",
-    "text": "Elige tu ruta\n\n\nPara Analistas\nPara Research Analysts que escriben codigo: do-files de Stata, debugging, pipelines MEL, tablas LaTeX.\n\nInstalacion en VS Code + terminal\nCLAUDE.md como briefing del proyecto\nTres ejercicios practicos con datos sinteticos\nProductos reales construidos con Claude Code\n\nEmpezar →\n\n\nPara Equipos y PMs\nPara staff que delega trabajo administrativo: comunicaciones, weekly reviews, procurement, gestion de personas, presentaciones.\n\nApp de escritorio (sin terminal)\nCLAUDE.md como memoria operativa personal\n7 modulos por capacidad + 4 starter packs por rol\nPlantillas descargables listas para usar\n\nEmpezar →"
-  },
-  {
-    "objectID": "index.html#lo-que-comparten-ambas-rutas",
-    "href": "index.html#lo-que-comparten-ambas-rutas",
-    "title": "Claude Code para IPA Colombia",
-    "section": "Lo que comparten ambas rutas",
-    "text": "Lo que comparten ambas rutas\nTres modulos son obligatorios independientemente de la ruta que elijas:\n\nSeguridad de datos — clasificacion IPA, PII, escenarios seguros y no seguros\nBucles de feedback — la practica que hace que Claude se vuelva mas util con el tiempo\nPrompting — modo plan y patrones para prompts efectivos"
-  },
-  {
-    "objectID": "analyst/examples.html",
-    "href": "analyst/examples.html",
-    "title": "Que se puede lograr",
-    "section": "",
-    "text": "Todo lo que se muestra en esta pagina fue construido con Claude Code en un proyecto real de IPA Colombia. No son demos — son entregables que se compartieron con donantes, equipos de investigacion y socios de implementacion.\nClaude Code no hizo estos productos solo. En todos los casos, defini la especificacion, revise cada output, y tome las decisiones analiticas. Pero Claude Code transformo tareas que tomaban dias en tareas de horas.",
-    "crumbs": [
-      "Para Analistas",
-      "Que se puede lograr"
-    ]
-  },
-  {
-    "objectID": "analyst/examples.html#un-pipeline-completo-de-analisis-mel",
-    "href": "analyst/examples.html#un-pipeline-completo-de-analisis-mel",
-    "title": "Que se puede lograr",
-    "section": "Un pipeline completo de analisis MEL",
-    "text": "Un pipeline completo de analisis MEL\nEl resultado mas ambicioso: un pipeline de 12 scripts de Stata que produce automaticamente todas las tablas, graficos y analisis del reporte de Monitoreo, Evaluacion y Aprendizaje (MEL) de un programa con 600+ participantes en 8 municipios.\nUn solo comando ejecuta todo el pipeline:\njust stata-run   # Corre los 12 scripts en secuencia\nEl pipeline incluye: limpieza de datos de asistencia, analisis de desercion, barreras de participacion, fidelidad de implementacion, calidad de sesiones, y analisis de dosis-respuesta. Claude Code escribio y depuro la mayoria de estos scripts iterativamente — yo definia la especificacion analitica, el generaba el codigo, yo revisaba los resultados y pedia ajustes.\n\nAlgunos graficos producidos por el pipeline\n\n\n\nPatron de participacion sesion a sesion: asistentes regulares, re-enganchados, ausencias por primera vez, ausencias repetidas y no asistentes. N = 595 participantes asignados a tratamiento.\n\n\n\n\n\nCambio neto en participacion entre sesiones consecutivas. Las barras verdes muestran ganancia de participantes, las naranjas muestran perdida.\n\n\n\n\n\nMapa de entrega de sesiones por Centro Zonal. Cada punto es una sesion, los colores representan diferentes grupos dentro del mismo centro.",
-    "crumbs": [
-      "Para Analistas",
-      "Que se puede lograr"
-    ]
-  },
-  {
-    "objectID": "analyst/examples.html#presentaciones-generadas-programaticamente",
-    "href": "analyst/examples.html#presentaciones-generadas-programaticamente",
-    "title": "Que se puede lograr",
-    "section": "Presentaciones generadas programaticamente",
-    "text": "Presentaciones generadas programaticamente\nLas presentaciones de resultados no se hacen manualmente en PowerPoint — se generan con un script de Node.js que usa la libreria pptxgenjs. Claude Code ayudo a disenar todo el sistema:\n\nUn script de ~1,000 lineas con funciones reutilizables: topbar(), footer(), sidebar(), callout(), table()\nColores y tipografia IPA aplicados automaticamente\nLas tablas de Stata alimentan directamente las diapositivas\n\nEl flujo es: Stata genera tablas → el script de Node.js las lee → produce un .pptx listo para presentar. Cuando se actualizan los datos, se regenera la presentacion completa sin editar una sola diapositiva manualmente.",
-    "crumbs": [
-      "Para Analistas",
-      "Que se puede lograr"
-    ]
-  },
-  {
-    "objectID": "analyst/examples.html#un-sistema-de-instrucciones-para-que-claude-trabaje-autonomamente",
-    "href": "analyst/examples.html#un-sistema-de-instrucciones-para-que-claude-trabaje-autonomamente",
-    "title": "Que se puede lograr",
-    "section": "Un sistema de instrucciones para que Claude trabaje autonomamente",
-    "text": "Un sistema de instrucciones para que Claude trabaje autonomamente\nQuizas lo mas util a largo plazo: Claude Code no necesita que le explique el proyecto cada vez que inicio una sesion. Tres documentos le dan contexto persistente:\nCLAUDE.md — El briefing del proyecto. Define las dos muestras (COMPLETA para monitoreo, RCT para impacto), el mapa del pipeline, las reglas de PII, las convenciones de codigo, y los globals de rutas.\nCLAUDE_STATA_GUIDE.md — Le ensena a Claude como ejecutar Stata en este proyecto. Incluye la instruccion de ejecutar scripts autonomamente despues de editarlos, leer el log, y reportar resultados sin esperar a que se lo pidan.\nCLAUDE_DELIVERABLES_GUIDE.md — Documenta el pipeline de Stata a LaTeX: patrones de esttab/outreg2, colores IPA para graficos, compilacion de tablas, y analisis de sensibilidad.\nEl resultado: cuando pido “corre el script de desercion y dime si paso”, Claude Code ejecuta el script, lee el log, identifica si hubo errores, reporta los coeficientes clave, y me dice donde guardo los outputs. Si falla, diagnostica el error y lo corrige antes de reportar.",
-    "crumbs": [
-      "Para Analistas",
-      "Que se puede lograr"
-    ]
-  },
-  {
-    "objectID": "analyst/examples.html#skills-personalizados",
-    "href": "analyst/examples.html#skills-personalizados",
-    "title": "Que se puede lograr",
-    "section": "Skills personalizados",
-    "text": "Skills personalizados\nMas alla del proyecto, construi skills reutilizables que Claude Code carga automaticamente:\n\nSkill de Stata: estandares IPA/DIME, headers de do-files, cuatro etapas del flujo de datos (importar, desidentificar, limpiar, construir), convenciones de valores faltantes extendidos\nSkill de escritura IPA: reglas de estilo, voz activa, acronimos, formato de citas, terminologia preferida\nSkill de presentaciones: framework para generar .pptx programaticamente con marca IPA\n\nEstos skills funcionan en cualquier proyecto — no son especificos de un solo estudio.",
-    "crumbs": [
-      "Para Analistas",
-      "Que se puede lograr"
-    ]
-  },
-  {
-    "objectID": "analyst/examples.html#que-tienen-en-comun-estos-ejemplos",
-    "href": "analyst/examples.html#que-tienen-en-comun-estos-ejemplos",
-    "title": "Que se puede lograr",
-    "section": "Que tienen en comun estos ejemplos",
-    "text": "Que tienen en comun estos ejemplos\n\nLa especificacion siempre fue mia. Claude Code no decide que analizar ni como presentarlo.\nEl valor esta en la velocidad de ejecucion. Escribir do-files, generar tablas, depurar errores, formatear graficos — ahi es donde mas tiempo ahorra.\nTodo es reproducible. Un comando regenera todo. No hay edicion manual.\nNada salio bien a la primera. El ciclo fue siempre: pedir → revisar → ajustar → repetir.",
-    "crumbs": [
-      "Para Analistas",
-      "Que se puede lograr"
-    ]
-  },
-  {
-    "objectID": "analyst/index.html",
-    "href": "analyst/index.html",
-    "title": "Para Analistas",
-    "section": "",
-    "text": "Bienvenido a la ruta para Research Analysts. Esta guia asume que escribes codigo Stata regularmente y que ya manejas IPA/DIME standards.",
-    "crumbs": [
-      "Para Analistas"
-    ]
-  },
-  {
-    "objectID": "analyst/index.html#que-vas-a-aprender",
-    "href": "analyst/index.html#que-vas-a-aprender",
-    "title": "Para Analistas",
-    "section": "Que vas a aprender",
-    "text": "Que vas a aprender\nEsta ruta toma entre 50 y 75 minutos, incluyendo tres ejercicios practicos.\n\n\n\n\nModulo\nTiempo\nQue cubre\n\n\n\n\n\nDemo\n~2 min\nClaude Code en accion — dos escenarios reales sin instalar nada\n\n\n1\nInstalacion\n~15 min\nGitHub, estructura de proyecto, VS Code, instalar Claude Code\n\n\n2\nConceptos\n~10 min\nQue es Claude Code, que puede hacer, CLAUDE.md y skills\n\n\n3\nSeguridad\n~10 min\nClasificacion de datos, reglas de PII, escenarios seguros/no seguros\n\n\n4\nPrompting\n~10 min\nModo plan, cinco patrones para prompts efectivos\n\n\n5\nPractica\n~30 min\nTres ejercicios: diagnostico, do-file, y configuracion de proyecto\n\n\n\nEjemplos\n—\nProductos reales construidos con Claude Code",
-    "crumbs": [
-      "Para Analistas"
-    ]
-  },
-  {
-    "objectID": "analyst/index.html#esto-es-solo-la-punta-del-iceberg",
-    "href": "analyst/index.html#esto-es-solo-la-punta-del-iceberg",
-    "title": "Para Analistas",
-    "section": "Esto es solo la punta del iceberg",
-    "text": "Esto es solo la punta del iceberg\nEsta guia es una introduccion muy inicial. Para profundizar mucho mas en flujos de trabajo asistidos por IA, estrategias de prompting y casos de uso avanzados, recomiendo la guia de Chris Blattman sobre IA como siguiente paso.",
-    "crumbs": [
-      "Para Analistas"
-    ]
-  },
-  {
     "objectID": "analyst/setup.html",
     "href": "analyst/setup.html",
     "title": "Instalación y configuración",
@@ -1413,6 +1153,376 @@
     "crumbs": [
       "Para Analistas",
       "Instalación y configuración"
+    ]
+  },
+  {
+    "objectID": "analyst/index.html",
+    "href": "analyst/index.html",
+    "title": "Para Analistas",
+    "section": "",
+    "text": "Bienvenido a la ruta para Research Analysts. Esta guia asume que escribes codigo Stata regularmente y que ya manejas IPA/DIME standards.",
+    "crumbs": [
+      "Para Analistas"
+    ]
+  },
+  {
+    "objectID": "analyst/index.html#que-vas-a-aprender",
+    "href": "analyst/index.html#que-vas-a-aprender",
+    "title": "Para Analistas",
+    "section": "Que vas a aprender",
+    "text": "Que vas a aprender\nEsta ruta toma entre 50 y 75 minutos, incluyendo tres ejercicios practicos.\n\n\n\n\nModulo\nTiempo\nQue cubre\n\n\n\n\n\nDemo\n~2 min\nClaude Code en accion — dos escenarios reales sin instalar nada\n\n\n1\nInstalacion\n~15 min\nGitHub, estructura de proyecto, VS Code, instalar Claude Code\n\n\n2\nConceptos\n~10 min\nQue es Claude Code, que puede hacer, CLAUDE.md y skills\n\n\n3\nFlujo Stata\n~10 min\nComo Claude ejecuta Stata, lee logs y reporta resultados\n\n\n4\nSeguridad\n~10 min\nClasificacion de datos, reglas de PII, escenarios seguros/no seguros\n\n\n5\nPrompting\n~10 min\nModo plan, cinco patrones para prompts efectivos\n\n\n6\nPractica\n~30 min\nTres ejercicios: diagnostico, do-file, y configuracion de proyecto\n\n\n\nEjemplos\n—\nProductos reales construidos con Claude Code",
+    "crumbs": [
+      "Para Analistas"
+    ]
+  },
+  {
+    "objectID": "analyst/index.html#esto-es-solo-la-punta-del-iceberg",
+    "href": "analyst/index.html#esto-es-solo-la-punta-del-iceberg",
+    "title": "Para Analistas",
+    "section": "Esto es solo la punta del iceberg",
+    "text": "Esto es solo la punta del iceberg\nEsta guia es una introduccion muy inicial. Para profundizar mucho mas en flujos de trabajo asistidos por IA, estrategias de prompting y casos de uso avanzados, recomiendo la guia de Chris Blattman sobre IA como siguiente paso.",
+    "crumbs": [
+      "Para Analistas"
+    ]
+  },
+  {
+    "objectID": "analyst/examples.html",
+    "href": "analyst/examples.html",
+    "title": "Que se puede lograr",
+    "section": "",
+    "text": "Todo lo que se muestra en esta pagina fue construido con Claude Code en un proyecto real de IPA Colombia. No son demos — son entregables que se compartieron con donantes, equipos de investigacion y socios de implementacion.\nClaude Code no hizo estos productos solo. En todos los casos, defini la especificacion, revise cada output, y tome las decisiones analiticas. Pero Claude Code transformo tareas que tomaban dias en tareas de horas.",
+    "crumbs": [
+      "Para Analistas",
+      "Que se puede lograr"
+    ]
+  },
+  {
+    "objectID": "analyst/examples.html#un-pipeline-completo-de-analisis-mel",
+    "href": "analyst/examples.html#un-pipeline-completo-de-analisis-mel",
+    "title": "Que se puede lograr",
+    "section": "Un pipeline completo de analisis MEL",
+    "text": "Un pipeline completo de analisis MEL\nEl resultado mas ambicioso: un pipeline de 12 scripts de Stata que produce automaticamente todas las tablas, graficos y analisis del reporte de Monitoreo, Evaluacion y Aprendizaje (MEL) de un programa con 600+ participantes en 8 municipios.\nUn solo comando ejecuta todo el pipeline:\njust stata-run   # Corre los 12 scripts en secuencia\nEl pipeline incluye: limpieza de datos de asistencia, analisis de desercion, barreras de participacion, fidelidad de implementacion, calidad de sesiones, y analisis de dosis-respuesta. Claude Code escribio y depuro la mayoria de estos scripts iterativamente — yo definia la especificacion analitica, el generaba el codigo, yo revisaba los resultados y pedia ajustes.\n\nAlgunos graficos producidos por el pipeline\n\n\n\nPatron de participacion sesion a sesion: asistentes regulares, re-enganchados, ausencias por primera vez, ausencias repetidas y no asistentes. N = 595 participantes asignados a tratamiento.\n\n\n\n\n\nCambio neto en participacion entre sesiones consecutivas. Las barras verdes muestran ganancia de participantes, las naranjas muestran perdida.\n\n\n\n\n\nMapa de entrega de sesiones por Centro Zonal. Cada punto es una sesion, los colores representan diferentes grupos dentro del mismo centro.",
+    "crumbs": [
+      "Para Analistas",
+      "Que se puede lograr"
+    ]
+  },
+  {
+    "objectID": "analyst/examples.html#presentaciones-generadas-programaticamente",
+    "href": "analyst/examples.html#presentaciones-generadas-programaticamente",
+    "title": "Que se puede lograr",
+    "section": "Presentaciones generadas programaticamente",
+    "text": "Presentaciones generadas programaticamente\nLas presentaciones de resultados no se hacen manualmente en PowerPoint — se generan con un script de Node.js que usa la libreria pptxgenjs. Claude Code ayudo a disenar todo el sistema:\n\nUn script de ~1,000 lineas con funciones reutilizables: topbar(), footer(), sidebar(), callout(), table()\nColores y tipografia IPA aplicados automaticamente\nLas tablas de Stata alimentan directamente las diapositivas\n\nEl flujo es: Stata genera tablas → el script de Node.js las lee → produce un .pptx listo para presentar. Cuando se actualizan los datos, se regenera la presentacion completa sin editar una sola diapositiva manualmente.",
+    "crumbs": [
+      "Para Analistas",
+      "Que se puede lograr"
+    ]
+  },
+  {
+    "objectID": "analyst/examples.html#un-sistema-de-instrucciones-para-que-claude-trabaje-autonomamente",
+    "href": "analyst/examples.html#un-sistema-de-instrucciones-para-que-claude-trabaje-autonomamente",
+    "title": "Que se puede lograr",
+    "section": "Un sistema de instrucciones para que Claude trabaje autonomamente",
+    "text": "Un sistema de instrucciones para que Claude trabaje autonomamente\nQuizas lo mas util a largo plazo: Claude Code no necesita que le explique el proyecto cada vez que inicio una sesion. Tres documentos le dan contexto persistente:\nCLAUDE.md — El briefing del proyecto. Define las dos muestras (COMPLETA para monitoreo, RCT para impacto), el mapa del pipeline, las reglas de PII, las convenciones de codigo, y los globals de rutas.\nCLAUDE_STATA_GUIDE.md — Le ensena a Claude como ejecutar Stata en este proyecto. Incluye la instruccion de ejecutar scripts autonomamente despues de editarlos, leer el log, y reportar resultados sin esperar a que se lo pidan.\nCLAUDE_DELIVERABLES_GUIDE.md — Documenta el pipeline de Stata a LaTeX: patrones de esttab/outreg2, colores IPA para graficos, compilacion de tablas, y analisis de sensibilidad.\nEl resultado: cuando pido “corre el script de desercion y dime si paso”, Claude Code ejecuta el script, lee el log, identifica si hubo errores, reporta los coeficientes clave, y me dice donde guardo los outputs. Si falla, diagnostica el error y lo corrige antes de reportar.",
+    "crumbs": [
+      "Para Analistas",
+      "Que se puede lograr"
+    ]
+  },
+  {
+    "objectID": "analyst/examples.html#skills-personalizados",
+    "href": "analyst/examples.html#skills-personalizados",
+    "title": "Que se puede lograr",
+    "section": "Skills personalizados",
+    "text": "Skills personalizados\nMas alla del proyecto, construi skills reutilizables que Claude Code carga automaticamente:\n\nSkill de Stata: estandares IPA/DIME, headers de do-files, cuatro etapas del flujo de datos (importar, desidentificar, limpiar, construir), convenciones de valores faltantes extendidos\nSkill de escritura IPA: reglas de estilo, voz activa, acronimos, formato de citas, terminologia preferida\nSkill de presentaciones: framework para generar .pptx programaticamente con marca IPA\n\nEstos skills funcionan en cualquier proyecto — no son especificos de un solo estudio.",
+    "crumbs": [
+      "Para Analistas",
+      "Que se puede lograr"
+    ]
+  },
+  {
+    "objectID": "analyst/examples.html#que-tienen-en-comun-estos-ejemplos",
+    "href": "analyst/examples.html#que-tienen-en-comun-estos-ejemplos",
+    "title": "Que se puede lograr",
+    "section": "Que tienen en comun estos ejemplos",
+    "text": "Que tienen en comun estos ejemplos\n\nLa especificacion siempre fue mia. Claude Code no decide que analizar ni como presentarlo.\nEl valor esta en la velocidad de ejecucion. Escribir do-files, generar tablas, depurar errores, formatear graficos — ahi es donde mas tiempo ahorra.\nTodo es reproducible. Un comando regenera todo. No hay edicion manual.\nNada salio bien a la primera. El ciclo fue siempre: pedir → revisar → ajustar → repetir.",
+    "crumbs": [
+      "Para Analistas",
+      "Que se puede lograr"
+    ]
+  },
+  {
+    "objectID": "index.html#de-que-se-trata-esta-guia",
+    "href": "index.html#de-que-se-trata-esta-guia",
+    "title": "Claude Code para IPA Colombia",
+    "section": "De que se trata esta guia",
+    "text": "De que se trata esta guia\nClaude Code es un asistente de IA de Anthropic. A diferencia de un chatbot en el navegador, lee los archivos de tu proyecto, entiende la estructura, y puede escribir o editar archivos directamente en tu maquina. Esta guia te ensena a usarlo de forma segura en proyectos de IPA Colombia.\n\n\n\n\n\n\nImportanteLectura obligatoria previa\n\n\n\nEsta guia complementa las IPA AI Usage Guidelines. Revisalas primero para conocer el marco completo de clasificacion de datos y aprobaciones."
+  },
+  {
+    "objectID": "index.html#elige-tu-ruta",
+    "href": "index.html#elige-tu-ruta",
+    "title": "Claude Code para IPA Colombia",
+    "section": "Elige tu ruta",
+    "text": "Elige tu ruta\n\n\nPara Analistas\nPara Research Analysts que escriben codigo: do-files de Stata, debugging, pipelines MEL, tablas LaTeX.\n\nInstalacion en VS Code + terminal\nCLAUDE.md como briefing del proyecto\nTres ejercicios practicos con datos sinteticos\nProductos reales construidos con Claude Code\n\nEmpezar →\n\n\nPara Equipos y PMs\nPara staff que delega trabajo administrativo: comunicaciones, weekly reviews, procurement, gestion de personas, presentaciones.\n\nApp de escritorio (sin terminal)\nCLAUDE.md como memoria operativa personal\n7 modulos por capacidad + 4 starter packs por rol\nPlantillas descargables listas para usar\n\nEmpezar →"
+  },
+  {
+    "objectID": "index.html#lo-que-comparten-ambas-rutas",
+    "href": "index.html#lo-que-comparten-ambas-rutas",
+    "title": "Claude Code para IPA Colombia",
+    "section": "Lo que comparten ambas rutas",
+    "text": "Lo que comparten ambas rutas\nTres modulos son obligatorios independientemente de la ruta que elijas:\n\nSeguridad de datos — clasificacion IPA, PII, escenarios seguros y no seguros\nBucles de feedback — la practica que hace que Claude se vuelva mas util con el tiempo\nPrompting — modo plan y patrones para prompts efectivos"
+  },
+  {
+    "objectID": "analyst/concepts.html",
+    "href": "analyst/concepts.html",
+    "title": "2. Conceptos clave",
+    "section": "",
+    "text": "Claude Code es un asistente de codigo con IA construido por Anthropic. Se ejecuta dentro de la terminal de VS Code. A diferencia de chatbots en el navegador, lee los archivos de tu proyecto, entiende la estructura, y puede escribir o editar codigo directamente en tu maquina.\nTres capacidades lo distinguen:\n\nContexto del proyecto. Lee tus archivos automaticamente — do-files, configs, documentacion. No necesitas copiar y pegar en una ventana de chat.\nEdicion directa. Crea, modifica y elimina archivos en tu proyecto. Pide tu aprobacion antes de hacer cambios.\nInstrucciones persistentes. Sigue reglas escritas en un archivo CLAUDE.md en la raiz de tu proyecto — estandares de codigo, convenciones y reglas de seguridad.",
+    "crumbs": [
+      "Para Analistas",
+      "2. Conceptos clave"
+    ]
+  },
+  {
+    "objectID": "analyst/concepts.html#que-es-claude-code",
+    "href": "analyst/concepts.html#que-es-claude-code",
+    "title": "2. Conceptos clave",
+    "section": "",
+    "text": "Claude Code es un asistente de codigo con IA construido por Anthropic. Se ejecuta dentro de la terminal de VS Code. A diferencia de chatbots en el navegador, lee los archivos de tu proyecto, entiende la estructura, y puede escribir o editar codigo directamente en tu maquina.\nTres capacidades lo distinguen:\n\nContexto del proyecto. Lee tus archivos automaticamente — do-files, configs, documentacion. No necesitas copiar y pegar en una ventana de chat.\nEdicion directa. Crea, modifica y elimina archivos en tu proyecto. Pide tu aprobacion antes de hacer cambios.\nInstrucciones persistentes. Sigue reglas escritas en un archivo CLAUDE.md en la raiz de tu proyecto — estandares de codigo, convenciones y reglas de seguridad.",
+    "crumbs": [
+      "Para Analistas",
+      "2. Conceptos clave"
+    ]
+  },
+  {
+    "objectID": "analyst/concepts.html#que-puede-y-que-no-puede-hacer",
+    "href": "analyst/concepts.html#que-puede-y-que-no-puede-hacer",
+    "title": "2. Conceptos clave",
+    "section": "Que puede y que no puede hacer",
+    "text": "Que puede y que no puede hacer\n\n\n\n\n\n\n\n✅ Puede hacer\n❌ No puede hacer\n\n\n\n\nEscribir do-files siguiendo estandares IPA/DIME\nAcceder o leer datos que contengan PII\n\n\nDiagnosticar errores leyendo logs de Stata\nReemplazar tu juicio sobre diseno de investigacion\n\n\nGenerar tablas en LaTeX con esttab o outreg2\nEjecutar Stata por si solo (usa comandos just)\n\n\nExplicar codigo existente en lenguaje sencillo\nAcceder a Box, email u otros sistemas externos\n\n\nRevisar do-files contra estandares de codigo\nGarantizar metodologia estadistica correcta\n\n\nAyudar con comandos de Git\nRecordar entre sesiones separadas",
+    "crumbs": [
+      "Para Analistas",
+      "2. Conceptos clave"
+    ]
+  },
+  {
+    "objectID": "analyst/concepts.html#como-claude-code-conoce-tu-proyecto",
+    "href": "analyst/concepts.html#como-claude-code-conoce-tu-proyecto",
+    "title": "2. Conceptos clave",
+    "section": "Como Claude Code conoce tu proyecto",
+    "text": "Como Claude Code conoce tu proyecto\nClaude Code no empieza de cero cada vez. Tres mecanismos le dan conocimiento persistente:\n\nCLAUDE.md: el briefing del proyecto\nEs como el documento que escribirias para un nuevo miembro del equipo en su primer dia. Le dice a Claude Code que es el proyecto, que reglas seguir, y donde encontrar las cosas.\n# CLAUDE.md — Proyecto SpC\n\n## Que es este proyecto\nSpC 3.0 = Sanar para Crecer 3.0 (HtG)\nPrograma de educacion a cuidadores implementado por ICBF en Colombia.\n\n## Reglas del proyecto\n- PII: nunca leer o mostrar archivos de datos crudos.\n- No usar cap / capture excepto para cap mkdir.\n- Globals de rutas definidos en 00_run.do (master do-file).\nEste archivo se sube a Git. Todos los miembros del equipo comparten las mismas instrucciones.\n\n\n\n\n\n\nTipPlantilla CLAUDE.md para proyectos IPA (clic para expandir)\n\n\n\n\n\nCopia esta plantilla a la raiz de tu proyecto y adapta cada seccion. Para un ejemplo completo, consulta el CLAUDE.md de ipa-stata-template.\n# CLAUDE.md\n\n## Descripcion del proyecto\n[Nombre del proyecto] — [descripcion de una linea].\nImplementado por [organizacion] en [pais/region].\n\n## Reglas criticas\n- NUNCA leer, abrir, ni mostrar archivos en `data/raw/` ni datos con PII.\n- No usar `capture` excepto para `cap mkdir`.\n- Globals de rutas estan definidos en `do_files/00_run.do`.\n- Usar convenciones de valores faltantes IPA: .d (don't know), .r (refused),\n  .n (not applicable), .s (skipped).\n\n## Estructura del proyecto\n- `do_files/`   — Scripts de Stata. `00_run.do` es el maestro.\n- `data/raw/`   — Datos crudos. NUNCA leer ni editar.\n- `data/clean/` — Datos limpios generados por scripts.\n- `outputs/`    — Tablas (`tables/`) y graficos (`figures/`).\n- `logs/`       — Logs de ejecucion de Stata.\n- `ado/`        — Paquetes locales aislados (reproducibilidad).\n- `.here`       — Marcador de raiz del proyecto (resuelto por `setroot`).\n\n## Estandares de codigo\n- Seguir IPA Data Cleaning Guide y estandares DIME.\n- Variables con prefijos descriptivos (e.g., `bl_` baseline, `el_` endline).\n- Headers estandar IPA en cada do-file (proyecto, autor, fecha, proposito).\n- Usar `assert` para validacion defensiva.\n\n## Comandos comunes\njust stata-run                     # Ejecutar pipeline completo\njust stata-script 01_data_cleaning # Ejecutar script individual\nPrueba tu CLAUDE.md: abre Claude Code y pregunta “Que proyecto es este?”. Si responde correctamente, tu archivo funciona.\n\n\n\n\n\nSkills: los manuales de referencia\nEl directorio .claude/skills/ contiene instrucciones especializadas que Claude Code carga automaticamente segun lo que le pidas. Cada skill es una carpeta con un archivo SKILL.md (descripcion + frontmatter) y opcionalmente references/ con material extenso.\nLa plantilla ipa-stata-template ya viene con cinco skills oficiales preinstalados:\n.claude/\n└── skills/\n    ├── stata/\n    │   ├── SKILL.md                       # Headers, missing values, naming\n    │   └── references/\n    │       ├── coding_standards.md\n    │       ├── data_cleaning_checklist.md\n    │       └── missing_values.md\n    ├── markdownlint/SKILL.md              # Linting de archivos Markdown\n    ├── quarto/SKILL.md                    # Reportes Quarto\n    ├── ruff/SKILL.md                      # Lint Python (cuando aplica)\n    └── uv/SKILL.md                        # Gestor Python para tooling\nEl SKILL.md de Stata empieza con un frontmatter YAML que describe cuando se debe activar, y luego enumera los principios y patrones:\n---\nname: stata\ndescription: Use when writing, reviewing, or debugging Stata code for\n  data cleaning and analysis. Apply IPA/DIME coding standards.\n---\n\n## Core Principles\n- Reproducible · Defensive · Documented · No PII\n\n## Do-File Header\n* ==============================================================================\n* Project: [Project Name]\n* Purpose: [Brief description]\n* Author:  [Name]\n* Created: [Date]\n* ==============================================================================\nclear all\nset more off\nversion 17.0\n\n## Missing Values\nUsar extended missing: .d (don't know), .r (refused),\n.n (not applicable), .s (skipped). Nunca solo \".\"\n\n## Variable Naming\nhh_ household · ind_ individual · bl_/el_ baseline/endline\nd_ dummy · n_ count\nCuando le pides a Claude Code que escriba un do-file, carga automaticamente el skill stata. Cuando le pides que edite un Quarto report, carga el de quarto. No necesitas indicarle cual skill usar.\n\nModelo mental: CLAUDE.md es el briefing para un nuevo miembro del equipo. Los skills son los manuales de referencia en su escritorio. Si usas ipa-stata-template, ya vienen escritos.\n\n\n\nConfiguracion y permisos\nEl archivo .claude/settings.json controla que comandos puede ejecutar Claude Code sin pedir permiso. Normalmente lo configura el lider del proyecto.\n{\n  \"permissions\": {\n    \"allow\": [\n      \"just stata-run\",\n      \"just stata-script *\",\n      \"just stata-build\",\n      \"just lint-stata\",\n      \"just fmt-all\"\n    ],\n    \"deny\": [\n      \"rm -rf *\",\n      \"git push --force\"\n    ]\n  }\n}\nLos comandos en allow se ejecutan sin pedirte confirmacion. Los de deny estan bloqueados. Todo lo demas te pide aprobacion antes de ejecutarse. La plantilla ipa-stata-template incluye un settings.json base con los comandos just mas usados ya pre-aprobados.",
+    "crumbs": [
+      "Para Analistas",
+      "2. Conceptos clave"
+    ]
+  },
+  {
+    "objectID": "analyst/exercises.html",
+    "href": "analyst/exercises.html",
+    "title": "5. Ejercicios practicos",
+    "section": "",
+    "text": "10–15 minutos\nEstas limpiando datos y haces un merge entre tu encuesta de linea base y las caracteristicas de las unidades de servicio. El log muestra un resultado inesperado:\n. use \"$data/clean/baseline_clean.dta\", clear\n(Baseline survey - HtG 3.0)\n\n. merge m:1 uds_id using \"$data/clean/uds_characteristics.dta\"\n\n    Result                      Number of obs\n    -----------------------------------------\n    Not matched                           147\n        from master                        12  (_merge==1)\n        from using                        135  (_merge==2)\n    Matched                             2,841  (_merge==3)\n    -----------------------------------------\n\n. tab _merge\n\n                 _merge |      Freq.     Percent        Cum.\n------------------------+-----------------------------------\n        Master only (1) |         12        0.40        0.40\n         Using only (2) |        135        4.52        4.93\n            Matched (3) |      2,841       95.07      100.00\n------------------------+-----------------------------------\n                  Total |      2,988      100.00\nEsperabas que todas las UDS del archivo using emparejaran. 135 no lo hicieron. Algo anda mal.\n\n\n\nAbre Claude Code en cualquier carpeta de proyecto (claude en la terminal)\nPega el log y pregunta: *“Hice este merge y tengo 135 observaciones con _merge==2 que no esperaba. Que puede estar causando esto y como lo diagnostico?“*\nLee el diagnostico. Propone multiples hipotesis? (formato de variable, espacios, UDS sin encuestas?)\nHaz seguimiento: “uds_id es string en un archivo y numerico en el otro. Como lo arreglo de forma reproducible?”\nEvalua si la solucion es correcta y si es reproducible (va en el do-file, no es manual)\n\n\n\n\n\nPropone multiples hipotesis en vez de asumir una sola causa?\nSugiere comandos de diagnostico concretos (e.g., describe, assert, list)?\nLa solucion propuesta es reproducible (codigo en el do-file, no edicion manual)?\nMenciona la importancia de verificar despues del fix (e.g., assert _merge==3)?",
+    "crumbs": [
+      "Para Analistas",
+      "5. Ejercicios practicos"
+    ]
+  },
+  {
+    "objectID": "analyst/exercises.html#ejercicio-1-diagnosticar-un-merge-problematico",
+    "href": "analyst/exercises.html#ejercicio-1-diagnosticar-un-merge-problematico",
+    "title": "5. Ejercicios practicos",
+    "section": "",
+    "text": "10–15 minutos\nEstas limpiando datos y haces un merge entre tu encuesta de linea base y las caracteristicas de las unidades de servicio. El log muestra un resultado inesperado:\n. use \"$data/clean/baseline_clean.dta\", clear\n(Baseline survey - HtG 3.0)\n\n. merge m:1 uds_id using \"$data/clean/uds_characteristics.dta\"\n\n    Result                      Number of obs\n    -----------------------------------------\n    Not matched                           147\n        from master                        12  (_merge==1)\n        from using                        135  (_merge==2)\n    Matched                             2,841  (_merge==3)\n    -----------------------------------------\n\n. tab _merge\n\n                 _merge |      Freq.     Percent        Cum.\n------------------------+-----------------------------------\n        Master only (1) |         12        0.40        0.40\n         Using only (2) |        135        4.52        4.93\n            Matched (3) |      2,841       95.07      100.00\n------------------------+-----------------------------------\n                  Total |      2,988      100.00\nEsperabas que todas las UDS del archivo using emparejaran. 135 no lo hicieron. Algo anda mal.\n\n\n\nAbre Claude Code en cualquier carpeta de proyecto (claude en la terminal)\nPega el log y pregunta: *“Hice este merge y tengo 135 observaciones con _merge==2 que no esperaba. Que puede estar causando esto y como lo diagnostico?“*\nLee el diagnostico. Propone multiples hipotesis? (formato de variable, espacios, UDS sin encuestas?)\nHaz seguimiento: “uds_id es string en un archivo y numerico en el otro. Como lo arreglo de forma reproducible?”\nEvalua si la solucion es correcta y si es reproducible (va en el do-file, no es manual)\n\n\n\n\n\nPropone multiples hipotesis en vez de asumir una sola causa?\nSugiere comandos de diagnostico concretos (e.g., describe, assert, list)?\nLa solucion propuesta es reproducible (codigo en el do-file, no edicion manual)?\nMenciona la importancia de verificar despues del fix (e.g., assert _merge==3)?",
+    "crumbs": [
+      "Para Analistas",
+      "5. Ejercicios practicos"
+    ]
+  },
+  {
+    "objectID": "analyst/exercises.html#ejercicio-2-escribir-un-do-file-de-estadisticas-descriptivas",
+    "href": "analyst/exercises.html#ejercicio-2-escribir-un-do-file-de-estadisticas-descriptivas",
+    "title": "5. Ejercicios practicos",
+    "section": "Ejercicio 2: Escribir un do-file de estadisticas descriptivas",
+    "text": "Ejercicio 2: Escribir un do-file de estadisticas descriptivas\n15–20 minutos\nNecesitas una tabla de estadisticas descriptivas comparando autos domesticos y extranjeros.\n\nPaso 1: Escribe el prompt\nUsa esta especificacion con plan mode:\n\n“Usa plan mode. Necesito un do-file que produzca una tabla de estadisticas descriptivas de sysuse auto, comparando autos domesticos vs extranjeros. Variables: price, mpg, weight, length, headroom. Muestra media, DE, N, y un p-valor de t-test para cada una. Guarda como exercise_sumstats.do.”\n\n\n\nPaso 2: Revisa el output\n\nCarga sysuse auto, clear?\nProduce estadisticas por foreign (0/1)?\nIncluye un t-test de diferencia?\nEl codigo es legible con comentarios?\nLo podrias ejecutar en Stata ahora mismo?\n\n\n\nPaso 3: Itera\nPide dos modificaciones:\n\n“Agrega una fila para rep78 (registro de reparaciones). Maneja los valores faltantes.”\n“Agrega etiquetas de variable a la tabla para que muestre ‘Precio (USD)’ en vez de ‘price’.”\n\n\n\nPaso 4: Evalua\nModifico el do-file sin romper la estructura existente? Manejo correctamente los valores faltantes en rep78?\n\n\nCriterios de evaluacion\n\nCarga sysuse auto, clear al inicio?\nUsa un loop o estructura repetible (no copia-pega por variable)?\nManeja los valores faltantes de rep78 explicitamente (no los ignora)?\nAplica etiquetas de variable legibles?\nEl codigo esta comentado y es ejecutable sin modificaciones?\nModifico sin romper la estructura que ya habia generado?",
+    "crumbs": [
+      "Para Analistas",
+      "5. Ejercicios practicos"
+    ]
+  },
+  {
+    "objectID": "analyst/exercises.html#ejercicio-3-configura-tu-proyecto-con-claude.md",
+    "href": "analyst/exercises.html#ejercicio-3-configura-tu-proyecto-con-claude.md",
+    "title": "5. Ejercicios practicos",
+    "section": "Ejercicio 3: Configura tu proyecto con CLAUDE.md",
+    "text": "Ejercicio 3: Configura tu proyecto con CLAUDE.md\n10–15 minutos\nLos ejercicios anteriores usaron datos de practica. Este ejercicio usa tu proyecto real — es donde Claude Code empieza a ser verdaderamente util.\n\nPaso 1: Crea tu CLAUDE.md\nAbre la plantilla de CLAUDE.md del modulo de conceptos. Copiala a la raiz de tu repositorio de proyecto y adapta cada seccion:\n\nCambia la descripcion del proyecto\nAgrega las reglas especificas de tu proyecto (convenciones de variables, rutas, restricciones de datos)\nLista los comandos que usas frecuentemente\n\n\n\nPaso 2: Prueba tu CLAUDE.md\nAbre Claude Code desde la raiz de tu proyecto y pregunta:\n\n“Que proyecto es este?”\n\nClaude Code deberia responder con la informacion de tu CLAUDE.md. Si no lo hace, verifica que el archivo esta en la raiz del proyecto (no dentro de una subcarpeta).\n\n\nPaso 3: Prueba una regla\nAgrega una regla especifica a tu CLAUDE.md, por ejemplo:\n## Reglas del proyecto\n- Todos los do-files deben usar header estandar IPA.\nLuego pide a Claude Code: “Crea un do-file vacio para limpieza de datos.” Verifica que el do-file generado incluye el header que especificaste.\n\n\nCriterios de evaluacion\n\nClaude Code identifica correctamente tu proyecto cuando le preguntas?\nEl do-file generado sigue la regla que agregaste?\nSi no la sigue, tu regla esta escrita de forma clara y especifica?\n\n\n\n\n\n\n\nNota\n\n\n\nUn buen CLAUDE.md es especifico. “Seguir estandares IPA” es vago. “Usar extended missing values: .d, .r, .n, .s. Nunca usar solo punto (.)” es accionable.",
+    "crumbs": [
+      "Para Analistas",
+      "5. Ejercicios practicos"
+    ]
+  },
+  {
+    "objectID": "analyst/exercises.html#referencia-rapida",
+    "href": "analyst/exercises.html#referencia-rapida",
+    "title": "5. Ejercicios practicos",
+    "section": "Referencia rapida",
+    "text": "Referencia rapida\n\nComandos comunes\n\n\n\nQue quieres\nQue escribir\n\n\n\n\nIniciar Claude Code\nclaude en la terminal\n\n\nPlanificar antes de actuar\n/plan o “usa plan mode”\n\n\nEditar un archivo\n“Edita [ruta] para [cambio]”\n\n\nCrear un archivo\n“Crea un do-file que [especificacion]”\n\n\nDiagnosticar un error\nPega el log y pregunta “Que esta mal?”\n\n\nSalir\n/exit o Ctrl+C\n\n\n\n\n\nSeguro vs. no seguro\n\n\n\n\n\n\n\n✅ Seguro\n❌ Nunca\n\n\n\n\n“Escribe un do-file que…”\n“Lee los datos crudos de la encuesta…”\n\n\n“Diagnostica este log…”\n“Muestrame observaciones donde nombre =…”\n\n\n“Explica este comando de Stata…”\n“Lista todos los nombres de encuestados…”\n\n\n“Genera una tabla en LaTeX para…”\n“Abre el archivo en la unidad D:…”\n\n\n\n\n\nSiguientes pasos\n\nEmpieza aqui. Pide a Claude Code que explique una seccion de un do-file existente.\nLuego intenta. Pega un error de Stata de un log y pide un diagnostico.\nAvanza. Pide que revise un do-file contra estandares de codigo.\nProfundiza. Trabaja con la guia de Blattman para flujos avanzados.\n\n\n\nRecursos\n\nIPA AI Usage Guidelines\nGuia de Blattman sobre IA\nDocumentacion de Claude Code\nPlantilla Stata de IPA\nMesa de ayuda MIST para aprobaciones",
+    "crumbs": [
+      "Para Analistas",
+      "5. Ejercicios practicos"
+    ]
+  },
+  {
+    "objectID": "analyst/quickstart.html",
+    "href": "analyst/quickstart.html",
+    "title": "Demo: Claude Code en accion",
+    "section": "",
+    "text": "Antes de instalar nada, mira como se ve una sesion real de Claude Code. Estos son dos escenarios tipicos del trabajo diario de un analista.",
+    "crumbs": [
+      "Para Analistas",
+      "Demo: Claude Code en accion"
+    ]
+  },
+  {
+    "objectID": "analyst/quickstart.html#escenario-1-diagnosticar-un-merge-que-no-cuadra",
+    "href": "analyst/quickstart.html#escenario-1-diagnosticar-un-merge-que-no-cuadra",
+    "title": "Demo: Claude Code en accion",
+    "section": "Escenario 1: Diagnosticar un merge que no cuadra",
+    "text": "Escenario 1: Diagnosticar un merge que no cuadra\nTu merge de linea base con seguimiento produce observaciones inesperadas. El log muestra:\n. use \"$data/clean/baseline_clean.dta\", clear\n(Baseline survey - HtG 3.0)\n\n. merge m:1 uds_id using \"$data/clean/uds_characteristics.dta\"\n\n    Result                      Number of obs\n    -----------------------------------------\n    Not matched                           147\n        from master                        12  (_merge==1)\n        from using                        135  (_merge==2)\n    Matched                             2,841  (_merge==3)\n    -----------------------------------------\n135 UDS del archivo using no emparejaron. Algo no cuadra. Le pegas el log a Claude Code:\n&gt; Me salio este resultado de merge. Esperaba que todas las UDS del using\n&gt; emparejaran. Por que hay 135 observaciones con _merge==2?\nClaude Code responde:\nEl problema es que 135 registros en uds_characteristics.dta tienen un\nuds_id que no aparece en baseline_clean.dta. Causas comunes:\n\n1. **Formatos diferentes**: uds_id es string en un archivo y numerico\n   en otro. Verifica con `describe uds_id` en ambos datasets.\n\n2. **Espacios extra**: Si uds_id es string, puede tener espacios al\n   inicio o final. Prueba `gen test = strtrim(uds_id)` y compara.\n\n3. **UDS sin encuestas**: Son UDS registradas pero sin participantes\n   encuestados en baseline.\n\nPara diagnosticar, ejecuta esto antes del merge:\n\n    use \"$data/clean/uds_characteristics.dta\", clear\n    tempfile uds\n    save `uds'\n\n    use \"$data/clean/baseline_clean.dta\", clear\n    merge m:1 uds_id using `uds', keep(using) nogenerate\n    list uds_id in 1/10\n\nEso te mostrara cuales UDS no emparejaron.\nHaces seguimiento:\n&gt; uds_id es string en un archivo y numerico en el otro. Como lo arreglo?\nConvierte a un formato comun antes del merge. Si uds_id deberia ser\nnumerico:\n\n    destring uds_id, replace\n\nSi deberia ser string:\n\n    tostring uds_id, replace\n\nAgrega esto al do-file de limpieza, antes del merge, para que sea\nreproducible.\nSin Claude Code, diagnosticar esto requiere: abrir ambos datasets, comparar tipos con describe, probar distintas hipotesis manualmente. Con Claude Code, llegas a la causa raiz en una pregunta.",
+    "crumbs": [
+      "Para Analistas",
+      "Demo: Claude Code en accion"
+    ]
+  },
+  {
+    "objectID": "analyst/quickstart.html#escenario-2-generar-una-tabla-de-balance",
+    "href": "analyst/quickstart.html#escenario-2-generar-una-tabla-de-balance",
+    "title": "Demo: Claude Code en accion",
+    "section": "Escenario 2: Generar una tabla de balance",
+    "text": "Escenario 2: Generar una tabla de balance\nNecesitas una tabla comparando grupo de tratamiento vs control para tu reporte.\n&gt; Usa plan mode. Necesito un do-file que produzca una tabla de balance\n&gt; para el RCT de SpC. Variables: edad del cuidador, anos de educacion,\n&gt; numero de hijos, ingreso mensual del hogar. Compara tratamiento\n&gt; (treatment==1) vs control (treatment==0). Incluye media, DE, diferencia,\n&gt; y p-valor. Exporta a LaTeX con esttab.\nClaude Code primero presenta un plan:\nPlan:\n1. Cargar datos limpios\n2. Definir lista de variables de balance\n3. Loop sobre variables: calcular media/DE por grupo con summarize\n4. Test de diferencia con ttest\n5. Almacenar resultados en matrices\n6. Exportar con esttab a LaTeX\n\n¿Apruebas este enfoque?\nApruebas, y Claude Code genera un do-file completo, comentado, y ejecutable. Si algo no se ve bien, iteras: “Agrega una columna con el N por grupo” o “Usa el formato de tabla de CLAUDE_DELIVERABLES_GUIDE.md.”\nSin Claude Code, escribes la tabla linea por linea, consultando la documentacion de esttab, ajustando formato por prueba y error. Con Claude Code, describes el resultado y el te da el codigo.",
+    "crumbs": [
+      "Para Analistas",
+      "Demo: Claude Code en accion"
+    ]
+  },
+  {
+    "objectID": "analyst/quickstart.html#listo-para-empezar",
+    "href": "analyst/quickstart.html#listo-para-empezar",
+    "title": "Demo: Claude Code en accion",
+    "section": "Listo para empezar?",
+    "text": "Listo para empezar?\nEstos son ejemplos simples. Claude Code puede ayudar con pipelines completos de analisis, graficos con formato IPA, documentos Quarto, y mucho mas. Pero primero necesitas instalarlo.\nIr a la instalacion →",
+    "crumbs": [
+      "Para Analistas",
+      "Demo: Claude Code en accion"
+    ]
+  },
+  {
+    "objectID": "analyst/stata-workflow.html",
+    "href": "analyst/stata-workflow.html",
+    "title": "Flujo de trabajo con Stata",
+    "section": "",
+    "text": "NotaDe dónde viene este patrón\n\n\n\nLo que sigue es el flujo que usamos en el repo de SpC (Sanar para Crecer 3.0). Está documentado allá en documentation/CLAUDE_STATA_GUIDE.md y se invoca desde CLAUDE.md en la raíz. Este módulo es la versión genérica adaptada a cualquier proyecto IPA que use la plantilla ipa-stata-template.\nHay seguramente muchas otras formas de integrar Claude con Stata — vía la app de escritorio, vía notebooks nbstata, vía wrappers personalizados, o vía workflows distintos al “run-and-report”. Esta es simplemente la que a nosotros nos funcionó en SpC y la que decidimos documentar. Si encuentras una mejor para tu proyecto, abre un issue y la sumamos como alternativa.",
+    "crumbs": [
+      "Para Analistas",
+      "Flujo de trabajo con Stata"
+    ]
+  },
+  {
+    "objectID": "analyst/stata-workflow.html#la-idea-central-claude-corre-y-reporta-no-espera",
+    "href": "analyst/stata-workflow.html#la-idea-central-claude-corre-y-reporta-no-espera",
+    "title": "Flujo de trabajo con Stata",
+    "section": "La idea central: Claude corre y reporta — no espera",
+    "text": "La idea central: Claude corre y reporta — no espera\nEl flujo que mejor funciona en proyectos Stata es uno donde Claude ejecuta el do-file que acaba de editar y reporta resultados sin esperar a que se le pida. La instrucción que va en tu CLAUDE.md es esta:\n\nDespués de editar cualquier do-file, ejecútalo autónomamente y reporta resultados — no esperes a que te pida. Lee el log y reporta: éxito o falla, resultados clave (β, N, F-stats), y dónde quedaron los outputs. Diagnostica y corrige errores antes de reportar. Solo escala si la causa raíz requiere un juicio sobre el análisis.\n\nEsto cambia la dinámica: en vez de un loop “edita → me dices → corro → te respondo → pegas el log → me dices qué pasó”, el ciclo se cierra solo. Tú reaccionas al resultado, no al proceso.",
+    "crumbs": [
+      "Para Analistas",
+      "Flujo de trabajo con Stata"
+    ]
+  },
+  {
+    "objectID": "analyst/stata-workflow.html#las-cuatro-reglas-que-nunca-se-rompen",
+    "href": "analyst/stata-workflow.html#las-cuatro-reglas-que-nunca-se-rompen",
+    "title": "Flujo de trabajo con Stata",
+    "section": "Las cuatro reglas que nunca se rompen",
+    "text": "Las cuatro reglas que nunca se rompen\nEstas reglas son las que me hicieron confiable en SpC. Cópialas a tu CLAUDE.md:\n\n\n\n\n\n\nAdvertencia\n\n\n\n\nNunca llamar Stata directamente. Siempre vía just. El Justfile resuelve paths, mueve logs y detecta errores. Si Claude llama stata-se -e do ... directo, los logs quedan huérfanos y los errores pasan inadvertidos.\nNunca saltarse el log. Después de cada corrida, leer el log y buscar r(\\d+); antes de reportar éxito.\nNunca correr análisis sobre PII. Si un dataset puede contener PII, parar y pedir al usuario que anonimice primero.\nNunca acceder a unidades encriptadas (D:, Cryptomator) directamente vía bash o PowerShell. Solo Stata (vía just stata-script) sabe acceder a ellas con seguridad. Probarlas con ls, find o Test-Path puede colgar el vault. Si hay un file-not-found, pedir al usuario que verifique que Cryptomator está desbloqueado — no hurgar la unidad.",
+    "crumbs": [
+      "Para Analistas",
+      "Flujo de trabajo con Stata"
+    ]
+  },
+  {
+    "objectID": "analyst/stata-workflow.html#los-comandos-just-que-pre-apruebas",
+    "href": "analyst/stata-workflow.html#los-comandos-just-que-pre-apruebas",
+    "title": "Flujo de trabajo con Stata",
+    "section": "Los comandos just que pre-apruebas",
+    "text": "Los comandos just que pre-apruebas\nLa plantilla ipa-stata-template define estas recetas. Para que Claude las ejecute sin pedir confirmación cada vez, agrégalas a .claude/settings.json de tu proyecto:\n{\n  \"permissions\": {\n    \"allow\": [\n      \"Bash(just stata-run)\",\n      \"Bash(just stata-script:*)\",\n      \"Bash(just stata-do:*)\",\n      \"Bash(just stata-setup)\",\n      \"Bash(just lint-stata)\",\n      \"Bash(just fmt-all)\"\n    ]\n  }\n}\n\n\n\n\n\n\n\nComando\nQué hace\n\n\n\n\njust stata-run\nEjecuta el pipeline maestro (do_files/00_run.do). Log: logs/00_run.log.\n\n\njust stata-script &lt;ruta&gt;\nEjecuta un script individual. Log: logs/&lt;basename&gt;.log. Detecta errores vía exit code y scan del log.\n\n\njust stata-do &lt;archivo&gt;\nEjecuta cualquier .do por path. Log se mueve a logs/.\n\n\njust stata-setup\nSetup de una vez por máquina: instala setroot + paquetes Stata.\n\n\njust lint-stata\nLinting con stata_linter.",
+    "crumbs": [
+      "Para Analistas",
+      "Flujo de trabajo con Stata"
+    ]
+  },
+  {
+    "objectID": "analyst/stata-workflow.html#log-lifecycle-dónde-encontrar-el-output",
+    "href": "analyst/stata-workflow.html#log-lifecycle-dónde-encontrar-el-output",
+    "title": "Flujo de trabajo con Stata",
+    "section": "Log lifecycle — dónde encontrar el output",
+    "text": "Log lifecycle — dónde encontrar el output\nEntender este flujo es crítico para debugging:\n\nStata corre en modo batch (-e) y escribe .log en la raíz del proyecto (al lado del Justfile).\nLa receta del Justfile mueve el log inmediatamente a logs/.\nClaude lee el log desde logs/ — nunca desde la raíz.\n\n\n\n\nComando\nLog resultante\n\n\n\n\njust stata-run\nlogs/00_run.log\n\n\njust stata-script 01_cleaning\nlogs/01_cleaning.log\n\n\njust stata-script subdir/04_tablas\nlogs/04_tablas.log\n\n\njust stata-do do_files/foo.do\nlogs/foo.log\n\n\njust stata-setup\nlogs/setup.log",
+    "crumbs": [
+      "Para Analistas",
+      "Flujo de trabajo con Stata"
+    ]
+  },
+  {
+    "objectID": "analyst/stata-workflow.html#cómo-claude-detecta-errores",
+    "href": "analyst/stata-workflow.html#cómo-claude-detecta-errores",
+    "title": "Flujo de trabajo con Stata",
+    "section": "Cómo Claude detecta errores",
+    "text": "Cómo Claude detecta errores\nDespués de cada corrida, el patrón que Claude debe seguir:\n1. Correr:           just stata-script &lt;nombre&gt;\n2. Leer log:         logs/&lt;basename&gt;.log\n3. Buscar r(\\d+);    si no aparece y termina con \"end of do-file\" → éxito\n4. Si hay error:     leer 3-5 líneas antes del r(###); para identificar la causa\n5. Editar el do-file para corregir\n6. Re-correr y repetir hasta que pase\nSeñales de éxito:\n\nLog termina con end of do-file\nNo hay líneas que matcheen r(\\d+);\n\nSeñales de falla:\n\nLíneas como r(111);, r(198); en cualquier punto del log\nLog truncado (sin end of do-file al final)\nJustfile sale con código distinto de cero",
+    "crumbs": [
+      "Para Analistas",
+      "Flujo de trabajo con Stata"
+    ]
+  },
+  {
+    "objectID": "analyst/stata-workflow.html#tabla-de-error-codes-comunes",
+    "href": "analyst/stata-workflow.html#tabla-de-error-codes-comunes",
+    "title": "Flujo de trabajo con Stata",
+    "section": "Tabla de error codes comunes",
+    "text": "Tabla de error codes comunes\nLos más frecuentes que Claude debe reconocer al instante:\n\n\n\nCode\nSignificado\n\n\n\n\nr(1)\nInterrupción del usuario (Ctrl+C)\n\n\nr(100)\nMemoria insuficiente\n\n\nr(101)\nDemasiadas variables\n\n\nr(111)\nVariable no encontrada\n\n\nr(198)\nSintaxis inválida o opción incorrecta\n\n\nr(199)\nComando no reconocido (paquete no instalado)\n\n\nr(601)\nArchivo no encontrado\n\n\nr(603)\nArchivo no se pudo abrir\n\n\n\nPara errores no listados: buscar la documentación de Stata o leer el contexto inmediatamente antes del r(###);.",
+    "crumbs": [
+      "Para Analistas",
+      "Flujo de trabajo con Stata"
+    ]
+  },
+  {
+    "objectID": "analyst/stata-workflow.html#convención-ascii-only-para-paths",
+    "href": "analyst/stata-workflow.html#convención-ascii-only-para-paths",
+    "title": "Flujo de trabajo con Stata",
+    "section": "Convención ASCII-only para paths",
+    "text": "Convención ASCII-only para paths\nTodos los nombres de carpetas y do-files bajo do_files/ deben ser ASCII puros — sin espacios, sin tildes, sin eñes. Esto significa que just stata-script &lt;ruta&gt; siempre funciona sin wrappers ni escapes raros. En vez de 2_RCT Analysis/3_Análisis niños endline survey, usa 2_RCT_Analysis/3_Analisis_ninos_endline_survey.\n\n\n\n\n\n\nTip\n\n\n\nLa ñ rompe statsmodels en Python y muchos parsers; los espacios rompen quoting en PowerShell. Adoptar ASCII-only desde el inicio del proyecto te ahorra bugs aleatorios todo el camino.",
+    "crumbs": [
+      "Para Analistas",
+      "Flujo de trabajo con Stata"
+    ]
+  },
+  {
+    "objectID": "analyst/stata-workflow.html#cómo-se-ve-en-claude.md-del-proyecto",
+    "href": "analyst/stata-workflow.html#cómo-se-ve-en-claude.md-del-proyecto",
+    "title": "Flujo de trabajo con Stata",
+    "section": "Cómo se ve en CLAUDE.md del proyecto",
+    "text": "Cómo se ve en CLAUDE.md del proyecto\nEsta es la sección que va en CLAUDE.md de tu proyecto para activar el flujo:\n## How to Run Stata\n\nFull instructions: documentation/CLAUDE_STATA_GUIDE.md\n\nQuick reference:\n    just stata-run                  # Run pipeline (00_run.do)\n    just stata-script 01_cleaning   # Run a single script\n    just stata-setup                # One-time setup\n\n## Claude's Workflow for Stata\n\nAfter editing any do-file, run it autonomously and report results — do\nnot wait to be asked. Read the log and report: success/failure, key\nresults (β, N, F-stats), and output file locations. Diagnose and fix\nerrors before reporting back. Only escalate if the root cause requires\na judgment call about the analysis.\n\n## Project-Specific Rules\n\n- PII: Raw data contains PII — never read, process, or display raw\n  data files.\n- config.do is gitignored — never commit it; copy from config.do.template.\n- Do not use cap / capture except for cap mkdir.\n- Path globals are defined in 00_run.do. Never redefine them.\n- Extended missing values: .d (don't know), .o (other), .n (not\n  applicable), .r (refused), .s (skipped).",
+    "crumbs": [
+      "Para Analistas",
+      "Flujo de trabajo con Stata"
+    ]
+  },
+  {
+    "objectID": "analyst/stata-workflow.html#cuando-algo-no-encaja",
+    "href": "analyst/stata-workflow.html#cuando-algo-no-encaja",
+    "title": "Flujo de trabajo con Stata",
+    "section": "Cuando algo no encaja",
+    "text": "Cuando algo no encaja\nSi tu proyecto tiene particularidades — un wrapper para data en Box, un Cryptomator vault, scripts que dependen de scripts previos en orden estricto — escribe una guía dedicada en documentation/CLAUDE_STATA_GUIDE.md y referénciala desde CLAUDE.md. Eso fue lo que hicimos en SpC: el CLAUDE.md raíz queda corto y digerible (~100 líneas), y la guía técnica detallada vive en su propio archivo. Claude lee ambos automáticamente al iniciar sesión.\n\nSiguiente paso: Prompting — cómo escribir prompts que aprovechen este flujo.",
+    "crumbs": [
+      "Para Analistas",
+      "Flujo de trabajo con Stata"
     ]
   },
   {
