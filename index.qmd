@@ -1,43 +1,61 @@
 ---
-title: "Primeros Pasos con Claude Code"
-subtitle: "Guia practica para IPA Colombia"
+title: "Claude Code para IPA Colombia"
+subtitle: "Guia practica · dos rutas segun tu trabajo"
 ---
 
 ```{=html}
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <div class="site-banner">
-  <span class="banner-badge">BETA v0.1</span>
-  Esta guia esta en beta. La construi con Claude Code y puede contener errores.
-  Comentarios bienvenidos: <a href="mailto:dquintero@poverty-action.org">dquintero@poverty-action.org</a> · <a href="https://github.com/Quintero-DiegoIPA/ipa-claude-code-intro/issues">GitHub Issues</a>
+  <span class="banner-badge">BETA v0.2</span>
+  Esta guia esta en beta. Combinamos dos guias hermanas en un solo sitio.
+  Comentarios bienvenidos a <a href="mailto:dquintero@poverty-action.org">Diego Quintero</a> (ruta analista) o a <a href="mailto:jfgarcia@poverty-action.org">Juan Felipe Garcia</a> (ruta manager) — tambien por <a href="https://github.com/Quintero-DiegoIPA/ipa-claude-code-intro/issues">GitHub Issues</a>.
 </div>
 ```
 
 ## De que se trata esta guia
 
-Escribir un do-file de estadisticas descriptivas con manejo de missings, etiquetas y formato LaTeX toma unas dos horas. Con Claude Code, toma 15 minutos — y sale mejor comentado. Diagnosticar por que un merge produce 135 observaciones inesperadas toma media hora de comparar datasets. Con Claude Code, una pregunta.
-
-Claude Code es un asistente de codigo con IA que se ejecuta en tu terminal. Lee los archivos de tu proyecto, entiende la estructura, y escribe o edita codigo directamente en tu maquina. Esta guia te ensena a usarlo de forma segura en proyectos de IPA Colombia.
-
-No se requiere experiencia previa con VS Code ni con Claude Code. La guia toma entre **50 y 75 minutos**, incluyendo tres ejercicios practicos.
+Claude Code es un asistente de IA de Anthropic. A diferencia de un chatbot en el navegador, lee los archivos de tu proyecto, entiende la estructura, y puede escribir o editar archivos directamente en tu maquina. Esta guia te ensena a usarlo de forma segura en proyectos de IPA Colombia.
 
 ::: {.callout-important}
 ## Lectura obligatoria previa
 Esta guia complementa las [IPA AI Usage Guidelines](https://ipastorage.box.com/s/mvr67ygvz1y3v8qmgjey67lk7msmyeks). Revisalas primero para conocer el marco completo de clasificacion de datos y aprobaciones.
 :::
 
-## Modulos
+## Elige tu ruta
 
-| | Modulo | Tiempo | Que cubre |
-|---|---|---|---|
-| | [Demo](quickstart.qmd) | ~2 min | Claude Code en accion — dos escenarios reales sin instalar nada |
-| 1 | [Instalacion](setup.qmd) | ~15 min | GitHub, estructura de proyecto, VS Code, instalar Claude Code |
-| 2 | [Conceptos](concepts.qmd) | ~10 min | Que es Claude Code, que puede hacer, CLAUDE.md y skills |
-| 3 | [Seguridad](safety.qmd) | ~10 min | Clasificacion de datos, reglas de PII, escenarios seguros/no seguros |
-| 4 | [Prompting](prompting.qmd) | ~10 min | Modo plan, cinco patrones para prompts efectivos |
-| 5 | [Practica](exercises.qmd) | ~30 min | Tres ejercicios: diagnostico, do-file, y configuracion de proyecto |
-| | [Ejemplos](examples.qmd) | — | Productos reales construidos con Claude Code |
+::: {.grid}
+::: {.g-col-md-6 .audience-card}
+### Para Analistas
 
-## Esto es solo la punta del iceberg
+Para Research Analysts que escriben **codigo**: do-files de Stata, debugging, pipelines MEL, tablas LaTeX.
 
-Esta guia es una introduccion muy inicial. Para profundizar mucho mas en flujos de trabajo asistidos por IA, estrategias de prompting y casos de uso avanzados, he encontrado la [guia de Chris Blattman sobre IA](https://claudeblattman.com/) increiblemente valiosa. La recomiendo como siguiente paso despues de completar esta guia.
+- Instalacion en VS Code + terminal
+- CLAUDE.md como briefing del proyecto
+- Tres ejercicios practicos con datos sinteticos
+- Productos reales construidos con Claude Code
+
+[Empezar →](analyst/index.qmd){.btn-cta}
+:::
+
+::: {.g-col-md-6 .audience-card}
+### Para Equipos y PMs
+
+Para staff que delega trabajo administrativo: comunicaciones, weekly reviews, procurement, gestion de personas, presentaciones.
+
+- App de escritorio (sin terminal)
+- CLAUDE.md como memoria operativa personal
+- 7 modulos por capacidad + 4 starter packs por rol
+- Plantillas descargables listas para usar
+
+[Empezar →](manager/index.qmd){.btn-cta}
+:::
+:::
+
+## Lo que comparten ambas rutas
+
+Tres modulos son obligatorios independientemente de la ruta que elijas:
+
+- [**Seguridad de datos**](shared/safety.qmd) — clasificacion IPA, PII, escenarios seguros y no seguros
+- [**Bucles de feedback**](shared/feedback-loops.qmd) — la practica que hace que Claude se vuelva mas util con el tiempo
+- [**Prompting**](shared/prompting.qmd) — modo plan y patrones para prompts efectivos
